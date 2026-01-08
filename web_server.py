@@ -87,21 +87,30 @@ except Exception as e:
     # Re-raise so main.py can catch it
     raise
 
-# Add request logging middleware
+# Add request logging middleware - but make it very defensive
 @app.before_request
 def log_request_info():
     """Log incoming requests for debugging."""
     try:
+        import sys
+        print(f"BEFORE_REQUEST: {request.method} {request.path}", file=sys.stderr)
         logger.info(f"Incoming request: {request.method} {request.path}")
-    except:
-        pass  # Don't fail if logging fails
+    except Exception as e:
+        # Don't fail if logging fails - just print to stderr
+        import sys
+        print(f"Error in before_request: {e}", file=sys.stderr)
+        pass
 
 @app.after_request
 def log_response_info(response):
     """Log responses for debugging."""
     try:
+        import sys
+        print(f"AFTER_REQUEST: {response.status_code} for {request.method} {request.path}", file=sys.stderr)
         logger.info(f"Response: {response.status_code} for {request.method} {request.path}")
-    except:
+    except Exception as e:
+        import sys
+        print(f"Error in after_request: {e}", file=sys.stderr)
         pass
     return response
 
