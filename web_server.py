@@ -188,6 +188,40 @@ def _auto_detect_benchmark2(stig_path: Path, original_filename: str = None) -> t
     return None, ''
 
 
+@app.route('/')
+def root():
+    """Root endpoint - serve the main page or API info."""
+    try:
+        # Try to serve the main page if template exists
+        template_path = BASE_DIR / 'templates' / 'index.html'
+        if template_path.exists():
+            logger.info("Root route: serving index.html template")
+            return render_template('index.html')
+        else:
+            # If template doesn't exist, return API info
+            logger.info("Root route: template not found, returning API info")
+            return jsonify({
+                'status': 'ok',
+                'message': 'STIG Generator API is running',
+                'endpoints': ['/ping', '/health', '/test', '/index', '/api/generate']
+            }), 200
+    except Exception as e:
+        # If anything fails, return simple JSON
+        logger.error(f"Error in root route: {e}", exc_info=True)
+        return jsonify({
+            'status': 'ok',
+            'message': 'STIG Generator API is running',
+            'error': str(e),
+            'endpoints': ['/ping', '/health', '/test', '/index', '/api/generate']
+        }), 200
+
+@app.route('/ping')
+def ping():
+    """Ultra-simple ping endpoint with no dependencies."""
+    import sys
+    print("PING ENDPOINT CALLED", file=sys.stderr)
+    return "pong", 200
+
 @app.route('/test')
 def test():
     """Simple test endpoint that doesn't require templates."""
