@@ -66,6 +66,18 @@ app.config['UPLOAD_FOLDER'] = BASE_DIR / 'stigs' / 'input'
 app.config['OUTPUT_FOLDER'] = BASE_DIR / 'output'
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
 
+# Add global error handler to catch all exceptions
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """Global error handler to prevent 502 errors."""
+    import traceback
+    error_msg = str(e)
+    traceback_str = traceback.format_exc()
+    print(f"ERROR in Flask app: {error_msg}", file=sys.stderr)
+    print(traceback_str, file=sys.stderr)
+    logger.error(f"Unhandled exception: {error_msg}", exc_info=True)
+    return jsonify({'error': error_msg, 'traceback': traceback_str}), 500
+
 # Ensure directories exist (with error handling for Railway)
 try:
     app.config['UPLOAD_FOLDER'].mkdir(parents=True, exist_ok=True)
