@@ -501,16 +501,8 @@ def generate_file_permission_tasks(control: dict) -> list[str]:
     if not file_path:
         return _generate_fallback_task(control)
     
-    # Build task name with all IDs
-    task_name_parts = []
-    if vul_id:
-        task_name_parts.append(vul_id)
-    task_name_parts.append(title)
-    if sv_id and sv_id != "UNKNOWN":
-        task_name_parts.append(f"({sv_id})")
-    if rule_id:
-        task_name_parts.append(f"({rule_id})")
-    task_name = " - ".join(task_name_parts)
+    # Build task name with SV ID and NIST ID
+    task_name = _build_task_name(control, title_override=title)
     
     lines = [
         f"    - name: {quote_yaml_string(task_name)}",
@@ -584,16 +576,8 @@ def generate_package_present_tasks(control: dict) -> list[str]:
     if valid_package_names:
         package_name = valid_package_names[0]
         
-        # Build task name
-        task_name_parts = []
-        if vul_id:
-            task_name_parts.append(vul_id)
-        task_name_parts.append(title)
-        if sv_id and sv_id != "UNKNOWN":
-            task_name_parts.append(f"({sv_id})")
-        if rule_id:
-            task_name_parts.append(f"({rule_id})")
-        task_name = " - ".join(task_name_parts)
+        # Build task name with SV ID and NIST ID
+        task_name = _build_task_name(control, title_override=title)
         
         # Use dnf for RHEL 9
         return [
@@ -799,21 +783,14 @@ def generate_service_enabled_tasks(control: dict) -> list[str]:
         disabled = "disabled" in text_lower or "disable" in text_lower
         masked = "masked" in text_lower or "mask" in text_lower
         
-        # Build task name
-        task_name_parts = []
-        if vul_id:
-            task_name_parts.append(vul_id)
+        # Build task name with SV ID and NIST ID
         if masked:
-            task_name_parts.append(f"Ensure {service_name} is masked and stopped")
+            custom_title = f"Ensure {service_name} is masked and stopped"
         elif disabled:
-            task_name_parts.append(f"Ensure {service_name} is disabled and stopped")
+            custom_title = f"Ensure {service_name} is disabled and stopped"
         else:
-            task_name_parts.append(f"Ensure {service_name} is enabled and running")
-        if sv_id and sv_id != "UNKNOWN":
-            task_name_parts.append(f"({sv_id})")
-        if rule_id:
-            task_name_parts.append(f"({rule_id})")
-        task_name = " - ".join(task_name_parts)
+            custom_title = f"Ensure {service_name} is enabled and running"
+        task_name = _build_task_name(control, title_override=custom_title)
         
         lines = [
             f"    - name: {quote_yaml_string(task_name)}",
@@ -1855,6 +1832,48 @@ def _extract_audit_rule(text: str) -> Optional[str]:
     return None
 
 
+def _build_task_name(control: dict, title_override: Optional[str] = None) -> str:
+    """
+    Build a consistent task name that includes STIG ID and NIST control ID.
+    
+    Format: "STIG_ID | NIST_ID - Title"
+    Example: "RHEL-09-010010 | AU.5 - Configure audit log storage"
+    
+    If NIST ID is not available, format is: "STIG_ID - Title"
+    If STIG ID is not available, falls back to: "SV_ID | NIST_ID - Title"
+    
+    Args:
+        control: Control dict with vul_id, sv_id, nist_id, title fields
+        title_override: Optional title to use instead of control title
+        
+    Returns:
+        Formatted task name string
+    """
+    vul_id = control.get("vul_id", "").strip()  # STIG ID format like "RHEL-09-010010" or "WN22-00-000010"
+    sv_id = control.get("sv_id", "UNKNOWN").strip()  # SV ID like "SV-257879r991589_rule"
+    nist_id = control.get("nist_id", "").strip()  # NIST control ID like "AU.5" or "CM.06.1(iv)"
+    title = title_override or _clean_title_for_task_name(control.get("title", ""), max_length=80)
+    
+    task_name_parts = []
+    
+    # Prefer vul_id (STIG ID format) over sv_id
+    stig_id = vul_id if vul_id else (sv_id if sv_id != "UNKNOWN" else None)
+    
+    # Add STIG ID and NIST ID at the start if available
+    if stig_id and nist_id:
+        task_name_parts.append(f"{stig_id} | {nist_id}")
+    elif stig_id:
+        task_name_parts.append(stig_id)
+    elif nist_id:
+        task_name_parts.append(f"NIST: {nist_id}")
+    
+    # Add title
+    if title:
+        task_name_parts.append(title)
+    
+    return " - ".join(task_name_parts)
+
+
 def _clean_title_for_task_name(title: str, max_length: int = 100) -> str:
     """
     Clean title for use in task names.
@@ -1888,21 +1907,11 @@ def _generate_fallback_task(control: dict) -> list[str]:
     as a last resort for controls that truly cannot be automated.
     """
     sv_id = control.get("sv_id", "UNKNOWN")
-    vul_id = control.get("vul_id", "")
-    rule_id = control.get("rule_id", "")
     title = _clean_title_for_task_name(control.get("title", ""), max_length=80)
     fix_text = (control.get("fix_text", "") or "")[:500]
     
-    # Build task name - use simple format without quotes if possible
-    task_name_parts = []
-    if vul_id:
-        task_name_parts.append(vul_id)
-    task_name_parts.append(title)
-    if sv_id and sv_id != "UNKNOWN":
-        task_name_parts.append(f"({sv_id})")
-    if rule_id:
-        task_name_parts.append(f"({rule_id})")
-    task_name = " - ".join(task_name_parts)
+    # Build task name with SV ID and NIST ID
+    task_name = _build_task_name(control, title_override=title)
     
     # Clean fix_text for message
     fix_clean = fix_text.replace(chr(10), ' ').replace(chr(13), ' ').strip()
@@ -2206,9 +2215,6 @@ def generate_windows_registry_tasks(control: dict) -> list[str]:
     """Generate Ansible tasks for Windows registry category."""
     fix_text = control.get("fix_text", "") or ""
     check_text = control.get("check_text", "") or ""
-    sv_id = control.get("sv_id", "UNKNOWN")
-    vul_id = control.get("vul_id", "")
-    rule_id = control.get("rule_id", "")
     title = _clean_title_for_task_name(control.get("title", ""), max_length=80)
     combined_text = f"{fix_text} {check_text}"
     
@@ -2216,15 +2222,8 @@ def generate_windows_registry_tasks(control: dict) -> list[str]:
     
     # Allow registry tasks even if data is None but we have path and name (for permission checks)
     if registry_info and (registry_info.get('data') is not None or (registry_info.get('path') and registry_info.get('name'))):
-        task_name_parts = []
-        if vul_id:
-            task_name_parts.append(vul_id)
-        task_name_parts.append(title)
-        if sv_id and sv_id != "UNKNOWN":
-            task_name_parts.append(f"({sv_id})")
-        if rule_id:
-            task_name_parts.append(f"({rule_id})")
-        task_name = " - ".join(task_name_parts)
+        # Build task name with SV ID and NIST ID
+        task_name = _build_task_name(control, title_override=title)
         
         lines = [
             f"    - name: {quote_yaml_string(task_name)}",

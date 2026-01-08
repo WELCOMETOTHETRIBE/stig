@@ -34,7 +34,8 @@ class StigControl:
     
     This is the central data model that all generators consume.
     """
-    sv_id: str  # STIG ID (e.g., "RHEL-09-010010")
+    sv_id: str  # SV ID (e.g., "SV-257777r991589_rule")
+    vul_id: Optional[str] = None  # STIG ID format (e.g., "RHEL-09-010010" or "WN22-00-000010")
     nist_id: Optional[str] = None  # NIST 800-53 Control ID (e.g., "AC.02.b")
     severity: str = "medium"  # "low", "medium", "high", "critical"
     title: str = ""
@@ -268,8 +269,16 @@ def parse_xccdf_file(
         }
         category = categorize_control(control_dict)
         
+        # Extract vul_id (STIG ID format) from raw_metadata if available
+        vul_id = None
+        if legacy.raw_metadata and "version" in legacy.raw_metadata:
+            vul_id = legacy.raw_metadata.get("version", "").strip()
+            if not vul_id:
+                vul_id = None
+        
         control = StigControl(
             sv_id=legacy.id,  # e.g., "SV-257777r991589_rule"
+            vul_id=vul_id,  # e.g., "RHEL-09-010010" or "WN22-00-000010"
             nist_id=legacy.nist_family_id,  # e.g., "CM.06.1(iv)" or None
             severity=legacy.severity,  # Already normalized: "high", "medium", "low", "critical"
             title=legacy.title or "",

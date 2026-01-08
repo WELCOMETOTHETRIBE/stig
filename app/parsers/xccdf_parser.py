@@ -231,6 +231,12 @@ def _parse_rule(
     if not rule_id:
         return None
 
+    # Extract version (STIG ID format like "RHEL-09-010010" or "WN22-00-000010")
+    version_elem = rule.find("xccdf:version", namespaces)
+    if version_elem is None:
+        version_elem = rule.find("version")
+    vul_id = version_elem.text if version_elem is not None and version_elem.text else ""
+    
     # Extract title
     title_elem = rule.find("xccdf:title", namespaces)
     if title_elem is None:
@@ -341,6 +347,7 @@ def _parse_rule(
     raw_metadata = {
         "rule_id": rule_id,
         "weight": rule.get("weight", ""),
+        "version": vul_id,  # STIG ID format like "RHEL-09-010010" or "WN22-00-000010"
     }
 
     # Extract candidate command blocks from fix_text and check_text
