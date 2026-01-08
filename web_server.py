@@ -206,7 +206,7 @@ def test():
         logger.error(f"Error in test endpoint: {e}", exc_info=True)
         return jsonify({'error': str(e)}), 500
 
-@app.route('/')
+@app.route('/index')
 def index():
     """Serve the main page."""
     try:
