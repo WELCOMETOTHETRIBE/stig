@@ -1,0 +1,4336 @@
+# Generated hardening playbook for windows2022
+# Total Controls: 283
+#   - Automated: 210 (74%)
+#   - Manual-only: 73 (25%)
+
+- name: "Windows Server 2022 STIG Hardening"
+  hosts: all
+  become: yes
+  gather_facts: yes
+  vars:
+    # Place any tunable defaults here if needed later
+  pre_tasks:
+    - name: "Verify Windows Server 2022 OS family"
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['os_family'] == 'Windows'
+          - ansible_facts['os_version'] is version('10.0.20348', '>=')
+        fail_msg: 'This playbook is designed for Windows Server 2022 only. Detected OS: { { ansible_facts[''os_family''] } } { { ansible_facts[''os_version''] } }'
+        success_msg: 'OS verification passed: Windows Server 2022 detected'
+
+  tasks:
+
+    # STIG ID: SV-254238r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 users with Administrative privileges must have separate - (SV-254238r991589_rule)"
+      tags:
+        - stig
+        - SV-254238r991589_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254238r991589_rule: Windows Server 2022 users with Administrative privileges must have separate - Ensure each user with administrative privileges has a separate account for user duties and one for privileged duties. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254239r1081067_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 passwords for the built-in Administrator account must be - (SV-254239r1081067_rule)"
+      tags:
+        - stig
+        - SV-254239r1081067_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254239r1081067_rule: Windows Server 2022 passwords for the built-in Administrator account must be - Change the enabled local Administrator account password at least every 60 days. Windows LAPS must be used to change the built-in Administrator account password. Domain-joined systems can configure thi... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254240r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 administrative accounts must not be used with applications - (SV-254240r991589_rule)"
+      tags:
+        - stig
+        - SV-254240r991589_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254240r991589_rule: Windows Server 2022 administrative accounts must not be used with applications - Establish a policy, at minimum, to prohibit administrative accounts from using applications that access the internet, such as web browsers, or with potential internet sources, such as email. Ensure th... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254241r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 members of the Backup Operators group must have separate - (SV-254241r991589_rule)"
+      tags:
+        - stig
+        - SV-254241r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254241r991589_rule: Windows Server 2022 members of the Backup Operators group must have separate - Ensure each member of the Backup Operators group has separate accounts for backup functions and standard user functions. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254242r1051087_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 manually managed application account passwords must be at - (SV-254242r1051087_rule)"
+      tags:
+        - stig
+        - SV-254242r1051087_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254242r1051087_rule: Windows Server 2022 manually managed application account passwords must be at - Establish a policy that requires application/service account passwords that are manually managed to be at least 14 characters in length. Ensure the policy is enforced. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254243r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 manually managed application account passwords must be - (SV-254243r991589_rule)"
+      tags:
+        - stig
+        - SV-254243r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254243r991589_rule: Windows Server 2022 manually managed application account passwords must be - Change passwords for manually managed application/service accounts at least annually or when an administrator with knowledge of the password leaves the organization.  It is recommended that system-man... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254244r958482_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 shared user accounts must not be permitted - (SV-254244r958482_rule)"
+      tags:
+        - stig
+        - SV-254244r958482_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254244r958482_rule: Windows Server 2022 shared user accounts must not be permitted - Remove unapproved shared accounts from the system.  Document required shared accounts with the ISSO. Documentation must include the reason for the account, who has access to the account, and how the r... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254245r958808_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must employ a deny-all, permit-by-exception policy to allow - (SV-254245r958808_rule)"
+      tags:
+        - stig
+        - SV-254245r958808_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254245r958808_rule: Windows Server 2022 must employ a deny-all, permit-by-exception policy to allow - Configure an application allowlisting program to employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs.  Configuration of allowlisting applications will ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254246r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 domain-joined systems must have a Trusted Platform Module - (SV-254246r991589_rule)"
+      tags:
+        - stig
+        - SV-254246r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254246r991589_rule: Windows Server 2022 domain-joined systems must have a Trusted Platform Module - Ensure domain-joined systems have a TPM that is configured for use. (Versions 2.0 or 1.2 support Credential Guard.)  The TPM must be enabled in the firmware.  Run "tpm.msc" for configuration options i... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254247r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be maintained at a supported servicing level - (SV-254247r991589_rule)"
+      tags:
+        - stig
+        - SV-254247r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254247r991589_rule: Windows Server 2022 must be maintained at a supported servicing level - Update the system to a Version 21H2 (Build 20348.xxx) or greater. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254248r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must use an antivirus program - (SV-254248r991589_rule)"
+      tags:
+        - stig
+        - SV-254248r991589_rule
+        - windows_feature
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254248r991589_rule: Windows Server 2022 must use an antivirus program - If no antivirus software is in use, install Microsoft Defender or third-party antivirus.  Open "PowerShell".  Enter "Install-WindowsFeature -Name Windows-Defender".  For third-party antivirus, install... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254249r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have a host-based intrusion detection or prevention - (SV-254249r991589_rule)"
+      tags:
+        - stig
+        - SV-254249r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254249r991589_rule: Windows Server 2022 must have a host-based intrusion detection or prevention - Install a HIDS or HIPS on each server. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254250r1137691_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 local volumes must use a format that supports NTFS - (SV-254250r1137691_rule)"
+      tags:
+        - stig
+        - SV-254250r1137691_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254250r1137691_rule: Windows Server 2022 local volumes must use a format that supports NTFS - Format volumes to use NTFS, ReFS, or CSVFS. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254251r958702_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 permissions for the system drive root directory (usually C - (SV-254251r958702_rule)"
+      tags:
+        - stig
+        - SV-254251r958702_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254251r958702_rule: Windows Server 2022 permissions for the system drive root directory (usually C - Maintain the default permissions for the system drive's root directory and configure the Security Option "Network access: Let Everyone permissions apply to anonymous users" to "Disabled" (WN22-SO-0002... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254252r958702_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 permissions for program file directories must conform to - (SV-254252r958702_rule)"
+      tags:
+        - stig
+        - SV-254252r958702_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254252r958702_rule: Windows Server 2022 permissions for program file directories must conform to - Maintain the default permissions for the program file directories and configure the Security Option "Network access: Let Everyone permissions apply to anonymous users" to "Disabled" (WN22-SO-000240). ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254253r958702_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 permissions for the Windows installation directory must - (SV-254253r958702_rule)"
+      tags:
+        - stig
+        - SV-254253r958702_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254253r958702_rule: Windows Server 2022 permissions for the Windows installation directory must - Maintain the default file ACLs and configure the Security Option "Network access: Let Everyone permissions apply to anonymous users" to "Disabled" (WN22-SO-000240).  Default permissions: Type - "Allow... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254254r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 default permissions for the HKEY_LOCAL_MACHINE registry - (SV-254254r958726_rule)"
+      tags:
+        - stig
+        - SV-254254r958726_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254254r958726_rule: Windows Server 2022 default permissions for the HKEY_LOCAL_MACHINE registry - Maintain the default permissions for the HKEY_LOCAL_MACHINE registry hive.  The default permissions of the higher-level keys are noted below.  HKEY_LOCAL_MACHINE\SECURITY  Type - "Allow" for all Inher... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254255r1137691_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 nonadministrative accounts or groups must only have print - (SV-254255r1137691_rule)"
+      tags:
+        - stig
+        - SV-254255r1137691_rule
+        - other
+        - severity_low
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254255r1137691_rule: Windows Server 2022 nonadministrative accounts or groups must only have print - Configure the permissions on shared printers to restrict standard users to only have Print permissions. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254256r1051088_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 outdated or unused accounts must be removed or disabled - (SV-254256r1051088_rule)"
+      tags:
+        - stig
+        - SV-254256r1051088_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254256r1051088_rule: Windows Server 2022 outdated or unused accounts must be removed or disabled - Regularly review accounts to determine if they are still active. Remove or disable accounts that have not been used in the last 35 days. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254257r958482_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 accounts must require passwords - (SV-254257r958482_rule)"
+      tags:
+        - stig
+        - SV-254257r958482_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254257r958482_rule: Windows Server 2022 accounts must require passwords - Configure all enabled accounts to require passwords.  The password required flag can be set by entering the following on a command line: "Net user [username] /passwordreq:yes", substituting [username]... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254258r1051089_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 passwords must be configured to expire - (SV-254258r1051089_rule)"
+      tags:
+        - stig
+        - SV-254258r1051089_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254258r1051089_rule: Windows Server 2022 passwords must be configured to expire - Configure all enabled user account passwords to expire.  Uncheck "Password never expires" for all enabled user accounts in Active Directory Users and Computers for domain accounts and Users in Compute... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254259r958794_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 system files must be monitored for unauthorized changes - (SV-254259r958794_rule)"
+      tags:
+        - stig
+        - SV-254259r958794_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254259r958794_rule: Windows Server 2022 system files must be monitored for unauthorized changes - Monitor the system for unauthorized changes to system files (e.g., *.exe, *.bat, *.com, *.cmd, and *.dll) against a baseline on a weekly basis. This can be done with the use of various monitoring tool... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254260r1137695_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 nonsystem-created file shares must limit access to groups - (SV-254260r1137695_rule)"
+      tags:
+        - stig
+        - SV-254260r1137695_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254260r1137695_rule: Windows Server 2022 nonsystem-created file shares must limit access to groups - If a nonsystem-created share is required on a system, configure the share and NTFS permissions to limit access to the specific groups or accounts that require it.  Remove any unnecessary nonsystem-cre... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254261r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have software certificate installation files removed - (SV-254261r991589_rule)"
+      tags:
+        - stig
+        - SV-254261r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254261r991589_rule: Windows Server 2022 must have software certificate installation files removed - Remove any certificate installation files (*.p12 and *.pfx) found on a system.  Note: This does not apply to server-based applications that have a requirement for .p12 certificate files or Adobe PreFl... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254262r958552_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 systems requiring data at rest protections must employ - (SV-254262r958552_rule)"
+      tags:
+        - stig
+        - SV-254262r958552_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254262r958552_rule: Windows Server 2022 systems requiring data at rest protections must employ - Configure systems that require additional protections due to factors such as inadequate physical protection or sensitivity of the data to employ encryption to protect the confidentiality and integrity... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254263r958912_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must implement protection methods such as TLS, encrypted - (SV-254263r958912_rule)"
+      tags:
+        - stig
+        - SV-254263r958912_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254263r958912_rule: Windows Server 2022 must implement protection methods such as TLS, encrypted - Configure protection methods such as TLS, encrypted VPNs, or IPsec when the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254264r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have the roles and features required by the system - (SV-254264r958478_rule)"
+      tags:
+        - stig
+        - SV-254264r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254264r958478_rule: Windows Server 2022 must have the roles and features required by the system - Document the roles and features required for the system to operate. Uninstall any that are not required. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254265r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have a host-based firewall installed and enabled - (SV-254265r991589_rule)"
+      tags:
+        - stig
+        - SV-254265r991589_rule
+        - windows_firewall
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254265r991589_rule: Windows Server 2022 must have a host-based firewall installed and enabled - Install and enable a host-based firewall on the system. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254266r1000154_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must employ automated mechanisms to determine the state of - (SV-254266r1000154_rule)"
+      tags:
+        - stig
+        - SV-254266r1000154_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254266r1000154_rule: Windows Server 2022 must employ automated mechanisms to determine the state of - Install a DOD-approved ESS software and ensure it is operating continuously. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254267r958364_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must automatically remove or disable temporary user - (SV-254267r958364_rule)"
+      tags:
+        - stig
+        - SV-254267r958364_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254267r958364_rule: Windows Server 2022 must automatically remove or disable temporary user - Configure temporary user accounts to automatically expire within 72 hours.  Domain accounts can be configured with an account expiration date, under "Account" properties.  Local accounts can be config... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254268r958508_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must automatically remove or disable emergency accounts - (SV-254268r958508_rule)"
+      tags:
+        - stig
+        - SV-254268r958508_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254268r958508_rule: Windows Server 2022 must automatically remove or disable emergency accounts - Remove emergency administrator accounts after a crisis has been resolved or configure the accounts to automatically expire within 72 hours.  Domain accounts can be configured with an account expiratio... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254269r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must not have the Fax Server role installed - (SV-254269r958478_rule)"
+      tags:
+        - stig
+        - SV-254269r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_feature:
+        name: Fax-Server
+        state: absent
+
+
+    # STIG ID: SV-254270r958480_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must not have the Microsoft FTP service installed unless - (SV-254270r958480_rule)"
+      tags:
+        - stig
+        - SV-254270r958480_rule
+        - windows_feature
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_feature:
+        name: FTP-Server
+        state: absent
+
+
+    # STIG ID: SV-254271r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must not have the Peer Name Resolution Protocol installed - (SV-254271r958478_rule)"
+      tags:
+        - stig
+        - SV-254271r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254271r958478_rule: Windows Server 2022 must not have the Peer Name Resolution Protocol installed - Uninstall the "Peer Name Resolution Protocol" feature.  Start "Server Manager".  Select the server with the feature.  Scroll down to "ROLES AND FEATURES" in the right pane.  Select "Remove Roles and F... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254272r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must not have Simple TCP/IP Services installed - (SV-254272r958478_rule)"
+      tags:
+        - stig
+        - SV-254272r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_feature:
+        name: Simple-TCPIP
+        state: absent
+
+
+    # STIG ID: SV-254273r958480_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must not have the Telnet Client installed - (SV-254273r958480_rule)"
+      tags:
+        - stig
+        - SV-254273r958480_rule
+        - windows_feature
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_feature:
+        name: Telnet-Client
+        state: absent
+
+
+    # STIG ID: SV-254274r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must not have the TFTP Client installed - (SV-254274r958478_rule)"
+      tags:
+        - stig
+        - SV-254274r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254274r958478_rule: Windows Server 2022 must not have the TFTP Client installed - Uninstall the "TFTP Client" feature.  Start "Server Manager".  Select the server with the feature.  Scroll down to "ROLES AND FEATURES" in the right pane.  Select "Remove Roles and Features" from the ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254275r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must not the Server Message Block (SMB) v1 protocol - (SV-254275r958478_rule)"
+      tags:
+        - stig
+        - SV-254275r958478_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254275r958478_rule: Windows Server 2022 must not the Server Message Block (SMB) v1 protocol - Uninstall the SMBv1 protocol.  Open "Windows PowerShell" with elevated privileges (run as administrator).  Enter "Uninstall-WindowsFeature -Name FS-SMB1 -Restart". (Omit the Restart parameter if an im... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254276r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must have the Server Message Block (SMB) v1 protocol - (SV-254276r958478_rule)"
+      tags:
+        - stig
+        - SV-254276r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters'
+        name: "SMB1"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254277r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must have the Server Message Block (SMB) v1 protocol - (SV-254277r958478_rule)"
+      tags:
+        - stig
+        - SV-254277r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters'
+        name: "Start"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254278r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must not have Windows PowerShell 2.0 installed - (SV-254278r958478_rule)"
+      tags:
+        - stig
+        - SV-254278r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254278r958478_rule: Windows Server 2022 must not have Windows PowerShell 2.0 installed - Uninstall the "Windows PowerShell 2.0 Engine".  Start "Server Manager".  Select the server with the feature.  Scroll down to "ROLES AND FEATURES" in the right pane.  Select "Remove Roles and Features"... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254279r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 FTP servers must be configured to prevent anonymous logons - (SV-254279r991589_rule)"
+      tags:
+        - stig
+        - SV-254279r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254279r991589_rule: Windows Server 2022 FTP servers must be configured to prevent anonymous logons - Configure the FTP service to prevent anonymous logons.  Open "Internet Information Services (IIS) Manager".  Select the server.  Double-click "FTP Authentication".  Select "Anonymous Authentication". ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254280r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 FTP servers must be configured to prevent access to the - (SV-254280r991589_rule)"
+      tags:
+        - stig
+        - SV-254280r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254280r991589_rule: Windows Server 2022 FTP servers must be configured to prevent access to the - Configure the FTP sites to allow access only to specific FTP shared resources. Do not allow access to other areas of the system. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254281r1051090_rule | Automation: manual-only (not covered by scap)
+    - name: "The Windows Server 2022 time service must synchronize with an appropriate DOD - (SV-254281r1051090_rule)"
+      tags:
+        - stig
+        - SV-254281r1051090_rule
+        - other
+        - severity_low
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254281r1051090_rule: The Windows Server 2022 time service must synchronize with an appropriate DOD - Configure the system to synchronize time with an appropriate DOD time source.  Domain-joined systems use NT5DS to synchronize time from other systems in the domain by default.  If the system needs to ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254282r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have orphaned security identifiers (SIDs) removed from - (SV-254282r991589_rule)"
+      tags:
+        - stig
+        - SV-254282r991589_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254282r991589_rule: Windows Server 2022 must have orphaned security identifiers (SIDs) removed from - Remove any unresolved SIDs found in User Rights assignments and determined to not be for currently valid accounts or groups by removing the accounts or groups from the appropriate group policy. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254283r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 systems must have Unified Extensible Firmware Interface - (SV-254283r991589_rule)"
+      tags:
+        - stig
+        - SV-254283r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254283r991589_rule: Windows Server 2022 systems must have Unified Extensible Firmware Interface - Configure UEFI firmware to run in "UEFI" mode, not "Legacy BIOS" mode. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254284r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have Secure Boot enabled - (SV-254284r991589_rule)"
+      tags:
+        - stig
+        - SV-254284r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: 'Manual hardening required for SV-254284r991589_rule: Windows Server 2022 must have Secure Boot enabled - Enable Secure Boot in the system firmware. Refer to STIG FixText for detailed steps.'
+
+
+    # STIG ID: SV-254285r958736_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 account lockout duration must be configured to 15 minutes - (SV-254285r958736_rule)"
+      tags:
+        - stig
+        - SV-254285r958736_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "LockoutDuration"
+        value: "15"
+
+
+    # STIG ID: SV-254286r958388_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must have the number of allowed bad logon attempts - (SV-254286r958388_rule)"
+      tags:
+        - stig
+        - SV-254286r958388_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "LockoutBadCount"
+        value: "0"
+
+
+    # STIG ID: SV-254287r958388_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must have the period of time before the bad logon counter - (SV-254287r958388_rule)"
+      tags:
+        - stig
+        - SV-254287r958388_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "ResetLockoutCount"
+        value: "15"
+
+
+    # STIG ID: SV-254288r1000156_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 password history must be configured to 24 passwords - (SV-254288r1000156_rule)"
+      tags:
+        - stig
+        - SV-254288r1000156_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "PasswordHistorySize"
+        value: "24"
+
+
+    # STIG ID: SV-254289r1051091_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 maximum password age must be configured to 60 days or less - (SV-254289r1051091_rule)"
+      tags:
+        - stig
+        - SV-254289r1051091_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "MaximumPasswordAge"
+        value: "60"
+
+
+    # STIG ID: SV-254290r1051092_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 minimum password age must be configured to at least one day - (SV-254290r1051092_rule)"
+      tags:
+        - stig
+        - SV-254290r1051092_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "MinimumPasswordAge"
+        value: "0"
+
+
+    # STIG ID: SV-254291r1051093_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 minimum password length must be configured to 14 characters - (SV-254291r1051093_rule)"
+      tags:
+        - stig
+        - SV-254291r1051093_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "MinimumPasswordLength"
+        value: "14"
+
+
+    # STIG ID: SV-254292r1051094_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must have the built-in Windows password complexity policy - (SV-254292r1051094_rule)"
+      tags:
+        - stig
+        - SV-254292r1051094_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "PasswordComplexity"
+        value: "0"
+
+
+    # STIG ID: SV-254293r1051095_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 reversible password encryption must be disabled - (SV-254293r1051095_rule)"
+      tags:
+        - stig
+        - SV-254293r1051095_rule
+        - windows_security_policy
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "ClearTextPassword"
+        value: "1"
+
+
+    # STIG ID: SV-254294r958754_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 audit records must be backed up to a different system or - (SV-254294r958754_rule)"
+      tags:
+        - stig
+        - SV-254294r958754_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254294r958754_rule: Windows Server 2022 audit records must be backed up to a different system or - Establish and implement a process for backing up log data to another system or media other than the system being audited. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254295r959008_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must, at a minimum, offload audit records of interconnected - (SV-254295r959008_rule)"
+      tags:
+        - stig
+        - SV-254295r959008_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254295r959008_rule: Windows Server 2022 must, at a minimum, offload audit records of interconnected - Configure the system to, at a minimum, offload audit records of interconnected systems in real time and offload standalone or nondomain-joined systems weekly. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254296r958434_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 permissions for the Application event log must prevent - (SV-254296r958434_rule)"
+      tags:
+        - stig
+        - SV-254296r958434_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254296r958434_rule: Windows Server 2022 permissions for the Application event log must prevent - Configure the permissions on the Application event log file (Application.evtx) to prevent access by nonprivileged accounts. The default permissions listed below satisfy this requirement:  Eventlog - F... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254297r958434_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 permissions for the Security event log must prevent access - (SV-254297r958434_rule)"
+      tags:
+        - stig
+        - SV-254297r958434_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254297r958434_rule: Windows Server 2022 permissions for the Security event log must prevent access - Configure the permissions on the Security event log file (Security.evtx) to prevent access by nonprivileged accounts. The default permissions listed below satisfy this requirement:  Eventlog - Full Co... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254298r958434_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 permissions for the System event log must prevent access by - (SV-254298r958434_rule)"
+      tags:
+        - stig
+        - SV-254298r958434_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254298r958434_rule: Windows Server 2022 permissions for the System event log must prevent access by - Configure the permissions on the System event log file (System.evtx) to prevent access by nonprivileged accounts. The default permissions listed below satisfy this requirement:  Eventlog - Full Contro... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254299r991558_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Event Viewer must be protected from unauthorized - (SV-254299r991558_rule)"
+      tags:
+        - stig
+        - SV-254299r991558_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254299r991558_rule: Windows Server 2022 Event Viewer must be protected from unauthorized - Configure the permissions on the "Eventvwr.exe" file to prevent modification by any groups or accounts other than TrustedInstaller. The default permissions listed below satisfy this requirement:  Trus... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254300r991578_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Account Logon - Credential - (SV-254300r991578_rule)"
+      tags:
+        - stig
+        - SV-254300r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountLogon"
+        value: "1"
+
+
+    # STIG ID: SV-254301r991578_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Account Logon - Credential - (SV-254301r991578_rule)"
+      tags:
+        - stig
+        - SV-254301r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountLogon"
+        value: "2"
+
+
+    # STIG ID: SV-254302r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Account Management - Other - (SV-254302r958732_rule)"
+      tags:
+        - stig
+        - SV-254302r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "1"
+
+
+    # STIG ID: SV-254303r958368_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Account Management - Security - (SV-254303r958368_rule)"
+      tags:
+        - stig
+        - SV-254303r958368_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "1"
+
+
+    # STIG ID: SV-254304r958368_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Account Management - User - (SV-254304r958368_rule)"
+      tags:
+        - stig
+        - SV-254304r958368_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "1"
+
+
+    # STIG ID: SV-254305r958368_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Account Management - User - (SV-254305r958368_rule)"
+      tags:
+        - stig
+        - SV-254305r958368_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "2"
+
+
+    # STIG ID: SV-254306r991583_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit Detailed Tracking - Plug and - (SV-254306r991583_rule)"
+      tags:
+        - stig
+        - SV-254306r991583_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254306r991583_rule: Windows Server 2022 must be configured to audit Detailed Tracking - Plug and - Configure the policy value for Computer Configuration >> Windows Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Detailed Tracking >> Audit PNP Activity with "Success" sele... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254307r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit Detailed Tracking - Process - (SV-254307r958732_rule)"
+      tags:
+        - stig
+        - SV-254307r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254307r958732_rule: Windows Server 2022 must be configured to audit Detailed Tracking - Process - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Detailed Tracking >> Audit Process Cre... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254309r991552_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit Logon/Logoff - Account Lockout - (SV-254309r991552_rule)"
+      tags:
+        - stig
+        - SV-254309r991552_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254309r991552_rule: Windows Server 2022 must be configured to audit Logon/Logoff - Account Lockout - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> Audit Account Lockout ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254310r991578_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit Logon/Logoff - Group Membership - (SV-254310r991578_rule)"
+      tags:
+        - stig
+        - SV-254310r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254310r991578_rule: Windows Server 2022 must be configured to audit Logon/Logoff - Group Membership - Configure the policy value for Computer Configuration >> Windows Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> Audit Group Membership with "Success" selec... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254311r991581_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit logoff successes - (SV-254311r991581_rule)"
+      tags:
+        - stig
+        - SV-254311r991581_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254311r991581_rule: Windows Server 2022 must be configured to audit logoff successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> Audit Logoff with "Suc... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254312r958406_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit logon successes - (SV-254312r958406_rule)"
+      tags:
+        - stig
+        - SV-254312r958406_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254312r958406_rule: Windows Server 2022 must be configured to audit logon successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> Audit Logon with "Succ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254313r958406_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit logon failures - (SV-254313r958406_rule)"
+      tags:
+        - stig
+        - SV-254313r958406_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254313r958406_rule: Windows Server 2022 must be configured to audit logon failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> Audit Logon with "Fail... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254314r991578_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit Logon/Logoff - Special Logon - (SV-254314r991578_rule)"
+      tags:
+        - stig
+        - SV-254314r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254314r991578_rule: Windows Server 2022 must be configured to audit Logon/Logoff - Special Logon - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> Audit Special Logon wi... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254315r991578_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Object Access - Other Object - (SV-254315r991578_rule)"
+      tags:
+        - stig
+        - SV-254315r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "1"
+
+
+    # STIG ID: SV-254316r991578_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Object Access - Other Object - (SV-254316r991578_rule)"
+      tags:
+        - stig
+        - SV-254316r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "2"
+
+
+    # STIG ID: SV-254317r991583_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit Object Access - Removable - (SV-254317r991583_rule)"
+      tags:
+        - stig
+        - SV-254317r991583_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254317r991583_rule: Windows Server 2022 must be configured to audit Object Access - Removable - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Object Access >> Audit Removable Stora... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254318r991583_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit Object Access - Removable - (SV-254318r991583_rule)"
+      tags:
+        - stig
+        - SV-254318r991583_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254318r991583_rule: Windows Server 2022 must be configured to audit Object Access - Removable - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Object Access >> Audit Removable Stora... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254319r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Policy Change - Audit Policy - (SV-254319r958732_rule)"
+      tags:
+        - stig
+        - SV-254319r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-254320r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Policy Change - Audit Policy - (SV-254320r958732_rule)"
+      tags:
+        - stig
+        - SV-254320r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "2"
+
+
+    # STIG ID: SV-254321r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Policy Change - Authentication - (SV-254321r958732_rule)"
+      tags:
+        - stig
+        - SV-254321r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-254322r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Policy Change - Authorization - (SV-254322r958732_rule)"
+      tags:
+        - stig
+        - SV-254322r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-254323r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Privilege Use - Sensitive - (SV-254323r958732_rule)"
+      tags:
+        - stig
+        - SV-254323r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPrivilegeUse"
+        value: "1"
+
+
+    # STIG ID: SV-254324r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Privilege Use - Sensitive - (SV-254324r958732_rule)"
+      tags:
+        - stig
+        - SV-254324r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPrivilegeUse"
+        value: "2"
+
+
+    # STIG ID: SV-254325r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit System - IPsec Driver successes - (SV-254325r958732_rule)"
+      tags:
+        - stig
+        - SV-254325r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254325r958732_rule: Windows Server 2022 must be configured to audit System - IPsec Driver successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> Audit IPsec Driver with "Suc... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254326r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit System - IPsec Driver failures - (SV-254326r958732_rule)"
+      tags:
+        - stig
+        - SV-254326r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254326r958732_rule: Windows Server 2022 must be configured to audit System - IPsec Driver failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> Audit IPsec Driver with "Fai... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254327r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit System - Other System Events - (SV-254327r958732_rule)"
+      tags:
+        - stig
+        - SV-254327r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditSystemEvents"
+        value: "1"
+
+
+    # STIG ID: SV-254328r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit System - Other System Events - (SV-254328r958732_rule)"
+      tags:
+        - stig
+        - SV-254328r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditSystemEvents"
+        value: "2"
+
+
+    # STIG ID: SV-254329r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit System - Security State Change - (SV-254329r958732_rule)"
+      tags:
+        - stig
+        - SV-254329r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254329r958732_rule: Windows Server 2022 must be configured to audit System - Security State Change - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> Audit Security State Chang w... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254330r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit System - Security System - (SV-254330r958732_rule)"
+      tags:
+        - stig
+        - SV-254330r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254330r958732_rule: Windows Server 2022 must be configured to audit System - Security System - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> Audit Security System Extens... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254331r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit System - System Integrity - (SV-254331r958732_rule)"
+      tags:
+        - stig
+        - SV-254331r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254331r958732_rule: Windows Server 2022 must be configured to audit System - System Integrity - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> Audit System Integrity with ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254332r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit System - System Integrity - (SV-254332r958732_rule)"
+      tags:
+        - stig
+        - SV-254332r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254332r958732_rule: Windows Server 2022 must be configured to audit System - System Integrity - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> Audit System Integrity with ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254333r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must prevent the display of slide shows on the lock screen - (SV-254333r958478_rule)"
+      tags:
+        - stig
+        - SV-254333r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization'
+        name: "NoLockScreenSlideshow"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254334r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must have WDigest Authentication disabled - (SV-254334r958478_rule)"
+      tags:
+        - stig
+        - SV-254334r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest'
+        name: "UseLogonCredential"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254335r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Internet Protocol version 6 (IPv6) source routing must be - (SV-254335r991589_rule)"
+      tags:
+        - stig
+        - SV-254335r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "DisableIPSourceRouting"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254336r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 source routing must be configured to the highest protection - (SV-254336r991589_rule)"
+      tags:
+        - stig
+        - SV-254336r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "DisableIPSourceRouting"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254337r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to prevent Internet Control Message - (SV-254337r991589_rule)"
+      tags:
+        - stig
+        - SV-254337r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "EnableICMPRedirect"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254338r958902_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to ignore NetBIOS name release requests - (SV-254338r958902_rule)"
+      tags:
+        - stig
+        - SV-254338r958902_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "NoNameReleaseOnDemand"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254339r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 insecure logons to an SMB server must be disabled - (SV-254339r991589_rule)"
+      tags:
+        - stig
+        - SV-254339r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "AllowInsecureGuestAuth"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254340r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 hardened Universal Naming Convention (UNC) paths must be - (SV-254340r991589_rule)"
+      tags:
+        - stig
+        - SV-254340r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "HardenedUNCPaths\""
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254341r958422_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 command line data must be included in process creation - (SV-254341r958422_rule)"
+      tags:
+        - stig
+        - SV-254341r958422_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\EventLog-Windows Defender'
+        name: "ProcessCreationIncludeCmdLine_Enabled"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254342r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to enable Remote host allows delegation - (SV-254342r991589_rule)"
+      tags:
+        - stig
+        - SV-254342r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation'
+        name: "AllowProtectedCreds"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254343r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 virtualization-based security must be enabled with the - (SV-254343r991589_rule)"
+      tags:
+        - stig
+        - SV-254343r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254343r991589_rule: Windows Server 2022 virtualization-based security must be enabled with the - Configure the policy value for Computer Configuration >> Administrative Templates >> System >> Device Guard >> Turn On Virtualization Based Security to "Enabled" with "Secure Boot" or "Secure Boot and... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254344r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Early Launch Antimalware, Boot-Start Driver Initialization - (SV-254344r991589_rule)"
+      tags:
+        - stig
+        - SV-254344r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch'
+        name: "below"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254345r1135378_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 group policy objects must be reprocessed even if they have - (SV-254345r1135378_rule)"
+      tags:
+        - stig
+        - SV-254345r1135378_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy'
+        name: "NoGPOListChanges"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254346r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 downloading print driver packages over HTTP must be turned - (SV-254346r958478_rule)"
+      tags:
+        - stig
+        - SV-254346r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Internet Communication Management'
+        name: "DisableWebPnPDownload"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254347r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 printing over HTTP must be turned off - (SV-254347r958478_rule)"
+      tags:
+        - stig
+        - SV-254347r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Internet Communication Management'
+        name: "DisableHTTPPrinting"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254348r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 network selection user interface (UI) must not be displayed - (SV-254348r958478_rule)"
+      tags:
+        - stig
+        - SV-254348r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "DontDisplayNetworkSelectionUI"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254349r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 users must be prompted to authenticate when the system - (SV-254349r991589_rule)"
+      tags:
+        - stig
+        - SV-254349r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Power'
+        name: "DCSettingIndex"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254350r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 users must be prompted to authenticate when the system - (SV-254350r991589_rule)"
+      tags:
+        - stig
+        - SV-254350r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Power'
+        name: "ACSettingIndex"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254351r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Application Compatibility Program Inventory must be - (SV-254351r958478_rule)"
+      tags:
+        - stig
+        - SV-254351r958478_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableInventory"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254352r958804_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Autoplay must be turned off for nonvolume devices - (SV-254352r958804_rule)"
+      tags:
+        - stig
+        - SV-254352r958804_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "NoAutoplayfornonVolume"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254353r958804_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 default AutoRun behavior must be configured to prevent - (SV-254353r958804_rule)"
+      tags:
+        - stig
+        - SV-254353r958804_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "NoAutorun"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254354r958804_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 AutoPlay must be disabled for all drives - (SV-254354r958804_rule)"
+      tags:
+        - stig
+        - SV-254354r958804_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "NoDriveTypeAutoRun"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254355r958518_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 administrator accounts must not be enumerated during - (SV-254355r958518_rule)"
+      tags:
+        - stig
+        - SV-254355r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnumerateAdministrators"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254356r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Diagnostic Data must be configured to send \"required - (SV-254356r991589_rule)"
+      tags:
+        - stig
+        - SV-254356r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowTelemetry"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254357r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Windows Update must not obtain updates from other PCs on - (SV-254357r991589_rule)"
+      tags:
+        - stig
+        - SV-254357r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DODownloadMode"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254358r958752_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Application event log size must be configured to 32768 KB - (SV-254358r958752_rule)"
+      tags:
+        - stig
+        - SV-254358r958752_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MaxSize"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254359r958752_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Security event log size must be configured to 196608 KB or - (SV-254359r958752_rule)"
+      tags:
+        - stig
+        - SV-254359r958752_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MaxSize"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254360r958752_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 System event log size must be configured to 32768 KB or - (SV-254360r958752_rule)"
+      tags:
+        - stig
+        - SV-254360r958752_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MaxSize"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254361r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Microsoft Defender antivirus SmartScreen must be enabled - (SV-254361r958478_rule)"
+      tags:
+        - stig
+        - SV-254361r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableSmartScreen"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254362r958928_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Explorer Data Execution Prevention must be enabled - (SV-254362r958928_rule)"
+      tags:
+        - stig
+        - SV-254362r958928_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+        name: "below"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254363r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Turning off File Explorer heap termination on corruption - (SV-254363r991589_rule)"
+      tags:
+        - stig
+        - SV-254363r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+        name: "below"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254364r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 File Explorer shell protocol must run in protected mode - (SV-254364r991589_rule)"
+      tags:
+        - stig
+        - SV-254364r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+        name: "below"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254365r1051096_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must not save passwords in the Remote Desktop Client - (SV-254365r1051096_rule)"
+      tags:
+        - stig
+        - SV-254365r1051096_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisablePasswordSaving"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254366r1137695_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Remote Desktop Services must prevent drive redirection - (SV-254366r1137695_rule)"
+      tags:
+        - stig
+        - SV-254366r1137695_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "fDisableCdm"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254367r1051097_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Remote Desktop Services must always prompt a client for - (SV-254367r1051097_rule)"
+      tags:
+        - stig
+        - SV-254367r1051097_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "fPromptForPassword"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254368r958408_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Remote Desktop Services must require secure Remote - (SV-254368r958408_rule)"
+      tags:
+        - stig
+        - SV-254368r958408_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "fEncryptRPCTraffic"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254369r958408_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Remote Desktop Services must be configured with the client - (SV-254369r958408_rule)"
+      tags:
+        - stig
+        - SV-254369r958408_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MinEncryptionLevel"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254370r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must prevent attachments from being downloaded from RSS - (SV-254370r991589_rule)"
+      tags:
+        - stig
+        - SV-254370r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableEnclosureDownload"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254371r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must disable Basic authentication for RSS feeds over HTTP - (SV-254371r958478_rule)"
+      tags:
+        - stig
+        - SV-254371r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Internet'
+        name: "below"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254372r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must prevent Indexing of encrypted files - (SV-254372r958478_rule)"
+      tags:
+        - stig
+        - SV-254372r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowIndexingEncryptedStoresOrItems"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254373r1051098_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must prevent users from changing installation options - (SV-254373r1051098_rule)"
+      tags:
+        - stig
+        - SV-254373r1051098_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableUserControl"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254374r1051099_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must disable the Windows Installer Always install with - (SV-254374r1051099_rule)"
+      tags:
+        - stig
+        - SV-254374r1051099_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AlwaysInstallElevated"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254375r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 users must be notified if a web-based program attempts to - (SV-254375r991589_rule)"
+      tags:
+        - stig
+        - SV-254375r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer'
+        name: "below"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254376r991591_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must disable automatically signing in the last interactive - (SV-254376r991591_rule)"
+      tags:
+        - stig
+        - SV-254376r991591_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableAutomaticRestartSignOn"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254377r958422_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 PowerShell script block logging must be enabled - (SV-254377r958422_rule)"
+      tags:
+        - stig
+        - SV-254377r958422_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableScriptBlockLogging"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254378r958510_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Windows Remote Management (WinRM) client must not use Basic - (SV-254378r958510_rule)"
+      tags:
+        - stig
+        - SV-254378r958510_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowBasic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254379r958848_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Windows Remote Management (WinRM) client must not allow - (SV-254379r958848_rule)"
+      tags:
+        - stig
+        - SV-254379r958848_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowUnencryptedTraffic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254380r958510_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Windows Remote Management (WinRM) client must not use - (SV-254380r958510_rule)"
+      tags:
+        - stig
+        - SV-254380r958510_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowDigest"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254381r958510_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Windows Remote Management (WinRM) service must not use - (SV-254381r958510_rule)"
+      tags:
+        - stig
+        - SV-254381r958510_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowBasic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254382r958848_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Windows Remote Management (WinRM) service must not allow - (SV-254382r958848_rule)"
+      tags:
+        - stig
+        - SV-254382r958848_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowUnencryptedTraffic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254383r1051100_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Windows Remote Management (WinRM) service must not store - (SV-254383r1051100_rule)"
+      tags:
+        - stig
+        - SV-254383r1051100_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableRunAs"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254384r958420_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must have PowerShell Transcription enabled - (SV-254384r958420_rule)"
+      tags:
+        - stig
+        - SV-254384r958420_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableTranscripting"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254385r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must only allow administrators responsible for the domain - (SV-254385r958726_rule)"
+      tags:
+        - stig
+        - SV-254385r958726_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254385r958726_rule: Windows Server 2022 must only allow administrators responsible for the domain - Configure the Administrators group to include only administrator groups or accounts that are responsible for the system.  Remove any standard user accounts. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254386r1051101_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Kerberos user logon restrictions must be enforced - (SV-254386r1051101_rule)"
+      tags:
+        - stig
+        - SV-254386r1051101_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254386r1051101_rule: Windows Server 2022 Kerberos user logon restrictions must be enforced - Configure the policy value in the Default Domain Policy for Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy >> Enforce user logon res... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254387r1051102_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Kerberos service ticket maximum lifetime must be limited to - (SV-254387r1051102_rule)"
+      tags:
+        - stig
+        - SV-254387r1051102_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254387r1051102_rule: Windows Server 2022 Kerberos service ticket maximum lifetime must be limited to - Configure the policy value in the Default Domain Policy for Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy >> Maximum lifetime for s... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254388r1051103_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Kerberos user ticket lifetime must be limited to 10 hours - (SV-254388r1051103_rule)"
+      tags:
+        - stig
+        - SV-254388r1051103_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254388r1051103_rule: Windows Server 2022 Kerberos user ticket lifetime must be limited to 10 hours - Configure the policy value in the Default Domain Policy for Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy >> Maximum lifetime for u... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254389r1051104_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Kerberos policy user ticket renewal maximum lifetime must - (SV-254389r1051104_rule)"
+      tags:
+        - stig
+        - SV-254389r1051104_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254389r1051104_rule: Windows Server 2022 Kerberos policy user ticket renewal maximum lifetime must - Configure the policy value in the Default Domain Policy for Computer Configuration >> Policies >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy >> Maximum lifetime for u... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254390r1051105_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 computer clock synchronization tolerance must be limited to - (SV-254390r1051105_rule)"
+      tags:
+        - stig
+        - SV-254390r1051105_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254390r1051105_rule: Windows Server 2022 computer clock synchronization tolerance must be limited to - Configure the policy value in the Default Domain Policy for Computer Configuration >> Windows Settings >> Security Settings >> Account Policies >> Kerberos Policy >> Maximum tolerance for computer clo... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254391r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 permissions on the Active Directory data files must only - (SV-254391r958726_rule)"
+      tags:
+        - stig
+        - SV-254391r958726_rule
+        - windows_registry
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254391r958726_rule: Windows Server 2022 permissions on the Active Directory data files must only - Maintain the permissions on NTDS database and log files as follows:  NT AUTHORITY\SYSTEM:(I)(F) BUILTIN\Administrators:(I)(F)  (I) - permission inherited from parent container (F) - full access Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254392r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory SYSVOL directory must have the proper - (SV-254392r958726_rule)"
+      tags:
+        - stig
+        - SV-254392r958726_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254392r958726_rule: Windows Server 2022 Active Directory SYSVOL directory must have the proper - Maintain the permissions on the SYSVOL directory. Do not allow greater than "Read & execute" permissions for standard user accounts or groups. The defaults below meet this requirement:  C:\Windows\SYS... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254393r1081073_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory Group Policy objects must have proper - (SV-254393r1081073_rule)"
+      tags:
+        - stig
+        - SV-254393r1081073_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254393r1081073_rule: Windows Server 2022 Active Directory Group Policy objects must have proper - Maintain the permissions on Group Policy objects to not allow greater than "Read" and "Apply group policy" for standard user accounts or groups. The default permissions below meet this requirement:  A... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254394r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory Domain Controllers Organizational Unit - (SV-254394r958726_rule)"
+      tags:
+        - stig
+        - SV-254394r958726_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254394r958726_rule: Windows Server 2022 Active Directory Domain Controllers Organizational Unit - Limit the permissions on the Domain Controllers OU to restrict changes to System, Domain Admins, Enterprise Admins and Administrators.  The default permissions listed below satisfy this requirement.  ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254395r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 organization created Active Directory Organizational Unit - (SV-254395r958726_rule)"
+      tags:
+        - stig
+        - SV-254395r958726_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254395r958726_rule: Windows Server 2022 organization created Active Directory Organizational Unit - Maintain the Allow type permissions on domain-defined OUs to be at least as restrictive as the defaults below.  Document any additional permissions above Read with the ISSO if an approved distributed ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254396r1137695_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 data files owned by users must be on a different logical - (SV-254396r1137695_rule)"
+      tags:
+        - stig
+        - SV-254396r1137695_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254396r1137695_rule: Windows Server 2022 data files owned by users must be on a different logical - Move shares used to store files owned by users to a different logical partition than the directory server data files. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254397r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 domain controllers must run on a machine dedicated to that - (SV-254397r958478_rule)"
+      tags:
+        - stig
+        - SV-254397r958478_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254397r958478_rule: Windows Server 2022 domain controllers must run on a machine dedicated to that - Remove additional roles or applications such as web, database, and email from the domain controller. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254398r987791_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must use separate, NSA-approved (Type 1) cryptography to - (SV-254398r987791_rule)"
+      tags:
+        - stig
+        - SV-254398r987791_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254398r987791_rule: Windows Server 2022 must use separate, NSA-approved (Type 1) cryptography to - Configure NSA-approved (Type 1) cryptography to protect the directory data in transit for directory service implementations at a classified confidentiality level that transfer replication data through... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254399r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 directory data (outside the root DSE) of a nonpublic - (SV-254399r991589_rule)"
+      tags:
+        - stig
+        - SV-254399r991589_rule
+        - windows_firewall
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254399r991589_rule: Windows Server 2022 directory data (outside the root DSE) of a nonpublic - Configure directory data (outside the root DSE) of a nonpublic directory to prevent anonymous access.  For AD, there are multiple configuration items that could enable anonymous access.  Changing the ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254400r970703_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 directory service must be configured to terminate - (SV-254400r970703_rule)"
+      tags:
+        - stig
+        - SV-254400r970703_rule
+        - other
+        - severity_low
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254400r970703_rule: Windows Server 2022 directory service must be configured to terminate - Configure the directory service to terminate LDAP-based network connections to the directory server after 5 minutes of inactivity.  Open an elevated "Command prompt" (run as administrator).  Enter "nt... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254401r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory Group Policy objects must be configured - (SV-254401r958732_rule)"
+      tags:
+        - stig
+        - SV-254401r958732_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254401r958732_rule: Windows Server 2022 Active Directory Group Policy objects must be configured - Configure the audit settings for Group Policy objects to include the following:  This can be done at the Policy level in Active Directory to apply to all group policies.  Open "Active Directory Users ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254402r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory Domain object must be configured with - (SV-254402r958732_rule)"
+      tags:
+        - stig
+        - SV-254402r958732_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254402r958732_rule: Windows Server 2022 Active Directory Domain object must be configured with - Open "Active Directory Users and Computers" (available from various menus or run "dsa.msc").  Ensure "Advanced Features" is selected in the "View" menu.  Select the domain being reviewed in the left p... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254403r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory Infrastructure object must be configured - (SV-254403r958732_rule)"
+      tags:
+        - stig
+        - SV-254403r958732_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254403r958732_rule: Windows Server 2022 Active Directory Infrastructure object must be configured - Open "Active Directory Users and Computers" (available from various menus or run "dsa.msc").  Ensure "Advanced Features" is selected in the "View" menu.  Select the domain being reviewed in the left p... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254404r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory Domain Controllers Organizational Unit - (SV-254404r958732_rule)"
+      tags:
+        - stig
+        - SV-254404r958732_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254404r958732_rule: Windows Server 2022 Active Directory Domain Controllers Organizational Unit - Open "Active Directory Users and Computers" (available from various menus or run "dsa.msc").  Ensure "Advanced Features" is selected in the "View" menu.  Select the "Domain Controllers OU" under the d... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254405r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory AdminSDHolder object must be configured - (SV-254405r958732_rule)"
+      tags:
+        - stig
+        - SV-254405r958732_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254405r958732_rule: Windows Server 2022 Active Directory AdminSDHolder object must be configured - Open "Active Directory Users and Computers" (available from various menus or run "dsa.msc").  Ensure "Advanced Features" is selected in the "View" menu.  Select "System" under the domain being reviewe... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254406r958732_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory RID Manager$ object must be configured - (SV-254406r958732_rule)"
+      tags:
+        - stig
+        - SV-254406r958732_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254406r958732_rule: Windows Server 2022 Active Directory RID Manager$ object must be configured - Open "Active Directory Users and Computers" (available from various menus or run "dsa.msc").  Ensure "Advanced Features" is selected in the "View" menu.  Select "System" under the domain being reviewe... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254407r958368_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit Account Management - Computer - (SV-254407r958368_rule)"
+      tags:
+        - stig
+        - SV-254407r958368_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "1"
+
+
+    # STIG ID: SV-254408r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit DS Access - Directory Service - (SV-254408r958732_rule)"
+      tags:
+        - stig
+        - SV-254408r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditDirectoryServiceAccess"
+        value: "1"
+
+
+    # STIG ID: SV-254409r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit DS Access - Directory Service - (SV-254409r958732_rule)"
+      tags:
+        - stig
+        - SV-254409r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditDirectoryServiceAccess"
+        value: "2"
+
+
+    # STIG ID: SV-254410r958732_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit DS Access - Directory Service - (SV-254410r958732_rule)"
+      tags:
+        - stig
+        - SV-254410r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditDSAccess"
+        value: "1"
+
+
+    # STIG ID: SV-254412r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 domain controllers must have a PKI server certificate - (SV-254412r958448_rule)"
+      tags:
+        - stig
+        - SV-254412r958448_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254412r958448_rule: Windows Server 2022 domain controllers must have a PKI server certificate - Obtain a server certificate for the domain controller. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254413r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 domain Controller PKI certificates must be issued by the - (SV-254413r958448_rule)"
+      tags:
+        - stig
+        - SV-254413r958448_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254413r958448_rule: Windows Server 2022 domain Controller PKI certificates must be issued by the - Obtain a server certificate for the domain controller issued by the DoD PKI or an approved ECA. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254414r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 PKI certificates associated with user accounts must be - (SV-254414r958448_rule)"
+      tags:
+        - stig
+        - SV-254414r958448_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254414r958448_rule: Windows Server 2022 PKI certificates associated with user accounts must be - Map user accounts to PKI certificates using the appropriate User Principal Name (UPN) for the network. See PKE documentation for details. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254415r1081074_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Active Directory user accounts, including administrators, - (SV-254415r1081074_rule)"
+      tags:
+        - stig
+        - SV-254415r1081074_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254415r1081074_rule: Windows Server 2022 Active Directory user accounts, including administrators, - Configure all user accounts, including administrator accounts, in Active Directory to enable the option "Smart card is required for interactive logon".  Run "Active Directory Users and Computers" (ava... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254416r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 domain controllers must require LDAP access signing - (SV-254416r958908_rule)"
+      tags:
+        - stig
+        - SV-254416r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\NTDS\Parameters'
+        name: "LDAPServerIntegrity"
+        data: '2'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254417r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 domain controllers must be configured to allow reset of - (SV-254417r991589_rule)"
+      tags:
+        - stig
+        - SV-254417r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "RefusePasswordChange"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254418r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Access this computer from the network user right must only - (SV-254418r1137691_rule)"
+      tags:
+        - stig
+        - SV-254418r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeNetworkLogonRight
+        users: ['Administrators', 'Users', 'Authenticated Users']
+        action: set
+
+
+    # STIG ID: SV-254419r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Add workstations to domain user right must only be assigned - (SV-254419r958726_rule)"
+      tags:
+        - stig
+        - SV-254419r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254419r958726_rule: Windows Server 2022 Add workstations to domain user right must only be assigned - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Add workstations to domain to include only the following a... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254420r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Allow log on through Remote Desktop Services user right - (SV-254420r1137691_rule)"
+      tags:
+        - stig
+        - SV-254420r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeRemoteInteractiveLogonRight
+        users: ['Administrators', 'SYSTEM', 'Service']
+        action: set
+
+
+    # STIG ID: SV-254421r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny access to this computer from the network user right on - (SV-254421r1137691_rule)"
+      tags:
+        - stig
+        - SV-254421r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyNetworkLogonRight
+        users: ['Guest', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254422r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on as a batch job user right on domain controllers - (SV-254422r1137691_rule)"
+      tags:
+        - stig
+        - SV-254422r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyBatchLogonRight
+        users: ['Guest', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254423r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on as a service user right must be configured to - (SV-254423r1137691_rule)"
+      tags:
+        - stig
+        - SV-254423r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyServiceLogonRight
+        users: ['SYSTEM', 'Service']
+        action: set
+
+
+    # STIG ID: SV-254424r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on locally user right on domain controllers must - (SV-254424r1137691_rule)"
+      tags:
+        - stig
+        - SV-254424r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyInteractiveLogonRight
+        users: ['Guest', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254425r958672_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on through Remote Desktop Services user right on - (SV-254425r958672_rule)"
+      tags:
+        - stig
+        - SV-254425r958672_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyRemoteInteractiveLogonRight
+        users: ['Guest', 'SYSTEM', 'Service']
+        action: set
+
+
+    # STIG ID: SV-254426r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Enable computer and user accounts to be trusted for - (SV-254426r958726_rule)"
+      tags:
+        - stig
+        - SV-254426r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254426r958726_rule: Windows Server 2022 Enable computer and user accounts to be trusted for - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Enable computer and user accounts to be trusted for delega... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254427r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "The password for the krbtgt account on a domain must be reset at least every - (SV-254427r991589_rule)"
+      tags:
+        - stig
+        - SV-254427r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254427r991589_rule: The password for the krbtgt account on a domain must be reset at least every - Reset the password for the krbtgt account a least every 180 days. The password must be changed twice to effectively remove the password history. Changing once, waiting for replication to complete and ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254428r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must only allow administrators responsible for the member - (SV-254428r958726_rule)"
+      tags:
+        - stig
+        - SV-254428r958726_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254428r958726_rule: Windows Server 2022 must only allow administrators responsible for the member - Configure the local "Administrators" group to include only administrator groups or accounts responsible for administration of the system.  For domain-joined member servers, replace the Domain Admins g... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254429r958518_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 local administrator accounts must have their privileged - (SV-254429r958518_rule)"
+      tags:
+        - stig
+        - SV-254429r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "LocalAccountTokenFilterPolicy"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254430r958478_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 local users on domain-joined member servers must not be - (SV-254430r958478_rule)"
+      tags:
+        - stig
+        - SV-254430r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "EnumerateLocalUsers"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254431r971545_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must restrict unauthenticated Remote Procedure Call (RPC) - (SV-254431r971545_rule)"
+      tags:
+        - stig
+        - SV-254431r971545_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "RestrictRemoteClients"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254432r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must limit the caching of logon credentials to four or less - (SV-254432r991589_rule)"
+      tags:
+        - stig
+        - SV-254432r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows'
+        name: "CachedLogonsCount"
+        data: '4'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254433r1106522_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must restrict remote calls to the Security Account Manager - (SV-254433r1106522_rule)"
+      tags:
+        - stig
+        - SV-254433r1106522_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "RestrictRemoteSAM"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254434r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Access this computer from the network user right must only - (SV-254434r1137691_rule)"
+      tags:
+        - stig
+        - SV-254434r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeNetworkLogonRight
+        users: ['Administrators', 'Users', 'Authenticated Users', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254435r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny access to this computer from the network user right on - (SV-254435r1137691_rule)"
+      tags:
+        - stig
+        - SV-254435r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyNetworkLogonRight
+        users: ['Administrators', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254436r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on as a batch job user right on domain-joined - (SV-254436r1137691_rule)"
+      tags:
+        - stig
+        - SV-254436r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyBatchLogonRight
+        users: ['Guest', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254437r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on as a service user right on domain-joined member - (SV-254437r1137691_rule)"
+      tags:
+        - stig
+        - SV-254437r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyServiceLogonRight
+        users: ['SYSTEM', 'Service']
+        action: set
+
+
+    # STIG ID: SV-254438r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on locally user right on domain-joined member - (SV-254438r1137691_rule)"
+      tags:
+        - stig
+        - SV-254438r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyInteractiveLogonRight
+        users: ['Guest', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254439r958672_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Deny log on through Remote Desktop Services user right on - (SV-254439r958672_rule)"
+      tags:
+        - stig
+        - SV-254439r958672_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDenyRemoteInteractiveLogonRight
+        users: ['Guest', 'SYSTEM', 'Service']
+        action: set
+
+
+    # STIG ID: SV-254440r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Enable computer and user accounts to be trusted for - (SV-254440r958726_rule)"
+      tags:
+        - stig
+        - SV-254440r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254440r958726_rule: Windows Server 2022 Enable computer and user accounts to be trusted for - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Enable computer and user accounts to be trusted for delega... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254441r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be running Credential Guard on domain-joined member - (SV-254441r991589_rule)"
+      tags:
+        - stig
+        - SV-254441r991589_rule
+        - windows_registry
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254441r991589_rule: Windows Server 2022 must be running Credential Guard on domain-joined member - Configure the policy value for Computer Configuration >> Administrative Templates >> System >> Device Guard >> Turn On Virtualization Based Security to "Enabled" with "Enabled with UEFI lock" selected... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254442r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have the DoD Root Certificate Authority (CA) - (SV-254442r958448_rule)"
+      tags:
+        - stig
+        - SV-254442r958448_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254442r958448_rule: Windows Server 2022 must have the DoD Root Certificate Authority (CA) - Install the DoD Root CA certificates:  DoD Root CA 3 DoD Root CA 4 DoD Root CA 5 DoD Root CA 6  The InstallRoot tool is available on Cyber Exchange at https://cyber.mil/pki-pke/tools-configuration-fil... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254443r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have the DoD Interoperability Root Certificate - (SV-254443r958448_rule)"
+      tags:
+        - stig
+        - SV-254443r958448_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254443r958448_rule: Windows Server 2022 must have the DoD Interoperability Root Certificate - Install the DoD Interoperability Root CA cross-certificates on unclassified systems.  Issued To - Issued By - Thumbprint  DoD Root CA 3- DoD Interoperability Root CA 2 - 49CBE933151872E17C8EAE7F0ABA97... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254444r1081077_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have the US DOD CCEB Interoperability Root CA - (SV-254444r1081077_rule)"
+      tags:
+        - stig
+        - SV-254444r1081077_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254444r1081077_rule: Windows Server 2022 must have the US DOD CCEB Interoperability Root CA - Install the US DOD CCEB Interoperability Root CA cross-certificate on unclassified systems.  Issued To - Issued By - Thumbprint  DOD Root CA 3 - US DOD CCEB Interoperability Root CA 2 - 9B74964506C7ED... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254445r958504_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must have the built-in guest account disabled - (SV-254445r958504_rule)"
+      tags:
+        - stig
+        - SV-254445r958504_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254445r958504_rule: Windows Server 2022 must have the built-in guest account disabled - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> Accounts: Guest account status to "Disabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254446r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must prevent local accounts with blank passwords from being - (SV-254446r991589_rule)"
+      tags:
+        - stig
+        - SV-254446r991589_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "LimitBlankPasswordUse"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254447r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 built-in administrator account must be renamed - (SV-254447r991589_rule)"
+      tags:
+        - stig
+        - SV-254447r991589_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254447r991589_rule: Windows Server 2022 built-in administrator account must be renamed - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> Accounts: Rename administrator account to a name other than "Adm... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254448r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 built-in guest account must be renamed - (SV-254448r991589_rule)"
+      tags:
+        - stig
+        - SV-254448r991589_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254448r991589_rule: Windows Server 2022 built-in guest account must be renamed - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> Accounts: Rename guest account to a name other than "Guest". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254449r958442_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must force audit policy subcategory settings to override - (SV-254449r958442_rule)"
+      tags:
+        - stig
+        - SV-254449r958442_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "SCENoApplyLegacyAuditPolicy"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254450r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 setting Domain member - Digitally encrypt or sign secure - (SV-254450r958908_rule)"
+      tags:
+        - stig
+        - SV-254450r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "RequireSignOrSeal"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254451r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 setting Domain member - Digitally encrypt secure channel - (SV-254451r958908_rule)"
+      tags:
+        - stig
+        - SV-254451r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "SealSecureChannel"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254452r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 setting Domain member - Digitally sign secure channel data - (SV-254452r958908_rule)"
+      tags:
+        - stig
+        - SV-254452r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "SignSecureChannel"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254453r971545_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 computer account password must not be prevented from being - (SV-254453r971545_rule)"
+      tags:
+        - stig
+        - SV-254453r971545_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "DisablePasswordChange"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254454r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 maximum age for machine account passwords must be - (SV-254454r991589_rule)"
+      tags:
+        - stig
+        - SV-254454r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "MaximumPasswordAge"
+        data: '30'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254455r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to require a strong session key - (SV-254455r958908_rule)"
+      tags:
+        - stig
+        - SV-254455r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "RequireStrongKey"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254456r958400_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 machine inactivity limit must be set to 15 minutes or less, - (SV-254456r958400_rule)"
+      tags:
+        - stig
+        - SV-254456r958400_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "InactivityTimeoutSecs"
+        data: '900'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254457r958390_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 required legal notice must be configured to display before - (SV-254457r958390_rule)"
+      tags:
+        - stig
+        - SV-254457r958390_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254457r958390_rule: Windows Server 2022 required legal notice must be configured to display before - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> Interactive Logon: Message text for users attempting to log on t... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254458r958390_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 title for legal banner dialog box must be configured with - (SV-254458r958390_rule)"
+      tags:
+        - stig
+        - SV-254458r958390_rule
+        - windows_registry
+        - severity_low
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254458r958390_rule: Windows Server 2022 title for legal banner dialog box must be configured with - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> Interactive Logon: Message title for users attempting to log on ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254459r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Smart Card removal option must be configured to Force - (SV-254459r991589_rule)"
+      tags:
+        - stig
+        - SV-254459r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows'
+        name: "scremoveoption"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254460r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 setting Microsoft network client - Digitally sign - (SV-254460r958908_rule)"
+      tags:
+        - stig
+        - SV-254460r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+        name: "RequireSecuritySignature"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254461r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 setting Microsoft network client - Digitally sign - (SV-254461r958908_rule)"
+      tags:
+        - stig
+        - SV-254461r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+        name: "EnableSecuritySignature"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254462r987796_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 unencrypted passwords must not be sent to third-party - (SV-254462r987796_rule)"
+      tags:
+        - stig
+        - SV-254462r987796_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+        name: "EnablePlainTextPassword"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254463r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 setting Microsoft network server - Digitally sign - (SV-254463r958908_rule)"
+      tags:
+        - stig
+        - SV-254463r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+        name: "RequireSecuritySignature"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254464r958908_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 setting Microsoft network server - Digitally sign - (SV-254464r958908_rule)"
+      tags:
+        - stig
+        - SV-254464r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+        name: "EnableSecuritySignature"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254465r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must not allow anonymous SID/Name translation - (SV-254465r991589_rule)"
+      tags:
+        - stig
+        - SV-254465r991589_rule
+        - windows_security_policy
+        - severity_high
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254465r991589_rule: Windows Server 2022 must not allow anonymous SID/Name translation - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> Network access: Allow anonymous SID/Name translation to "Disable... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254466r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must not allow anonymous enumeration of Security Account - (SV-254466r991589_rule)"
+      tags:
+        - stig
+        - SV-254466r991589_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "RestrictAnonymousSAM"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254467r1137695_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must not allow anonymous enumeration of shares - (SV-254467r1137695_rule)"
+      tags:
+        - stig
+        - SV-254467r1137695_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "RestrictAnonymous"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254468r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to prevent anonymous users from having - (SV-254468r991589_rule)"
+      tags:
+        - stig
+        - SV-254468r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "EveryoneIncludesAnonymous"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254469r1137695_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must restrict anonymous access to Named Pipes and Shares - (SV-254469r1137695_rule)"
+      tags:
+        - stig
+        - SV-254469r1137695_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+        name: "RestrictNullSessAccess"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254470r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 services using Local System that use Negotiate when - (SV-254470r991589_rule)"
+      tags:
+        - stig
+        - SV-254470r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\LSA'
+        name: "UseMachineId"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254471r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must prevent NTLM from falling back to a Null session - (SV-254471r991589_rule)"
+      tags:
+        - stig
+        - SV-254471r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\LSA\MSV'
+        name: "allownullsessionfallback"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254472r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must prevent PKU2U authentication using online identities - (SV-254472r991589_rule)"
+      tags:
+        - stig
+        - SV-254472r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\LSA\pku'
+        name: "AllowOnlineID"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254473r971535_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Kerberos encryption types must be configured to prevent the - (SV-254473r971535_rule)"
+      tags:
+        - stig
+        - SV-254473r971535_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters'
+        name: "SupportedEncryptionTypes"
+        data: '2147483640'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254474r1051107_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to prevent the storage of the LAN - (SV-254474r1051107_rule)"
+      tags:
+        - stig
+        - SV-254474r1051107_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "NoLMHash"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254475r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 LAN Manager authentication level must be configured to send - (SV-254475r991589_rule)"
+      tags:
+        - stig
+        - SV-254475r991589_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "LmCompatibilityLevel"
+        data: '5'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254476r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to at least negotiate signing for LDAP - (SV-254476r991589_rule)"
+      tags:
+        - stig
+        - SV-254476r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LDAP'
+        name: "LDAPClientIntegrity"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254477r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 session security for NTLM SSP-based clients must be - (SV-254477r991589_rule)"
+      tags:
+        - stig
+        - SV-254477r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV'
+        name: "NTLMMinClientSec"
+        data: '537395200'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254478r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 session security for NTLM SSP-based servers must be - (SV-254478r991589_rule)"
+      tags:
+        - stig
+        - SV-254478r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV'
+        name: "NTLMMinServerSec"
+        data: '537395200'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254479r958450_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 users must be required to enter a password to access - (SV-254479r958450_rule)"
+      tags:
+        - stig
+        - SV-254479r958450_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Cryptography'
+        name: "ForceKeyProtection"
+        data: '2'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254480r1137699_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to use FIPS-compliant algorithms for - (SV-254480r1137699_rule)"
+      tags:
+        - stig
+        - SV-254480r1137699_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy'
+        name: "Enabled"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254481r991589_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 default permissions of global system objects must be - (SV-254481r991589_rule)"
+      tags:
+        - stig
+        - SV-254481r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Session'
+        name: "ProtectionMode"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254482r1051108_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 User Account Control (UAC) approval mode for the built-in - (SV-254482r1051108_rule)"
+      tags:
+        - stig
+        - SV-254482r1051108_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "FilterAdministratorToken"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254483r958518_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 UIAccess applications must not be allowed to prompt for - (SV-254483r958518_rule)"
+      tags:
+        - stig
+        - SV-254483r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableUIADesktopToggle"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254484r958518_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 User Account Control (UAC) must, at a minimum, prompt - (SV-254484r958518_rule)"
+      tags:
+        - stig
+        - SV-254484r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "ConsentPromptBehaviorAdmin"
+        data: '2'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254485r1051109_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 User Account Control (UAC) must automatically deny standard - (SV-254485r1051109_rule)"
+      tags:
+        - stig
+        - SV-254485r1051109_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "ConsentPromptBehaviorUser"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254486r958518_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 User Account Control (UAC) must be configured to detect - (SV-254486r958518_rule)"
+      tags:
+        - stig
+        - SV-254486r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableInstallerDetection"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254487r958518_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 User Account Control (UAC) must only elevate UIAccess - (SV-254487r958518_rule)"
+      tags:
+        - stig
+        - SV-254487r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableSecureUIAPaths"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254488r1051110_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 User Account Control (UAC) must run all administrators in - (SV-254488r1051110_rule)"
+      tags:
+        - stig
+        - SV-254488r1051110_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableLUA"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254489r958518_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 User Account Control (UAC) must virtualize file and - (SV-254489r958518_rule)"
+      tags:
+        - stig
+        - SV-254489r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableVirtualization"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-254490r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must preserve zone information when saving attachments - (SV-254490r991589_rule)"
+      tags:
+        - stig
+        - SV-254490r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254490r991589_rule: Windows Server 2022 must preserve zone information when saving attachments - The default behavior is for Windows to mark file attachments with their zone information.  If this needs to be corrected, configure the policy value for User Configuration >> Administrative Templates ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254491r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 Access Credential Manager as a trusted caller user right - (SV-254491r958726_rule)"
+      tags:
+        - stig
+        - SV-254491r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254491r958726_rule: Windows Server 2022 Access Credential Manager as a trusted caller user right - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Access Credential Manager as a trusted caller to be define... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254492r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Act as part of the operating system user right must not be - (SV-254492r958726_rule)"
+      tags:
+        - stig
+        - SV-254492r958726_rule
+        - windows_user_right
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeTcbPrivilege
+        users: ['SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254493r1137691_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 Allow log on locally user right must only be assigned to - (SV-254493r1137691_rule)"
+      tags:
+        - stig
+        - SV-254493r1137691_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeInteractiveLogonRight
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-254494r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 back up files and directories user right must only be - (SV-254494r958726_rule)"
+      tags:
+        - stig
+        - SV-254494r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeBackupPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-254495r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 create a pagefile user right must only be assigned to the - (SV-254495r958726_rule)"
+      tags:
+        - stig
+        - SV-254495r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254495r958726_rule: Windows Server 2022 create a pagefile user right must only be assigned to the - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Create a pagefile to include only the following accounts o... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254496r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 create a token object user right must not be assigned to - (SV-254496r958726_rule)"
+      tags:
+        - stig
+        - SV-254496r958726_rule
+        - windows_user_right
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeCreateTokenPrivilege
+        users: []
+        action: set
+
+
+    # STIG ID: SV-254497r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 create global objects user right must only be assigned to - (SV-254497r958726_rule)"
+      tags:
+        - stig
+        - SV-254497r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254497r958726_rule: Windows Server 2022 create global objects user right must only be assigned to - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Create global objects to include only the following accoun... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254498r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 create permanent shared objects user right must not be - (SV-254498r958726_rule)"
+      tags:
+        - stig
+        - SV-254498r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254498r958726_rule: Windows Server 2022 create permanent shared objects user right must not be - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Create permanent shared objects to be defined but containi... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254499r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 create symbolic links user right must only be assigned to - (SV-254499r958726_rule)"
+      tags:
+        - stig
+        - SV-254499r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254499r958726_rule: Windows Server 2022 create symbolic links user right must only be assigned to - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Create symbolic links to include only the following accoun... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254500r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 debug programs user right must only be assigned to the - (SV-254500r958726_rule)"
+      tags:
+        - stig
+        - SV-254500r958726_rule
+        - windows_user_right
+        - severity_high
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeDebugPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-254501r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 force shutdown from a remote system user right must only be - (SV-254501r958726_rule)"
+      tags:
+        - stig
+        - SV-254501r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeRemoteShutdownPrivilege
+        users: ['Administrators', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-254502r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 generate security audits user right must only be assigned - (SV-254502r958726_rule)"
+      tags:
+        - stig
+        - SV-254502r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254502r958726_rule: Windows Server 2022 generate security audits user right must only be assigned - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Generate security audits to include only the following acc... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254503r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 impersonate a client after authentication user right must - (SV-254503r958726_rule)"
+      tags:
+        - stig
+        - SV-254503r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254503r958726_rule: Windows Server 2022 impersonate a client after authentication user right must - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Impersonate a client after authentication to include only ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254504r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 increase scheduling priority - user right must only be - (SV-254504r958726_rule)"
+      tags:
+        - stig
+        - SV-254504r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254504r958726_rule: Windows Server 2022 increase scheduling priority - user right must only be - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Increase scheduling priority to include only the following... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254505r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 load and unload device drivers user right must only be - (SV-254505r958726_rule)"
+      tags:
+        - stig
+        - SV-254505r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeLoadDriverPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-254506r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 lock pages in memory user right must not be assigned to any - (SV-254506r958726_rule)"
+      tags:
+        - stig
+        - SV-254506r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeLockMemoryPrivilege
+        users: []
+        action: set
+
+
+    # STIG ID: SV-254507r958434_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 manage auditing and security log user right must only be - (SV-254507r958434_rule)"
+      tags:
+        - stig
+        - SV-254507r958434_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeSecurityPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-254508r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 modify firmware environment values user right must only be - (SV-254508r958726_rule)"
+      tags:
+        - stig
+        - SV-254508r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254508r958726_rule: Windows Server 2022 modify firmware environment values user right must only be - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Modify firmware environment values to include only the fol... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254509r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 perform volume maintenance tasks user right must only be - (SV-254509r958726_rule)"
+      tags:
+        - stig
+        - SV-254509r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254509r958726_rule: Windows Server 2022 perform volume maintenance tasks user right must only be - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Perform volume maintenance tasks to include only the follo... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254510r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 profile single process user right must only be assigned to - (SV-254510r958726_rule)"
+      tags:
+        - stig
+        - SV-254510r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-254510r958726_rule: Windows Server 2022 profile single process user right must only be assigned to - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> Profile single process to include only the following accou... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-254511r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 restore files and directories user right must only be - (SV-254511r958726_rule)"
+      tags:
+        - stig
+        - SV-254511r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeRestorePrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-254512r958726_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 take ownership of files or other objects user right must - (SV-254512r958726_rule)"
+      tags:
+        - stig
+        - SV-254512r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_user_right:
+        name: SeTakeOwnershipPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-271426r1137691_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured for certificate-based authentication for - (SV-271426r1137691_rule)"
+      tags:
+        - stig
+        - SV-271426r1137691_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-271426r1137691_rule: Windows Server 2022 must be configured for certificate-based authentication for - Configure the registry value. Registry Hive: HKEY_LOCAL_MACHINE Registry Path: SYSTEM\CurrentControlSet\Services\Kdc   Value Name: StrongCertificateBindingEnforcement   Value Type: REG_DWORD Value: 0x... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-271427r1137691_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured for name-based strong mappings for - (SV-271427r1137691_rule)"
+      tags:
+        - stig
+        - SV-271427r1137691_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-271427r1137691_rule: Windows Server 2022 must be configured for name-based strong mappings for - Configure the policy value for Computer Configuration >> Administrative Template >> System >> KDC >> Allow name-based strong mappings for certificates to "Enabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-278942r1135355_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit file system failures - (SV-278942r1135355_rule)"
+      tags:
+        - stig
+        - SV-278942r1135355_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "2"
+
+
+    # STIG ID: SV-278943r1135358_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit file system successes - (SV-278943r1135358_rule)"
+      tags:
+        - stig
+        - SV-278943r1135358_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "1"
+
+
+    # STIG ID: SV-278944r1135361_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit handle manipulation failures - (SV-278944r1135361_rule)"
+      tags:
+        - stig
+        - SV-278944r1135361_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "2"
+
+
+    # STIG ID: SV-278945r1135364_rule | Automation: automated via SCAP
+    - name: "Windows Server 2022 must be configured to audit handle manipulation successes - (SV-278945r1135364_rule)"
+      tags:
+        - stig
+        - SV-278945r1135364_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows2022
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "1"
+
+
+    # STIG ID: SV-278946r1135367_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit registry failures - (SV-278946r1135367_rule)"
+      tags:
+        - stig
+        - SV-278946r1135367_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-278946r1135367_rule: Windows Server 2022 must be configured to audit registry failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Object Access >> "Audit Registry" with... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-278947r1135370_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit registry successes - (SV-278947r1135370_rule)"
+      tags:
+        - stig
+        - SV-278947r1135370_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-278947r1135370_rule: Windows Server 2022 must be configured to audit registry successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Object Access >> "Audit Registry" with... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-278948r1141928_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit sensitive privilege use - (SV-278948r1141928_rule)"
+      tags:
+        - stig
+        - SV-278948r1141928_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-278948r1141928_rule: Windows Server 2022 must be configured to audit sensitive privilege use - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Privilege Use >> Audit Sensitive Privi... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-278949r1141931_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows Server 2022 must be configured to audit sensitive privilege use failures - (SV-278949r1141931_rule)"
+      tags:
+        - stig
+        - SV-278949r1141931_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows2022
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-278949r1141931_rule: Windows Server 2022 must be configured to audit sensitive privilege use failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Privilege Use >> Audit Sensitive Privi... Refer to STIG FixText for detailed steps.
+

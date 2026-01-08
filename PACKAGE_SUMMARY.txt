@@ -1,0 +1,104 @@
+STIG Generator - Collaboration Package Summary
+==============================================
+
+Package Created: $(date)
+Package Name: stig_generator_collaboration.zip
+Package Location: /Users/patrick/ansible/stig_generator/
+
+CONTENTS
+--------
+This package contains all essential files for collaborating on the STIG Generator project:
+
+Core Scripts:
+  - scripts/parse_stig.py              # Parse XCCDF XML → JSON
+  - scripts/generate_hardening.py     # Generate hardening playbooks
+  - scripts/generate_checker.py       # Generate checker playbooks
+  - scripts/generate_ctp.py            # Generate CTP documents
+  - scripts/parse_scap_benchmark.py    # Parse SCAP benchmarks
+  - scripts/parse_nessus_scan.py       # Parse Nessus scans
+
+Application Library:
+  - app/parsers/                        # XML parsers
+  - app/model/                         # Data models
+  - app/classifiers/                   # Control classification
+  - app/generators/                     # Legacy generators (reference)
+
+Tools:
+  - tools/sanity_check_playbooks.py    # Playbook validation
+
+Tests:
+  - tests/test_coverage.py             # Coverage verification
+  - tests/test_parsers.py               # Parser tests
+  - tests/test_generators.py           # Generator tests
+  - tests/test_classifiers.py           # Classifier tests
+
+Web Interface (Optional):
+  - web_server.py                       # Flask web server
+  - templates/index.html                # Web UI template
+
+Configuration:
+  - pyproject.toml                      # Project metadata
+  - requirements.txt                    # Python dependencies
+  - pytest.ini                          # Test configuration
+
+Documentation:
+  - README.md                           # Main collaboration guide
+  - SCRIPTS_README.md                   # Detailed script documentation
+
+SETUP INSTRUCTIONS
+------------------
+1. Extract the zip file
+2. Navigate to the extracted directory
+3. Create a virtual environment:
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+4. Install dependencies:
+   pip install -r requirements.txt
+5. Verify installation:
+   python scripts/parse_stig.py --help
+
+WHAT'S INCLUDED
+---------------
+✅ All core Python scripts
+✅ Complete application library
+✅ Validation tools
+✅ Test suite
+✅ Web interface (optional)
+✅ Configuration files
+✅ Documentation
+
+WHAT'S NOT INCLUDED
+-------------------
+❌ Virtual environment (venv/) - create your own
+❌ Generated output files - can be regenerated
+❌ STIG XML files - obtain from public.cyber.mil
+❌ Cache files (__pycache__, *.pyc)
+❌ Log files
+
+QUICK START
+-----------
+See README.md in the package for detailed instructions.
+
+The main workflow is:
+1. Parse STIG XML: python scripts/parse_stig.py --xccdf <file> --output <json>
+2. Generate hardening: python scripts/generate_hardening.py --input <json> --output <yml> --product <product>
+3. Generate checker: python scripts/generate_checker.py --input <json> --output <yml> --product <product>
+4. Generate CTP: python scripts/generate_ctp.py --input <json> --output <csv> --manual-only
+
+SUPPORTED PRODUCTS
+------------------
+- RHEL 8 (rhel8)
+- RHEL 9 (rhel9)
+- Windows 11 (windows11)
+- Windows Server 2022 (windows2022)
+- Cisco IOS Switch (NDM, L2S, RTR)
+
+REQUIREMENTS
+------------
+- Python 3.11 or higher
+- pip
+- Ansible (for validating generated playbooks)
+- Flask (optional, for web interface)
+
+For questions or issues, refer to the README.md file in the package.
+

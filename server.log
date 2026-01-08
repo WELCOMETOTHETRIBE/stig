@@ -1,0 +1,1341 @@
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+ * Serving Flask app 'web_server'
+ * Debug mode: on
+INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4000
+ * Running on http://192.168.0.20:4000
+INFO: [33mPress CTRL+C to quit[0m
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO: 127.0.0.1 - - [06/Dec/2025 20:44:08] "GET / HTTP/1.1" 200 -
+ERROR: File not found: /Users/patrick/ansible/stig_generator/output/output/ctp/stig_unknown_ctp.csv
+INFO: 127.0.0.1 - - [06/Dec/2025 20:44:17] "[33mGET /api/download/output/ctp/stig_unknown_ctp.csv HTTP/1.1[0m" 404 -
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/parse_stig.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO: 127.0.0.1 - - [06/Dec/2025 20:44:27] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp4fzw6e6j.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp4fzw6e6j.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp4fzw6e6j.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp_nacqq08.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [06/Dec/2025 20:44:55] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [06/Dec/2025 20:44:57] "GET /api/download/ctp/stig_rhel9_ctp.csv HTTP/1.1" 200 -
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO: 127.0.0.1 - - [07/Dec/2025 08:23:27] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp0va5nqjw.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp0va5nqjw.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp0va5nqjw.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpmjqfcana.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 08:23:32] "POST /api/generate HTTP/1.1" 200 -
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO: 127.0.0.1 - - [07/Dec/2025 08:48:02] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpu2omtg3j.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpu2omtg3j.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpu2omtg3j.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpa3qtdgpu.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 08:48:08] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 08:48:12] "GET /api/download/ctp/stig_rhel9_ctp.csv HTTP/1.1" 200 -
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/scripts/generate_hardening.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/web_server.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/web_server.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/web_server.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/web_server.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/web_server.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+WARNING:  * Debugger is active!
+INFO:  * Debugger PIN: 752-905-856
+INFO:  * Detected change in '/Users/patrick/ansible/stig_generator/web_server.py', reloading
+============================================================
+STIG Generator Web Server
+============================================================
+Starting server on http://localhost:4000
+Press Ctrl+C to stop
+============================================================
+INFO:  * Restarting with stat
+INFO: 127.0.0.1 - - [07/Dec/2025 17:25:17] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp1p0e2ecf.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp1p0e2ecf.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp1p0e2ecf.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp5fc2zgaj.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 17:25:38] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 17:37:19] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpz1cdgs1q.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpz1cdgs1q.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpz1cdgs1q.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmps7s00gca.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 17:37:23] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 17:47:07] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpk4zl2afz.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpk4zl2afz.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpk4zl2afz.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp9wrn7m0q.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 17:47:23] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 18:02:48] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpxwlrioom.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpxwlrioom.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpxwlrioom.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpnav66rwh.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:02:58] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpb5g23vw4.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpb5g23vw4.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpb5g23vw4.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmplodhvhq6.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:03:14] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 18:11:18] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp3dddj996.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp3dddj996.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp3dddj996.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpsbeb_60f.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:11:23] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpzu8o_n30.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpzu8o_n30.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpzu8o_n30.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp79yc6il6.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:11:36] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpanpq7f14.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpanpq7f14.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpanpq7f14.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpjjr6t_h6.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:11:46] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 18:33:19] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp9qfrjj9l.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp9qfrjj9l.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp9qfrjj9l.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpchx6xi2s.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:33:32] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp42ot5cnf.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp42ot5cnf.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp42ot5cnf.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp8ukk4p9p.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:33:54] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpm378bpza.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpm378bpza.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpm378bpza.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmplmseang5.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 18:34:08] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 19:04:39] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpooham7x1.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpooham7x1.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpooham7x1.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpxgygbpx2.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 19:04:43] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp9v5r17e0.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp9v5r17e0.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp9v5r17e0.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpgeg41g9d.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 19:04:58] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpoip_nihv.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpoip_nihv.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpoip_nihv.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpk179ti43.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 19:05:09] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 20:50:53] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp09f6xidc.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp09f6xidc.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp09f6xidc.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp1tt9atil.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 20:50:57] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpprvro34q.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpprvro34q.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpprvro34q.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpgcu8oue7.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 20:51:09] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp_sr56nho.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp_sr56nho.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp_sr56nho.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmppjweq6m5.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 20:51:25] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpzcmrujz1.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpzcmrujz1.xml
+INFO: Found 258 rules in SCAP benchmark
+INFO: Extracted automation metadata for 258 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml: 258 controls
+INFO: Detected product: windows11
+INFO: Parsed 265 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpzcmrujz1.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Saved 265 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmppg85k_v3.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 265 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 265 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 39 manual-only controls (out of 265 total)
+INFO:   - Automated controls (excluded from CTP): 226
+INFO:   - Manual-only controls (included in CTP): 39
+INFO: Generated 40 CTP rows for 39 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 20:51:35] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 21:02:03] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp8za1efn7.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp8za1efn7.xml
+INFO: Found 258 rules in SCAP benchmark
+INFO: Extracted automation metadata for 258 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml: 258 controls
+INFO: Detected product: windows11
+INFO: Parsed 265 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp8za1efn7.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Saved 265 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp8s5d1eou.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 265 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 265 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 39 manual-only controls (out of 265 total)
+INFO:   - Automated controls (excluded from CTP): 226
+INFO:   - Manual-only controls (included in CTP): 39
+INFO: Generated 40 CTP rows for 39 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:02:08] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpjd0l0vof.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpjd0l0vof.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpjd0l0vof.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpgm146pjp.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:02:32] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp_160petv.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp_160petv.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp_160petv.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp1mbcmnbb.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:02:44] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpd6_p5gtn.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpd6_p5gtn.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpd6_p5gtn.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpeitm4qs2.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:02:55] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 21:16:56] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpt_aojhez.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpt_aojhez.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpt_aojhez.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmph7usuidi.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:17:02] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpca_5cpmx.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpca_5cpmx.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpca_5cpmx.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpl_emljip.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:17:16] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpkg5190zz.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpkg5190zz.xml
+INFO: Found 258 rules in SCAP benchmark
+INFO: Extracted automation metadata for 258 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml: 258 controls
+INFO: Detected product: windows11
+INFO: Parsed 265 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpkg5190zz.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Saved 265 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp7mip38u2.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 265 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 265 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 39 manual-only controls (out of 265 total)
+INFO:   - Automated controls (excluded from CTP): 226
+INFO:   - Manual-only controls (included in CTP): 39
+INFO: Generated 40 CTP rows for 39 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:17:32] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpfn2ko6fe.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpfn2ko6fe.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpfn2ko6fe.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpw3hv45bt.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:17:48] "POST /api/generate HTTP/1.1" 200 -
+INFO: 127.0.0.1 - - [07/Dec/2025 21:53:05] "GET / HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp8ddtd1_i.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmp8ddtd1_i.xml
+INFO: Found 450 rules in SCAP benchmark
+INFO: Extracted automation metadata for 450 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_9_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV8-signed.xml: 450 controls
+INFO: Detected product: rhel9
+INFO: Parsed 447 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmp8ddtd1_i.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Saved 447 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmp1ea2fdt5.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 367 (82%)
+INFO:   - Manual-only: 80 (17%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 447 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 447 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 80 manual-only controls (out of 447 total)
+INFO:   - Automated controls (excluded from CTP): 367
+INFO:   - Manual-only controls (included in CTP): 80
+INFO: Generated 113 CTP rows for 80 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:53:10] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmphg86i47t.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmphg86i47t.xml
+INFO: Found 369 rules in SCAP benchmark
+INFO: Extracted automation metadata for 369 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_RHEL_8_V2R4_STIG_SCAP_1-4_Benchmark-enhancedV17-signed.xml: 369 controls
+INFO: Detected product: rhel8
+INFO: Parsed 368 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmphg86i47t.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Saved 368 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpfwgacohr.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 318 (86%)
+INFO:   - Manual-only: 50 (13%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 368 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 368 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 50 manual-only controls (out of 368 total)
+INFO:   - Automated controls (excluded from CTP): 318
+INFO:   - Manual-only controls (included in CTP): 50
+INFO: Generated 64 CTP rows for 50 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:53:19] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpsecptxkl.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmpsecptxkl.xml
+INFO: Found 275 rules in SCAP benchmark
+INFO: Extracted automation metadata for 275 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_Server_2022_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV14-signed.xml: 275 controls
+INFO: Detected product: windows2022
+INFO: Parsed 283 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmpsecptxkl.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Saved 283 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpd2lah8ki.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 216 (76%)
+INFO:   - Manual-only: 67 (23%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 283 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 283 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 67 manual-only controls (out of 283 total)
+INFO:   - Automated controls (excluded from CTP): 216
+INFO:   - Manual-only controls (included in CTP): 67
+INFO: Generated 67 CTP rows for 67 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:53:28] "POST /api/generate HTTP/1.1" 200 -
+INFO: Auto-detected benchmark2 file: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmptp9an4nn.xml
+INFO: Using secondary artifact: /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml (type: scap)
+INFO: Parsing XCCDF file: /Users/patrick/ansible/stig_generator/stigs/input/tmptp9an4nn.xml
+INFO: Found 258 rules in SCAP benchmark
+INFO: Extracted automation metadata for 258 STIG controls
+INFO: Loaded SCAP automation map from /Users/patrick/ansible/stig_generator/stigs/benchmark2/U_MS_Windows_11_V2R5_STIG_SCAP_1-4_Benchmark-enhancedV13-signed.xml: 258 controls
+INFO: Detected product: windows11
+INFO: Parsed 265 controls from /Users/patrick/ansible/stig_generator/stigs/input/tmptp9an4nn.xml
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Saved 265 controls to /var/folders/v9/wb8pwgvx17b2b4fznf28fn940000gn/T/tmpi_9knzk9.json
+INFO: Automation classification (source: scap):
+INFO:   - Automated: 226 (85%)
+INFO:   - Manual-only: 39 (14%)
+INFO: Generating hardening playbook...
+INFO: Generated hardening playbook with 265 tasks
+INFO: Generating checker playbook...
+INFO: Generated checker playbook with 265 tasks
+INFO: Generating CTP document...
+INFO: Filtering to 39 manual-only controls (out of 265 total)
+INFO:   - Automated controls (excluded from CTP): 226
+INFO:   - Manual-only controls (included in CTP): 39
+INFO: Generated 40 CTP rows for 39 controls
+INFO: 127.0.0.1 - - [07/Dec/2025 21:53:38] "POST /api/generate HTTP/1.1" 200 -

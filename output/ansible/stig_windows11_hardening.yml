@@ -1,0 +1,4047 @@
+# Generated hardening playbook for windows11
+# Total Controls: 258
+#   - Automated: 246 (95%)
+#   - Manual-only: 12 (4%)
+
+- name: "Windows 11 STIG Hardening"
+  hosts: all
+  become: yes
+  gather_facts: yes
+  vars:
+    # Place any tunable defaults here if needed later
+  pre_tasks:
+    - name: "Verify Windows 11 OS family"
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['os_family'] == 'Windows'
+        fail_msg: 'This playbook is designed for Windows 11 only. Detected OS: { { ansible_facts[''os_family''] } } { { ansible_facts[''os_version''] } }'
+        success_msg: 'OS verification passed: Windows 11 detected'
+
+  tasks:
+
+    # STIG ID: SV-253254r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Domain-joined systems must use Windows 11 Enterprise Edition 64-bit version - (SV-253254r991589_rule)"
+      tags:
+        - stig
+        - SV-253254r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253254r991589_rule: Domain-joined systems must use Windows 11 Enterprise Edition 64-bit version - Use Windows 11 Enterprise 64-bit version for domain-joined systems. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253255r971547_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 domain-joined systems must have a Trusted Platform Module (TPM) - (SV-253255r971547_rule)"
+      tags:
+        - stig
+        - SV-253255r971547_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253255r971547_rule: Windows 11 domain-joined systems must have a Trusted Platform Module (TPM) - For standalone systems, this is NA.  Virtualization-based security, including Credential Guard, currently cannot be implemented in virtual desktop implementations (VDI) due to specific supporting requ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253256r971547_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 systems must have Unified Extensible Firmware Interface (UEFI) - (SV-253256r971547_rule)"
+      tags:
+        - stig
+        - SV-253256r971547_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253256r971547_rule: Windows 11 systems must have Unified Extensible Firmware Interface (UEFI) - Configure UEFI firmware to run in UEFI mode, not Legacy BIOS mode. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253257r971547_rule | Automation: manual-only (not covered by scap)
+    - name: "Secure Boot must be enabled on Windows 11 systems - (SV-253257r971547_rule)"
+      tags:
+        - stig
+        - SV-253257r971547_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: 'Manual hardening required for SV-253257r971547_rule: Secure Boot must be enabled on Windows 11 systems - Enable Secure Boot in the system firmware. Refer to STIG FixText for detailed steps.'
+
+
+    # STIG ID: SV-253258r1000099_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 must employ automated mechanisms to determine the state of system - (SV-253258r1000099_rule)"
+      tags:
+        - stig
+        - SV-253258r1000099_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253258r1000099_rule: Windows 11 must employ automated mechanisms to determine the state of system - Install DOD-approved ESS software and ensure it is operating continuously. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253259r958870_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 information systems must use BitLocker to encrypt all disks to - (SV-253259r958870_rule)"
+      tags:
+        - stig
+        - SV-253259r958870_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253259r958870_rule: Windows 11 information systems must use BitLocker to encrypt all disks to - Enable full disk encryption on all information systems (including SIPRNet) using BitLocker.  BitLocker, included in Windows, can be enabled in the Control Panel under "BitLocker Drive Encryption" as w... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253260r958872_rule | Automation: automated via SCAP
+    - name: "Windows 11 systems must use a BitLocker PIN for pre-boot authentication - (SV-253260r958872_rule)"
+      tags:
+        - stig
+        - SV-253260r958872_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "UseAdvancedStartup"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253261r958504_rule | Automation: automated via SCAP
+    - name: "Windows 11 systems must use a BitLocker PIN with a minimum length of six digits - (SV-253261r958504_rule)"
+      tags:
+        - stig
+        - SV-253261r958504_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MinimumPIN"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253262r958808_rule | Automation: manual-only (not covered by scap)
+    - name: "The operating system must employ a deny-all, permit-by-exception policy to - (SV-253262r958808_rule)"
+      tags:
+        - stig
+        - SV-253262r958808_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253262r958808_rule: The operating system must employ a deny-all, permit-by-exception policy to - Configure an application allowlisting program to employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs.  Configuration of allowlisting applications will ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253263r1016364_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 systems must be maintained at a supported servicing level - (SV-253263r1016364_rule)"
+      tags:
+        - stig
+        - SV-253263r1016364_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253263r1016364_rule: Windows 11 systems must be maintained at a supported servicing level - Update systems on the Semi-Annual Channel to "Microsoft Windows 11 Version 22H2 (OS Build 22621.380)" or greater. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253264r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "The Windows 11 system must use an antivirus program - (SV-253264r991589_rule)"
+      tags:
+        - stig
+        - SV-253264r991589_rule
+        - windows_service
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253264r991589_rule: The Windows 11 system must use an antivirus program - Install Microsoft Defender Antivirus or a third-party antivirus solution. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253265r958472_rule | Automation: manual-only (not covered by scap)
+    - name: "Local volumes must be formatted using NTFS - (SV-253265r958472_rule)"
+      tags:
+        - stig
+        - SV-253265r958472_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: 'Manual hardening required for SV-253265r958472_rule: Local volumes must be formatted using NTFS - Format all local volumes to use NTFS. Refer to STIG FixText for detailed steps.'
+
+
+    # STIG ID: SV-253266r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Alternate operating systems must not be permitted on the same system - (SV-253266r991589_rule)"
+      tags:
+        - stig
+        - SV-253266r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253266r991589_rule: Alternate operating systems must not be permitted on the same system - Ensure Windows 11 is the only operating system on a device. Remove alternate operating systems. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253267r958524_rule | Automation: manual-only (not covered by scap)
+    - name: "Non-system-created file shares on a system must limit access to groups that - (SV-253267r958524_rule)"
+      tags:
+        - stig
+        - SV-253267r958524_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253267r958524_rule: Non-system-created file shares on a system must limit access to groups that - If a non-system-created share is required on a system, configure the share and NTFS permissions to limit access to the specific groups or accounts that require it.  Remove any unnecessary non-system-c... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253268r1051039_rule | Automation: manual-only (not covered by scap)
+    - name: "Unused accounts must be disabled or removed from the system after 35 days of - (SV-253268r1051039_rule)"
+      tags:
+        - stig
+        - SV-253268r1051039_rule
+        - other
+        - severity_low
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253268r1051039_rule: Unused accounts must be disabled or removed from the system after 35 days of - Review local accounts and verify their necessity. Disable or delete any active accounts that have not been used in the last 35 days. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253269r958702_rule | Automation: manual-only (not covered by scap)
+    - name: "Only accounts responsible for the administration of a system must have - (SV-253269r958702_rule)"
+      tags:
+        - stig
+        - SV-253269r958702_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253269r958702_rule: Only accounts responsible for the administration of a system must have - Configure the system to include only administrator groups or accounts that are responsible for the system in the local Administrators group.  For domain-joined workstations, the Domain Admins group mu... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253270r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Only accounts responsible for the backup operations must be members of the - (SV-253270r991589_rule)"
+      tags:
+        - stig
+        - SV-253270r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253270r991589_rule: Only accounts responsible for the backup operations must be members of the - Create separate accounts for backup operations for users with this privilege. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253271r958702_rule | Automation: manual-only (not covered by scap)
+    - name: "Only authorized user accounts must be allowed to create or run virtual machines - (SV-253271r958702_rule)"
+      tags:
+        - stig
+        - SV-253271r958702_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253271r958702_rule: Only authorized user accounts must be allowed to create or run virtual machines - For Hyper-V, remove any unauthorized groups or user accounts from the "Hyper-V Administrators" group.  For hosted hypervisors other than Hyper-V, restrict access to create or run virtual machines to a... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253272r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Standard local user accounts must not exist on a system in a domain - (SV-253272r991589_rule)"
+      tags:
+        - stig
+        - SV-253272r991589_rule
+        - other
+        - severity_low
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253272r991589_rule: Standard local user accounts must not exist on a system in a domain - Limit local user accounts on domain-joined systems. Remove any unauthorized local accounts. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253273r1051040_rule | Automation: manual-only (not covered by scap)
+    - name: "Accounts must be configured to require password expiration - (SV-253273r1051040_rule)"
+      tags:
+        - stig
+        - SV-253273r1051040_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253273r1051040_rule: Accounts must be configured to require password expiration - Configure all passwords to expire. Run "Computer Management". Navigate to System Tools >> Local Users and Groups >> Users. Double-click each active account. Ensure "Password never expires" is not chec... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253274r1016661_rule | Automation: manual-only (not covered by scap)
+    - name: "Permissions for system files and directories must conform to minimum - (SV-253274r1016661_rule)"
+      tags:
+        - stig
+        - SV-253274r1016661_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253274r1016661_rule: Permissions for system files and directories must conform to minimum - Maintain the default file system permissions and configure the Security Option: "Network access: Let everyone permissions apply to anonymous users" to "Disabled" (WN11-SO-000160). Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253275r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Internet Information System (IIS) or its subcomponents must not be installed on - (SV-253275r958478_rule)"
+      tags:
+        - stig
+        - SV-253275r958478_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253275r958478_rule: Internet Information System (IIS) or its subcomponents must not be installed on - Uninstall "Internet Information Services" or "Internet Information Services Hostable Web Core" from the system. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253276r958480_rule | Automation: manual-only (not covered by scap)
+    - name: "Simple Network Management Protocol (SNMP) must not be installed on the system - (SV-253276r958480_rule)"
+      tags:
+        - stig
+        - SV-253276r958480_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253276r958480_rule: Simple Network Management Protocol (SNMP) must not be installed on the system - Uninstall "Simple Network Management Protocol (SNMP)" from the system.  Run "Programs and Features". Select "Turn Windows Features on or off". De-select "Simple Network Management Protocol (SNMP)". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253277r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Simple TCP/IP Services must not be installed on the system - (SV-253277r958478_rule)"
+      tags:
+        - stig
+        - SV-253277r958478_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253277r958478_rule: Simple TCP/IP Services must not be installed on the system - Uninstall "Simple TCPIP Services (i.e. echo, daytime etc.)" from the system.  Run "Programs and Features". Select "Turn Windows Features on or off". De-select "Simple TCPIP Services (i.e. echo, daytim... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253278r958480_rule | Automation: manual-only (not covered by scap)
+    - name: "The Telnet Client must not be installed on the system - (SV-253278r958480_rule)"
+      tags:
+        - stig
+        - SV-253278r958480_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253278r958480_rule: The Telnet Client must not be installed on the system - Uninstall "Telnet Client" from the system.  Run "Programs and Features". Select "Turn Windows Features on or off".  De-select "Telnet Client". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253279r958480_rule | Automation: manual-only (not covered by scap)
+    - name: "The TFTP Client must not be installed on the system - (SV-253279r958480_rule)"
+      tags:
+        - stig
+        - SV-253279r958480_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253279r958480_rule: The TFTP Client must not be installed on the system - Uninstall "TFTP Client" from the system.  Run "Programs and Features". Select "Turn Windows Features on or off". De-select "TFTP Client". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253280r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Software certificate installation files must be removed from Windows 11 - (SV-253280r991589_rule)"
+      tags:
+        - stig
+        - SV-253280r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253280r991589_rule: Software certificate installation files must be removed from Windows 11 - Remove any certificate installation files (*.p12 and *.pfx) found on a system.  Note: This does not apply to server-based applications that have a requirement for .p12 certificate files (e.g., Oracle ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253281r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "A host-based firewall must be installed and enabled on the system - (SV-253281r991589_rule)"
+      tags:
+        - stig
+        - SV-253281r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253281r991589_rule: A host-based firewall must be installed and enabled on the system - Install and enable a host-based firewall on the system. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253282r991593_rule | Automation: manual-only (not covered by scap)
+    - name: "Inbound exceptions to the firewall on Windows 11 domain workstations must only - (SV-253282r991593_rule)"
+      tags:
+        - stig
+        - SV-253282r991593_rule
+        - windows_firewall
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253282r991593_rule: Inbound exceptions to the firewall on Windows 11 domain workstations must only - Configure firewall exceptions to inbound connections on domain workstations to include only authorized remote management hosts.  Configure only inbound connection exceptions for authorized remote mana... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253283r958928_rule | Automation: manual-only (not covered by scap)
+    - name: "Data Execution Prevention (DEP) must be configured to at least OptOut - (SV-253283r958928_rule)"
+      tags:
+        - stig
+        - SV-253283r958928_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253283r958928_rule: Data Execution Prevention (DEP) must be configured to at least OptOut - Configure DEP to at least OptOut.  Note: Suspend BitLocker before making changes to the DEP configuration.  Open a command prompt (cmd.exe) or PowerShell with elevated privileges (Run as administrator... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253284r958928_rule | Automation: automated via SCAP
+    - name: "Structured Exception Handling Overwrite Protection (SEHOP) must be enabled - (SV-253284r958928_rule)"
+      tags:
+        - stig
+        - SV-253284r958928_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "DisableExceptionChainValidation"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253285r958478_rule | Automation: automated via SCAP
+    - name: "The Windows PowerShell 2.0 feature must be disabled on the system - (SV-253285r958478_rule)"
+      tags:
+        - stig
+        - SV-253285r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_feature:
+        name: -Online
+        state: absent
+
+
+    # STIG ID: SV-253286r958478_rule | Automation: automated via SCAP
+    - name: "The Server Message Block (SMB) v1 protocol must be disabled on the system - (SV-253286r958478_rule)"
+      tags:
+        - stig
+        - SV-253286r958478_rule
+        - windows_feature
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_feature:
+        name: -Online
+        state: absent
+
+
+    # STIG ID: SV-253287r958478_rule | Automation: automated via SCAP
+    - name: "The Server Message Block (SMB) v1 protocol must be disabled on the SMB server - (SV-253287r958478_rule)"
+      tags:
+        - stig
+        - SV-253287r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters'
+        name: "SMB1"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253288r958478_rule | Automation: automated via SCAP
+    - name: "The Server Message Block (SMB) v1 protocol must be disabled on the SMB client - (SV-253288r958478_rule)"
+      tags:
+        - stig
+        - SV-253288r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters'
+        name: "Start"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253289r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "The Secondary Logon service must be disabled on Windows 11 - (SV-253289r958478_rule)"
+      tags:
+        - stig
+        - SV-253289r958478_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253289r958478_rule: The Secondary Logon service must be disabled on Windows 11 - Configure the "Secondary Logon" service "Startup Type" to "Disabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253290r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Orphaned security identifiers (SIDs) must be removed from user rights on - (SV-253290r991589_rule)"
+      tags:
+        - stig
+        - SV-253290r991589_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253290r991589_rule: Orphaned security identifiers (SIDs) must be removed from user rights on - Remove any unresolved SIDs found in User Rights assignments and determined to not be for currently valid accounts or groups by removing the accounts or groups from the appropriate group policy. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253291r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Bluetooth must be turned off unless approved by the organization - (SV-253291r958478_rule)"
+      tags:
+        - stig
+        - SV-253291r958478_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253291r958478_rule: Bluetooth must be turned off unless approved by the organization - Turn off Bluetooth radios not organizationally approved. Establish an organizational policy for the use of Bluetooth. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253292r958478_rule | Automation: manual-only (not covered by scap)
+    - name: "Bluetooth must be turned off when not in use - (SV-253292r958478_rule)"
+      tags:
+        - stig
+        - SV-253292r958478_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253292r958478_rule: Bluetooth must be turned off when not in use - Turn off Bluetooth radios when not in use. Establish an organizational policy for the use of Bluetooth to include training of personnel. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253293r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must notify the user when a Bluetooth device attempts to connect - (SV-253293r991589_rule)"
+      tags:
+        - stig
+        - SV-253293r991589_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253293r991589_rule: The system must notify the user when a Bluetooth device attempts to connect - Configure Bluetooth to notify users if devices attempt to connect. View Bluetooth Settings. Ensure "Alert me when a new Bluetooth device wants to connect" is checked. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253294r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Administrative accounts must not be used with applications that access the - (SV-253294r991589_rule)"
+      tags:
+        - stig
+        - SV-253294r991589_rule
+        - other
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253294r991589_rule: Administrative accounts must not be used with applications that access the - Establish and enforce a policy that prohibits administrative accounts from using applications that access the internet, such as web browsers, or with potential internet sources, such as email. Define ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253295r958552_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 nonpersistent VM sessions must not exceed 24 hours - (SV-253295r958552_rule)"
+      tags:
+        - stig
+        - SV-253295r958552_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253295r958552_rule: Windows 11 nonpersistent VM sessions must not exceed 24 hours - Set nonpersistent VM sessions to not exceed 24 hours. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253296r1051041_rule | Automation: manual-only (not covered by scap)
+    - name: "The Windows 11 time service must synchronize with an appropriate DOD time source - (SV-253296r1051041_rule)"
+      tags:
+        - stig
+        - SV-253296r1051041_rule
+        - other
+        - severity_low
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253296r1051041_rule: The Windows 11 time service must synchronize with an appropriate DOD time source - Configure the system to synchronize time with an appropriate DOD time source.  Domain-joined systems use NT5DS to synchronize time from other systems in the domain by default.  If the system needs to ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253297r958736_rule | Automation: automated via SCAP
+    - name: "Windows 11 account lockout duration must be configured to 15 minutes or greater - (SV-253297r958736_rule)"
+      tags:
+        - stig
+        - SV-253297r958736_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "LockoutDuration"
+        value: "15"
+
+
+    # STIG ID: SV-253298r958388_rule | Automation: automated via SCAP
+    - name: "The number of allowed bad logon attempts must be configured to three or less - (SV-253298r958388_rule)"
+      tags:
+        - stig
+        - SV-253298r958388_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "LockoutBadCount"
+        value: "3"
+
+
+    # STIG ID: SV-253299r958388_rule | Automation: automated via SCAP
+    - name: "The period of time before the bad logon counter is reset must be configured to - (SV-253299r958388_rule)"
+      tags:
+        - stig
+        - SV-253299r958388_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "ResetLockoutCount"
+        value: "15"
+
+
+    # STIG ID: SV-253300r1000103_rule | Automation: automated via SCAP
+    - name: "The password history must be configured to 24 passwords remembered - (SV-253300r1000103_rule)"
+      tags:
+        - stig
+        - SV-253300r1000103_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "PasswordHistorySize"
+        value: "24"
+
+
+    # STIG ID: SV-253301r1051042_rule | Automation: automated via SCAP
+    - name: "The maximum password age must be configured to 60 days or less - (SV-253301r1051042_rule)"
+      tags:
+        - stig
+        - SV-253301r1051042_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "MaximumPasswordAge"
+        value: "60"
+
+
+    # STIG ID: SV-253302r1051043_rule | Automation: automated via SCAP
+    - name: "The minimum password age must be configured to at least 1 day - (SV-253302r1051043_rule)"
+      tags:
+        - stig
+        - SV-253302r1051043_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "MinimumPasswordAge"
+        value: "1"
+
+
+    # STIG ID: SV-253303r1051044_rule | Automation: automated via SCAP
+    - name: "Passwords must, at a minimum, be 14 characters - (SV-253303r1051044_rule)"
+      tags:
+        - stig
+        - SV-253303r1051044_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "System Access"
+        key: "MinimumPasswordLength"
+        value: "14"
+
+
+    # STIG ID: SV-253304r1051045_rule | Automation: manual-only (not covered by scap)
+    - name: "The built-in Microsoft password complexity filter must be enabled - (SV-253304r1051045_rule)"
+      tags:
+        - stig
+        - SV-253304r1051045_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253304r1051045_rule: The built-in Microsoft password complexity filter must be enabled - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Account Policies >> Password Policy >> "Password must meet complexity requirements" to "Enabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253305r1051046_rule | Automation: manual-only (not covered by scap)
+    - name: "Reversible password encryption must be disabled - (SV-253305r1051046_rule)"
+      tags:
+        - stig
+        - SV-253305r1051046_rule
+        - windows_security_policy
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253305r1051046_rule: Reversible password encryption must be disabled - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Account Policies >> Password Policy >> "Store passwords using reversible encryption" to "Disabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253306r991570_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Account Logon - Credential Validation - (SV-253306r991570_rule)"
+      tags:
+        - stig
+        - SV-253306r991570_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountLogon"
+        value: "2"
+
+
+    # STIG ID: SV-253307r991570_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Account Logon - Credential Validation - (SV-253307r991570_rule)"
+      tags:
+        - stig
+        - SV-253307r991570_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountLogon"
+        value: "1"
+
+
+    # STIG ID: SV-253308r971541_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Account Management - Security Group - (SV-253308r971541_rule)"
+      tags:
+        - stig
+        - SV-253308r971541_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "1"
+
+
+    # STIG ID: SV-253309r958566_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Account Management - User Account - (SV-253309r958566_rule)"
+      tags:
+        - stig
+        - SV-253309r958566_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "2"
+
+
+    # STIG ID: SV-253310r991551_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Account Management - User Account - (SV-253310r991551_rule)"
+      tags:
+        - stig
+        - SV-253310r991551_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditAccountManagement"
+        value: "1"
+
+
+    # STIG ID: SV-253311r1051047_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Detailed Tracking - PNP Activity - (SV-253311r1051047_rule)"
+      tags:
+        - stig
+        - SV-253311r1051047_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253311r1051047_rule: The system must be configured to audit Detailed Tracking - PNP Activity - Computer Configuration >> Windows Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Detailed Tracking >> "Audit PNP Activity" with "Success" selected. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253312r1051048_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Detailed Tracking - Process Creation - (SV-253312r1051048_rule)"
+      tags:
+        - stig
+        - SV-253312r1051048_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253312r1051048_rule: The system must be configured to audit Detailed Tracking - Process Creation - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Detailed Tracking >> "Audit Process Cr... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253313r991578_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Logon/Logoff - Account Lockout failures - (SV-253313r991578_rule)"
+      tags:
+        - stig
+        - SV-253313r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253313r991578_rule: The system must be configured to audit Logon/Logoff - Account Lockout failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Account Lockout... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253314r991570_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Logon/Logoff - Group Membership successes - (SV-253314r991570_rule)"
+      tags:
+        - stig
+        - SV-253314r991570_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253314r991570_rule: The system must be configured to audit Logon/Logoff - Group Membership successes - Configure the policy value for Computer Configuration >> Windows Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Group Membership" with "Success" sel... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253315r958406_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Logon/Logoff - Logoff successes - (SV-253315r958406_rule)"
+      tags:
+        - stig
+        - SV-253315r958406_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253315r958406_rule: The system must be configured to audit Logon/Logoff - Logoff successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Logoff" with "S... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253316r991581_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Logon/Logoff - Logon failures - (SV-253316r991581_rule)"
+      tags:
+        - stig
+        - SV-253316r991581_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253316r991581_rule: The system must be configured to audit Logon/Logoff - Logon failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Logon" with "Fa... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253317r991581_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Logon/Logoff - Logon successes - (SV-253317r991581_rule)"
+      tags:
+        - stig
+        - SV-253317r991581_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253317r991581_rule: The system must be configured to audit Logon/Logoff - Logon successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Logon" with "Su... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253318r991578_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit Logon/Logoff - Special Logon successes - (SV-253318r991578_rule)"
+      tags:
+        - stig
+        - SV-253318r991578_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253318r991578_rule: The system must be configured to audit Logon/Logoff - Special Logon successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Special Logon" ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253319r991572_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit Object Access - File Share failures - (SV-253319r991572_rule)"
+      tags:
+        - stig
+        - SV-253319r991572_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "2"
+
+
+    # STIG ID: SV-253320r991572_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit Object Access - File Share successes - (SV-253320r991572_rule)"
+      tags:
+        - stig
+        - SV-253320r991572_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "1"
+
+
+    # STIG ID: SV-253321r991572_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit Object Access - Other Object Access - (SV-253321r991572_rule)"
+      tags:
+        - stig
+        - SV-253321r991572_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "1"
+
+
+    # STIG ID: SV-253322r991572_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit Object Access - Other Object Access - (SV-253322r991572_rule)"
+      tags:
+        - stig
+        - SV-253322r991572_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "2"
+
+
+    # STIG ID: SV-253323r991583_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Object Access - Removable Storage - (SV-253323r991583_rule)"
+      tags:
+        - stig
+        - SV-253323r991583_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "2"
+
+
+    # STIG ID: SV-253324r991583_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Object Access - Removable Storage - (SV-253324r991583_rule)"
+      tags:
+        - stig
+        - SV-253324r991583_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "1"
+
+
+    # STIG ID: SV-253325r991572_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Policy Change - Audit Policy Change - (SV-253325r991572_rule)"
+      tags:
+        - stig
+        - SV-253325r991572_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-253326r991572_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Policy Change - Authentication Policy - (SV-253326r991572_rule)"
+      tags:
+        - stig
+        - SV-253326r991572_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-253327r991572_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Policy Change - Authorization Policy - (SV-253327r991572_rule)"
+      tags:
+        - stig
+        - SV-253327r991572_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-253328r958732_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Privilege Use - Sensitive Privilege Use - (SV-253328r958732_rule)"
+      tags:
+        - stig
+        - SV-253328r958732_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPrivilegeUse"
+        value: "2"
+
+
+    # STIG ID: SV-253329r991575_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit Privilege Use - Sensitive Privilege Use - (SV-253329r991575_rule)"
+      tags:
+        - stig
+        - SV-253329r991575_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPrivilegeUse"
+        value: "1"
+
+
+    # STIG ID: SV-253330r991586_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit System - IPsec Driver failures - (SV-253330r991586_rule)"
+      tags:
+        - stig
+        - SV-253330r991586_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253330r991586_rule: The system must be configured to audit System - IPsec Driver failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> "Audit IPsec Driver" with "F... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253331r991579_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit System - Other System Events successes - (SV-253331r991579_rule)"
+      tags:
+        - stig
+        - SV-253331r991579_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditSystemEvents"
+        value: "1"
+
+
+    # STIG ID: SV-253332r991579_rule | Automation: automated via SCAP
+    - name: "The system must be configured to audit System - Other System Events failures - (SV-253332r991579_rule)"
+      tags:
+        - stig
+        - SV-253332r991579_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditSystemEvents"
+        value: "2"
+
+
+    # STIG ID: SV-253333r991575_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit System - Security State Change successes - (SV-253333r991575_rule)"
+      tags:
+        - stig
+        - SV-253333r991575_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253333r991575_rule: The system must be configured to audit System - Security State Change successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> "Audit Security State Change... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253334r991575_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit System - Security System Extension - (SV-253334r991575_rule)"
+      tags:
+        - stig
+        - SV-253334r991575_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253334r991575_rule: The system must be configured to audit System - Security System Extension - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> "Audit Security System Exten... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253335r991573_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit System - System Integrity failures - (SV-253335r991573_rule)"
+      tags:
+        - stig
+        - SV-253335r991573_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253335r991573_rule: The system must be configured to audit System - System Integrity failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> "Audit System Integrity" wit... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253336r991573_rule | Automation: manual-only (not covered by scap)
+    - name: "The system must be configured to audit System - System Integrity successes - (SV-253336r991573_rule)"
+      tags:
+        - stig
+        - SV-253336r991573_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253336r991573_rule: The system must be configured to audit System - System Integrity successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> System >> "Audit System Integrity" wit... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253337r958752_rule | Automation: automated via SCAP
+    - name: "The Application event log size must be configured to 32768 KB or greater - (SV-253337r958752_rule)"
+      tags:
+        - stig
+        - SV-253337r958752_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MaxSize"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253338r958752_rule | Automation: automated via SCAP
+    - name: "The Security event log size must be configured to 1024000 KB or greater - (SV-253338r958752_rule)"
+      tags:
+        - stig
+        - SV-253338r958752_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MaxSize"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253339r958752_rule | Automation: automated via SCAP
+    - name: "The System event log size must be configured to 32768 KB or greater - (SV-253339r958752_rule)"
+      tags:
+        - stig
+        - SV-253339r958752_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MaxSize"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253340r958434_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 permissions for the Application event log must prevent access by - (SV-253340r958434_rule)"
+      tags:
+        - stig
+        - SV-253340r958434_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253340r958434_rule: Windows 11 permissions for the Application event log must prevent access by - Ensure the permissions on the Application event log (Application.evtx) are configured to prevent standard user accounts or groups from having access. The default permissions listed below satisfy this ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253341r958434_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 permissions for the Security event log must prevent access by - (SV-253341r958434_rule)"
+      tags:
+        - stig
+        - SV-253341r958434_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253341r958434_rule: Windows 11 permissions for the Security event log must prevent access by - Ensure the permissions on the Security event log (Security.evtx) are configured to prevent standard user accounts or groups from having access. The default permissions listed below satisfy this requir... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253342r958434_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 permissions for the System event log must prevent access by - (SV-253342r958434_rule)"
+      tags:
+        - stig
+        - SV-253342r958434_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253342r958434_rule: Windows 11 permissions for the System event log must prevent access by - Ensure the permissions on the System event log (System.evtx) are configured to prevent standard user accounts or groups from having access. The default permissions listed below satisfy this requiremen... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253343r958412_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit Other Policy Change Events Successes - (SV-253343r958412_rule)"
+      tags:
+        - stig
+        - SV-253343r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-253344r958412_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit Other Policy Change Events Failures - (SV-253344r958412_rule)"
+      tags:
+        - stig
+        - SV-253344r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "2"
+
+
+    # STIG ID: SV-253345r958412_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 must be configured to audit other Logon/Logoff Events Successes - (SV-253345r958412_rule)"
+      tags:
+        - stig
+        - SV-253345r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253345r958412_rule: Windows 11 must be configured to audit other Logon/Logoff Events Successes - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Other Logon/Log... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253346r958412_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 must be configured to audit other Logon/Logoff Events Failures - (SV-253346r958412_rule)"
+      tags:
+        - stig
+        - SV-253346r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253346r958412_rule: Windows 11 must be configured to audit other Logon/Logoff Events Failures - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Advanced Audit Policy Configuration >> System Audit Policies >> Logon/Logoff >> "Audit Other Logon/Log... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253347r958412_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit Detailed File Share Failures - (SV-253347r958412_rule)"
+      tags:
+        - stig
+        - SV-253347r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditObjectAccess"
+        value: "2"
+
+
+    # STIG ID: SV-253348r958412_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit MPSSVC Rule-Level Policy Change Successes - (SV-253348r958412_rule)"
+      tags:
+        - stig
+        - SV-253348r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "1"
+
+
+    # STIG ID: SV-253349r958412_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to audit MPSSVC Rule-Level Policy Change Failures - (SV-253349r958412_rule)"
+      tags:
+        - stig
+        - SV-253349r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_security_policy:
+        section: "Event Audit"
+        key: "AuditPolicyChange"
+        value: "2"
+
+
+    # STIG ID: SV-253350r958478_rule | Automation: automated via SCAP
+    - name: "Camera access from the lock screen must be disabled - (SV-253350r958478_rule)"
+      tags:
+        - stig
+        - SV-253350r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization'
+        name: "NoLockScreenCamera"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253351r1106508_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 must cover or disable the built-in or attached camera when not in use - (SV-253351r1106508_rule)"
+      tags:
+        - stig
+        - SV-253351r1106508_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253351r1106508_rule: Windows 11 must cover or disable the built-in or attached camera when not in use - If the camera is not disconnected or covered, the following registry entry is required.   Registry Hive: HKEY_LOCAL_MACHINE RegistryPath\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManag... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253352r958478_rule | Automation: automated via SCAP
+    - name: "The display of slide shows on the lock screen must be disabled - (SV-253352r958478_rule)"
+      tags:
+        - stig
+        - SV-253352r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization'
+        name: "NoLockScreenSlideshow"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253353r991589_rule | Automation: automated via SCAP
+    - name: "IPv6 source routing must be configured to highest protection - (SV-253353r991589_rule)"
+      tags:
+        - stig
+        - SV-253353r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "DisableIpSourceRouting"
+        data: 'Highest protection, source routing is completely disabled'
+        type: string
+        state: present
+
+
+    # STIG ID: SV-253354r991589_rule | Automation: automated via SCAP
+    - name: "The system must be configured to prevent IP source routing - (SV-253354r991589_rule)"
+      tags:
+        - stig
+        - SV-253354r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "DisableIPSourceRouting"
+        data: 'Highest protection, source routing is completely disabled'
+        type: string
+        state: present
+
+
+    # STIG ID: SV-253355r991589_rule | Automation: automated via SCAP
+    - name: "The system must be configured to prevent Internet Control Message Protocol - (SV-253355r991589_rule)"
+      tags:
+        - stig
+        - SV-253355r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "EnableICMPRedirect"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253356r958902_rule | Automation: automated via SCAP
+    - name: "The system must be configured to ignore NetBIOS name release requests except - (SV-253356r958902_rule)"
+      tags:
+        - stig
+        - SV-253356r958902_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "NoNameReleaseOnDemand"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253357r958518_rule | Automation: automated via SCAP
+    - name: "Local administrator accounts must have their privileged token filtered to - (SV-253357r958518_rule)"
+      tags:
+        - stig
+        - SV-253357r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "LocalAccountTokenFilterPolicy"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253358r958478_rule | Automation: automated via SCAP
+    - name: "WDigest Authentication must be disabled - (SV-253358r958478_rule)"
+      tags:
+        - stig
+        - SV-253358r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest'
+        name: "UseLogonCredential"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253359r958478_rule | Automation: automated via SCAP
+    - name: "Run as different user must be removed from context menus - (SV-253359r958478_rule)"
+      tags:
+        - stig
+        - SV-253359r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+        name: "SuppressionPolicy"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253360r991589_rule | Automation: automated via SCAP
+    - name: "Insecure logons to an SMB server must be disabled - (SV-253360r991589_rule)"
+      tags:
+        - stig
+        - SV-253360r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "AllowInsecureGuestAuth"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253361r958478_rule | Automation: automated via SCAP
+    - name: "Internet connection sharing must be disabled - (SV-253361r958478_rule)"
+      tags:
+        - stig
+        - SV-253361r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "NC_ShowSharedAccessUI"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253362r991589_rule | Automation: automated via SCAP
+    - name: "Hardened UNC Paths must be defined to require mutual authentication and - (SV-253362r991589_rule)"
+      tags:
+        - stig
+        - SV-253362r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "\"HardenedUNCPaths\""
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253363r971535_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to prioritize ECC Curves with longer key lengths - (SV-253363r971535_rule)"
+      tags:
+        - stig
+        - SV-253363r971535_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "EccCurves"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253364r958358_rule | Automation: automated via SCAP
+    - name: "Simultaneous connections to the internet or a Windows domain must be limited - (SV-253364r958358_rule)"
+      tags:
+        - stig
+        - SV-253364r958358_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy'
+        name: "fMinimizeConnections"
+        data: '3'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253365r991589_rule | Automation: automated via SCAP
+    - name: "Connections to non-domain networks when connected to a domain authenticated - (SV-253365r991589_rule)"
+      tags:
+        - stig
+        - SV-253365r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "fBlockNonDomain"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253366r991589_rule | Automation: automated via SCAP
+    - name: "Wi-Fi Sense must be disabled - (SV-253366r991589_rule)"
+      tags:
+        - stig
+        - SV-253366r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+        name: "AutoConnectAllowedOEM"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253367r958422_rule | Automation: automated via SCAP
+    - name: "Command line data must be included in process creation events - (SV-253367r958422_rule)"
+      tags:
+        - stig
+        - SV-253367r958422_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\EventLog-Windows Defender'
+        name: "ProcessCreationIncludeCmdLine_Enabled"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253368r991589_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to enable Remote host allows delegation of - (SV-253368r991589_rule)"
+      tags:
+        - stig
+        - SV-253368r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation'
+        name: "AllowProtectedCreds"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253369r991589_rule | Automation: automated via SCAP
+    - name: "Virtualization-based Security must be enabled on Windows 11 with the platform - (SV-253369r991589_rule)"
+      tags:
+        - stig
+        - SV-253369r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard'
+        name: "EnableVirtualizationBasedSecurity"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253370r991589_rule | Automation: automated via SCAP
+    - name: "Credential Guard must be running on Windows 11 domain-joined systems - (SV-253370r991589_rule)"
+      tags:
+        - stig
+        - SV-253370r991589_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard'
+        name: "LsaCfgFlags"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253371r991589_rule | Automation: automated via SCAP
+    - name: "Virtualization-based protection of code integrity must be enabled - (SV-253371r991589_rule)"
+      tags:
+        - stig
+        - SV-253371r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard'
+        name: "HypervisorEnforcedCodeIntegrity"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253372r991589_rule | Automation: automated via SCAP
+    - name: "Early Launch Antimalware, Boot-Start Driver Initialization Policy must prevent - (SV-253372r991589_rule)"
+      tags:
+        - stig
+        - SV-253372r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Policies\EarlyLaunch'
+        name: "below"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253373r991589_rule | Automation: automated via SCAP
+    - name: "Group Policy objects must be reprocessed even if they have not changed - (SV-253373r991589_rule)"
+      tags:
+        - stig
+        - SV-253373r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy'
+        name: "NoGPOListChanges"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253374r958478_rule | Automation: automated via SCAP
+    - name: "Downloading print driver packages over HTTP must be prevented - (SV-253374r958478_rule)"
+      tags:
+        - stig
+        - SV-253374r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Internet Communication Management'
+        name: "DisableWebPnPDownload"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253375r958478_rule | Automation: automated via SCAP
+    - name: "Web publishing and online ordering wizards must be prevented from downloading a - (SV-253375r958478_rule)"
+      tags:
+        - stig
+        - SV-253375r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Internet Communication Management'
+        name: "NoWebServices"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253376r958478_rule | Automation: automated via SCAP
+    - name: "Printing over HTTP must be prevented - (SV-253376r958478_rule)"
+      tags:
+        - stig
+        - SV-253376r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Internet Communication Management'
+        name: "DisableHTTPPrinting"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253377r991589_rule | Automation: automated via SCAP
+    - name: "Systems must at least attempt device authentication using certificates - (SV-253377r991589_rule)"
+      tags:
+        - stig
+        - SV-253377r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters'
+        name: "DevicePKInitEnabled"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253378r958478_rule | Automation: automated via SCAP
+    - name: "The network selection user interface (UI) must not be displayed on the logon - (SV-253378r958478_rule)"
+      tags:
+        - stig
+        - SV-253378r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "DontDisplayNetworkSelectionUI"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253379r958478_rule | Automation: automated via SCAP
+    - name: "Local users on domain-joined computers must not be enumerated - (SV-253379r958478_rule)"
+      tags:
+        - stig
+        - SV-253379r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "EnumerateLocalUsers"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253380r1051049_rule | Automation: automated via SCAP
+    - name: "Users must be prompted for a password on resume from sleep (on battery) - (SV-253380r1051049_rule)"
+      tags:
+        - stig
+        - SV-253380r1051049_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Power'
+        name: "DCSettingIndex"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253381r1051050_rule | Automation: automated via SCAP
+    - name: "The user must be prompted for a password on resume from sleep (plugged in) - (SV-253381r1051050_rule)"
+      tags:
+        - stig
+        - SV-253381r1051050_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Power'
+        name: "ACSettingIndex"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253382r958524_rule | Automation: automated via SCAP
+    - name: "Solicited Remote Assistance must not be allowed - (SV-253382r958524_rule)"
+      tags:
+        - stig
+        - SV-253382r958524_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "fAllowToGetHelp"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253383r971545_rule | Automation: automated via SCAP
+    - name: "Unauthenticated RPC clients must be restricted from connecting to the RPC server - (SV-253383r971545_rule)"
+      tags:
+        - stig
+        - SV-253383r971545_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "RestrictRemoteClients"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253384r991589_rule | Automation: automated via SCAP
+    - name: "The setting to allow Microsoft accounts to be optional for modern style apps - (SV-253384r991589_rule)"
+      tags:
+        - stig
+        - SV-253384r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MSAOptional"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253385r958478_rule | Automation: automated via SCAP
+    - name: "The Application Compatibility Program Inventory must be prevented from - (SV-253385r958478_rule)"
+      tags:
+        - stig
+        - SV-253385r958478_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableInventory"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253386r958804_rule | Automation: automated via SCAP
+    - name: "Autoplay must be turned off for non-volume devices - (SV-253386r958804_rule)"
+      tags:
+        - stig
+        - SV-253386r958804_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "NoAutoplayfornonVolume"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253387r958804_rule | Automation: automated via SCAP
+    - name: "The default autorun behavior must be configured to prevent autorun commands - (SV-253387r958804_rule)"
+      tags:
+        - stig
+        - SV-253387r958804_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "NoAutorun"
+        data: 'Enabled:Do not execute any autorun commands'
+        type: string
+        state: present
+
+
+    # STIG ID: SV-253388r958804_rule | Automation: automated via SCAP
+    - name: "Autoplay must be disabled for all drives - (SV-253388r958804_rule)"
+      tags:
+        - stig
+        - SV-253388r958804_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "NoDriveTypeAutoRun"
+        data: 'Enabled:All Drives'
+        type: string
+        state: present
+
+
+    # STIG ID: SV-253389r991589_rule | Automation: automated via SCAP
+    - name: "Enhanced anti-spoofing for facial recognition must be enabled on Windows 11 - (SV-253389r991589_rule)"
+      tags:
+        - stig
+        - SV-253389r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnhancedAntiSpoofing"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253390r958478_rule | Automation: automated via SCAP
+    - name: "Microsoft consumer experiences must be turned off - (SV-253390r958478_rule)"
+      tags:
+        - stig
+        - SV-253390r958478_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableWindowsConsumerFeatures"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253391r958518_rule | Automation: automated via SCAP
+    - name: "Administrator accounts must not be enumerated during elevation - (SV-253391r958518_rule)"
+      tags:
+        - stig
+        - SV-253391r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnumerateAdministrators"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253392r991589_rule | Automation: automated via SCAP
+    - name: "Enhanced diagnostic data must be limited to the minimum required to support - (SV-253392r991589_rule)"
+      tags:
+        - stig
+        - SV-253392r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "LimitEnhancedDiagnosticDataWindowsAnalytics"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253393r958564_rule | Automation: automated via SCAP
+    - name: "Windows Telemetry must not be configured to Full - (SV-253393r958564_rule)"
+      tags:
+        - stig
+        - SV-253393r958564_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowTelemetry"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253394r991589_rule | Automation: automated via SCAP
+    - name: "Windows Update must not obtain updates from other PCs on the internet - (SV-253394r991589_rule)"
+      tags:
+        - stig
+        - SV-253394r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DODownloadMode"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253395r958478_rule | Automation: automated via SCAP
+    - name: "The Microsoft Defender SmartScreen for Explorer must be enabled - (SV-253395r958478_rule)"
+      tags:
+        - stig
+        - SV-253395r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableSmartScreen"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253396r958928_rule | Automation: automated via SCAP
+    - name: "Explorer Data Execution Prevention must be enabled - (SV-253396r958928_rule)"
+      tags:
+        - stig
+        - SV-253396r958928_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+        name: "NoDataExecutionPrevention"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253397r958902_rule | Automation: automated via SCAP
+    - name: "File Explorer heap termination on corruption must be disabled - (SV-253397r958902_rule)"
+      tags:
+        - stig
+        - SV-253397r958902_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+        name: "NoHeapTerminationOnCorruption"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253398r991589_rule | Automation: automated via SCAP
+    - name: "File Explorer shell protocol must run in protected mode - (SV-253398r991589_rule)"
+      tags:
+        - stig
+        - SV-253398r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+        name: "PreXPSP2ShellProtocolBehavior"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253399r958478_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to disable Windows Game Recording and Broadcasting - (SV-253399r958478_rule)"
+      tags:
+        - stig
+        - SV-253399r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowGameDVR"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253400r991589_rule | Automation: automated via SCAP
+    - name: "The use of a hardware security device with Windows Hello for Business must be - (SV-253400r991589_rule)"
+      tags:
+        - stig
+        - SV-253400r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "RequireSecurityDevice"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253401r991589_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to require a minimum pin length of six characters - (SV-253401r991589_rule)"
+      tags:
+        - stig
+        - SV-253401r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "MinimumPINLength"
+        data: '6'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253402r1051051_rule | Automation: automated via SCAP
+    - name: "Passwords must not be saved in the Remote Desktop Client - (SV-253402r1051051_rule)"
+      tags:
+        - stig
+        - SV-253402r1051051_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisablePasswordSaving"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253403r958524_rule | Automation: automated via SCAP
+    - name: "Local drives must be prevented from sharing with Remote Desktop Session Hosts - (SV-253403r958524_rule)"
+      tags:
+        - stig
+        - SV-253403r958524_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "fDisableCdm"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253404r1051052_rule | Automation: automated via SCAP
+    - name: "Remote Desktop Services must always prompt a client for passwords upon - (SV-253404r1051052_rule)"
+      tags:
+        - stig
+        - SV-253404r1051052_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "fPromptForPassword"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253405r991554_rule | Automation: automated via SCAP
+    - name: "The Remote Desktop Session Host must require secure RPC communications - (SV-253405r991554_rule)"
+      tags:
+        - stig
+        - SV-253405r991554_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "fEncryptRPCTraffic"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253406r958408_rule | Automation: automated via SCAP
+    - name: "Remote Desktop Services must be configured with the client connection - (SV-253406r958408_rule)"
+      tags:
+        - stig
+        - SV-253406r958408_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "MinEncryptionLevel"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253407r991589_rule | Automation: automated via SCAP
+    - name: "Attachments must be prevented from being downloaded from RSS feeds - (SV-253407r991589_rule)"
+      tags:
+        - stig
+        - SV-253407r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableEnclosureDownload"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253408r958478_rule | Automation: automated via SCAP
+    - name: "Basic authentication for RSS feeds over HTTP must not be used - (SV-253408r958478_rule)"
+      tags:
+        - stig
+        - SV-253408r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Internet'
+        name: "AllowBasicAuthInClear"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253409r958478_rule | Automation: automated via SCAP
+    - name: "Indexing of encrypted files must be turned off - (SV-253409r958478_rule)"
+      tags:
+        - stig
+        - SV-253409r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowIndexingEncryptedStoresOrItems"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253410r1051053_rule | Automation: automated via SCAP
+    - name: "Users must be prevented from changing installation options - (SV-253410r1051053_rule)"
+      tags:
+        - stig
+        - SV-253410r1051053_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableUserControl"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253411r1051054_rule | Automation: automated via SCAP
+    - name: "The Windows Installer feature \"Always install with elevated privileges\" must be - (SV-253411r1051054_rule)"
+      tags:
+        - stig
+        - SV-253411r1051054_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AlwaysInstallElevated"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253412r991589_rule | Automation: automated via SCAP
+    - name: "Users must be notified if a web-based program attempts to install software - (SV-253412r991589_rule)"
+      tags:
+        - stig
+        - SV-253412r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Installer'
+        name: "SafeForScripting"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253413r991591_rule | Automation: automated via SCAP
+    - name: "Automatically signing in the last interactive user after a system-initiated - (SV-253413r991591_rule)"
+      tags:
+        - stig
+        - SV-253413r991591_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableAutomaticRestartSignOn"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253414r958422_rule | Automation: automated via SCAP
+    - name: "PowerShell script block logging must be enabled on Windows 11 - (SV-253414r958422_rule)"
+      tags:
+        - stig
+        - SV-253414r958422_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableScriptBlockLogging"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253415r958420_rule | Automation: automated via SCAP
+    - name: "PowerShell Transcription must be enabled on Windows 11 - (SV-253415r958420_rule)"
+      tags:
+        - stig
+        - SV-253415r958420_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "EnableTranscripting"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253416r958510_rule | Automation: automated via SCAP
+    - name: "The Windows Remote Management (WinRM) client must not use Basic authentication - (SV-253416r958510_rule)"
+      tags:
+        - stig
+        - SV-253416r958510_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowBasic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253417r958848_rule | Automation: automated via SCAP
+    - name: "The Windows Remote Management (WinRM) client must not allow unencrypted traffic - (SV-253417r958848_rule)"
+      tags:
+        - stig
+        - SV-253417r958848_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowUnencryptedTraffic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253418r958510_rule | Automation: automated via SCAP
+    - name: "The Windows Remote Management (WinRM) service must not use Basic authentication - (SV-253418r958510_rule)"
+      tags:
+        - stig
+        - SV-253418r958510_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowBasic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253419r958850_rule | Automation: automated via SCAP
+    - name: "The Windows Remote Management (WinRM) service must not allow unencrypted traffic - (SV-253419r958850_rule)"
+      tags:
+        - stig
+        - SV-253419r958850_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowUnencryptedTraffic"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253420r1051055_rule | Automation: automated via SCAP
+    - name: "The Windows Remote Management (WinRM) service must not store RunAs credentials - (SV-253420r1051055_rule)"
+      tags:
+        - stig
+        - SV-253420r1051055_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "DisableRunAs"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253421r958510_rule | Automation: automated via SCAP
+    - name: "The Windows Remote Management (WinRM) client must not use Digest authentication - (SV-253421r958510_rule)"
+      tags:
+        - stig
+        - SV-253421r958510_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "AllowDigest"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253422r958400_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to prevent Windows apps from being activated by - (SV-253422r958400_rule)"
+      tags:
+        - stig
+        - SV-253422r958400_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows'
+        name: "LetAppsActivateWithVoiceAboveLock"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253423r958478_rule | Automation: automated via SCAP
+    - name: "The convenience PIN for Windows 11 must be disabled - (SV-253423r958478_rule)"
+      tags:
+        - stig
+        - SV-253423r958478_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\Software\Policies\Microsoft\Windows\System'
+        name: "AllowDomainPINLogon"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253424r958404_rule | Automation: automated via SCAP
+    - name: "Windows Ink Workspace must be configured to disallow access above the lock - (SV-253424r958404_rule)"
+      tags:
+        - stig
+        - SV-253424r958404_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\Software\Policies\Microsoft\WindowsInkWorkspace'
+        name: "AllowWindowsInkWorkspace"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253425r958478_rule | Automation: automated via SCAP
+    - name: "Windows 11 must be configured to prevent users from receiving suggestions for - (SV-253425r958478_rule)"
+      tags:
+        - stig
+        - SV-253425r958478_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent'
+        name: "DisableThirdPartySuggestions"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253426r991580_rule | Automation: automated via SCAP
+    - name: "Windows 11 Kernel (Direct Memory Access) DMA Protection must be enabled - (SV-253426r991580_rule)"
+      tags:
+        - stig
+        - SV-253426r991580_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\System'
+        name: "DeviceEnumerationPolicy"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253427r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "The DoD Root CA certificates must be installed in the Trusted Root Store - (SV-253427r958448_rule)"
+      tags:
+        - stig
+        - SV-253427r958448_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253427r958448_rule: The DoD Root CA certificates must be installed in the Trusted Root Store - Install the DoD Root CA certificates. DoD Root CA 3 DoD Root CA 4 DoD Root CA 5                                                DoD Root CA 6  The InstallRoot tool is available on Cyber Exchange at htt... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253428r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "The External Root CA certificates must be installed in the Trusted Root Store - (SV-253428r958448_rule)"
+      tags:
+        - stig
+        - SV-253428r958448_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253428r958448_rule: The External Root CA certificates must be installed in the Trusted Root Store - Install the ECA Root CA certificates on unclassified systems.  ECA Root CA 4  The InstallRoot tool is available on Cyber Exchange at https://cyber.mil/pki-pke/tools-configuration-files. PKI can be fou... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253429r958448_rule | Automation: manual-only (not covered by scap)
+    - name: "The DoD Interoperability Root CA cross-certificates must be installed in the - (SV-253429r958448_rule)"
+      tags:
+        - stig
+        - SV-253429r958448_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253429r958448_rule: The DoD Interoperability Root CA cross-certificates must be installed in the - Install the DoD Interoperability Root CA cross-certificates on unclassified systems.                                               Issued To - Issued By - Thumbprint DoD Root CA 3 - DoD Interoperabili... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253430r1081058_rule | Automation: manual-only (not covered by scap)
+    - name: "The US DOD CCEB Interoperability Root CA cross-certificates must be installed - (SV-253430r1081058_rule)"
+      tags:
+        - stig
+        - SV-253430r1081058_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253430r1081058_rule: The US DOD CCEB Interoperability Root CA cross-certificates must be installed - Install the US DOD CCEB Interoperability Root CA cross-certificate on unclassified systems.  Issued To - Issued By - Thumbprint 9B74964506C7ED9138070D08D5F8B969866560C8 NotAfter: 7/18/2025 9:56:22 AM ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253431r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "Default permissions for the HKEY_LOCAL_MACHINE registry hive must be maintained - (SV-253431r958726_rule)"
+      tags:
+        - stig
+        - SV-253431r958726_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253431r958726_rule: Default permissions for the HKEY_LOCAL_MACHINE registry hive must be maintained - Maintain the default permissions for the HKEY_LOCAL_MACHINE registry hive.  The default permissions of the higher level keys are noted below.  HKEY_LOCAL_MACHINE\SECURITY Type - "Allow" for all Inheri... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253432r958482_rule | Automation: manual-only (not covered by scap)
+    - name: "The built-in administrator account must be disabled - (SV-253432r958482_rule)"
+      tags:
+        - stig
+        - SV-253432r958482_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253432r958482_rule: The built-in administrator account must be disabled - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "Accounts: Administrator account status" to "Disabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253433r958504_rule | Automation: manual-only (not covered by scap)
+    - name: "The built-in guest account must be disabled - (SV-253433r958504_rule)"
+      tags:
+        - stig
+        - SV-253433r958504_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253433r958504_rule: The built-in guest account must be disabled - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "Accounts: Guest account status" to "Disabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253434r991589_rule | Automation: automated via SCAP
+    - name: "Local accounts with blank passwords must be restricted to prevent access from - (SV-253434r991589_rule)"
+      tags:
+        - stig
+        - SV-253434r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "LimitBlankPasswordUse"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253435r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "The built-in administrator account must be renamed - (SV-253435r991589_rule)"
+      tags:
+        - stig
+        - SV-253435r991589_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253435r991589_rule: The built-in administrator account must be renamed - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "Accounts: Rename administrator account" to a name other than "A... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253436r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "The built-in guest account must be renamed - (SV-253436r991589_rule)"
+      tags:
+        - stig
+        - SV-253436r991589_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253436r991589_rule: The built-in guest account must be renamed - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "Accounts: Rename guest account" to a name other than "Guest". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253437r958442_rule | Automation: automated via SCAP
+    - name: "Audit policy using subcategories must be enabled - (SV-253437r958442_rule)"
+      tags:
+        - stig
+        - SV-253437r958442_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "SCENoApplyLegacyAuditPolicy"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253438r958908_rule | Automation: automated via SCAP
+    - name: "Outgoing secure channel traffic must be encrypted or signed - (SV-253438r958908_rule)"
+      tags:
+        - stig
+        - SV-253438r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "RequireSignOrSeal"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253439r958908_rule | Automation: automated via SCAP
+    - name: "Outgoing secure channel traffic must be encrypted - (SV-253439r958908_rule)"
+      tags:
+        - stig
+        - SV-253439r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "SealSecureChannel"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253440r958908_rule | Automation: automated via SCAP
+    - name: "Outgoing secure channel traffic must be signed - (SV-253440r958908_rule)"
+      tags:
+        - stig
+        - SV-253440r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "SignSecureChannel"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253441r991589_rule | Automation: automated via SCAP
+    - name: "The computer account password must not be prevented from being reset - (SV-253441r991589_rule)"
+      tags:
+        - stig
+        - SV-253441r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "DisablePasswordChange"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253442r991589_rule | Automation: automated via SCAP
+    - name: "The maximum age for machine account passwords must be configured to 30 days or - (SV-253442r991589_rule)"
+      tags:
+        - stig
+        - SV-253442r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "MaximumPasswordAge"
+        data: '30'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253443r958908_rule | Automation: automated via SCAP
+    - name: "The system must be configured to require a strong session key - (SV-253443r958908_rule)"
+      tags:
+        - stig
+        - SV-253443r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+        name: "RequireStrongKey"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253444r958636_rule | Automation: manual-only (not covered by scap)
+    - name: "The machine inactivity limit must be set to 15 minutes, locking the system with - (SV-253444r958636_rule)"
+      tags:
+        - stig
+        - SV-253444r958636_rule
+        - dconf
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253444r958636_rule: The machine inactivity limit must be set to 15 minutes, locking the system with - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "Interactive logon: Machine inactivity limit" to "900" seconds" ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253445r958392_rule | Automation: automated via SCAP
+    - name: "The required legal notice must be configured to display before console logon - (SV-253445r958392_rule)"
+      tags:
+        - stig
+        - SV-253445r958392_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "LegalNoticeText"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253446r958586_rule | Automation: automated via SCAP
+    - name: "The Windows message title for the legal notice must be configured - (SV-253446r958586_rule)"
+      tags:
+        - stig
+        - SV-253446r958586_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "LegalNoticeCaption"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253447r991589_rule | Automation: automated via SCAP
+    - name: "Caching of logon credentials must be limited - (SV-253447r991589_rule)"
+      tags:
+        - stig
+        - SV-253447r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows'
+        name: "CachedLogonsCount"
+        data: '10'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253448r991589_rule | Automation: automated via SCAP
+    - name: "The Smart Card removal option must be configured to Force Logoff or Lock - (SV-253448r991589_rule)"
+      tags:
+        - stig
+        - SV-253448r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows'
+        name: "SCRemoveOption"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253449r958908_rule | Automation: automated via SCAP
+    - name: "The Windows SMB client must be configured to always perform SMB packet signing - (SV-253449r958908_rule)"
+      tags:
+        - stig
+        - SV-253449r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+        name: "RequireSecuritySignature"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253450r987796_rule | Automation: automated via SCAP
+    - name: "Unencrypted passwords must not be sent to third-party SMB Servers - (SV-253450r987796_rule)"
+      tags:
+        - stig
+        - SV-253450r987796_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+        name: "EnablePlainTextPassword"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253451r958908_rule | Automation: automated via SCAP
+    - name: "The Windows SMB server must be configured to always perform SMB packet signing - (SV-253451r958908_rule)"
+      tags:
+        - stig
+        - SV-253451r958908_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+        name: "RequireSecuritySignature"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253452r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Anonymous SID/Name translation must not be allowed - (SV-253452r991589_rule)"
+      tags:
+        - stig
+        - SV-253452r991589_rule
+        - windows_security_policy
+        - severity_high
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253452r991589_rule: Anonymous SID/Name translation must not be allowed - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> Security Options >> "Network access: Allow anonymous SID/Name translation" to "Disab... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253453r991589_rule | Automation: automated via SCAP
+    - name: "Anonymous enumeration of SAM accounts must not be allowed - (SV-253453r991589_rule)"
+      tags:
+        - stig
+        - SV-253453r991589_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "RestrictAnonymousSAM"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253454r958524_rule | Automation: automated via SCAP
+    - name: "Anonymous enumeration of shares must be restricted - (SV-253454r958524_rule)"
+      tags:
+        - stig
+        - SV-253454r958524_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "RestrictAnonymous"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253455r991589_rule | Automation: automated via SCAP
+    - name: "The system must be configured to prevent anonymous users from having the same - (SV-253455r991589_rule)"
+      tags:
+        - stig
+        - SV-253455r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "EveryoneIncludesAnonymous"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253456r958524_rule | Automation: automated via SCAP
+    - name: "Anonymous access to Named Pipes and Shares must be restricted - (SV-253456r958524_rule)"
+      tags:
+        - stig
+        - SV-253456r958524_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+        name: "RestrictNullSessAccess"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253457r1081060_rule | Automation: automated via SCAP
+    - name: "Remote calls to the Security Account Manager (SAM) must be restricted to - (SV-253457r1081060_rule)"
+      tags:
+        - stig
+        - SV-253457r1081060_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "RestrictRemoteSAM"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253458r991589_rule | Automation: automated via SCAP
+    - name: "NTLM must be prevented from falling back to a Null session - (SV-253458r991589_rule)"
+      tags:
+        - stig
+        - SV-253458r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\LSA\MSV'
+        name: "allownullsessionfallback"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253459r991589_rule | Automation: automated via SCAP
+    - name: "PKU2U authentication using online identities must be prevented - (SV-253459r991589_rule)"
+      tags:
+        - stig
+        - SV-253459r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\LSA\pku'
+        name: "AllowOnlineID"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253460r971535_rule | Automation: automated via SCAP
+    - name: "Kerberos encryption types must be configured to prevent the use of DES and RC4 - (SV-253460r971535_rule)"
+      tags:
+        - stig
+        - SV-253460r971535_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters'
+        name: "SupportedEncryptionTypes"
+        data: '2147483640'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253461r1051056_rule | Automation: automated via SCAP
+    - name: "The system must be configured to prevent the storage of the LAN Manager hash of - (SV-253461r1051056_rule)"
+      tags:
+        - stig
+        - SV-253461r1051056_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "NoLMHash"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253462r991589_rule | Automation: automated via SCAP
+    - name: "The LanMan authentication level must be set to send NTLMv2 response only, and - (SV-253462r991589_rule)"
+      tags:
+        - stig
+        - SV-253462r991589_rule
+        - windows_registry
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+        name: "LmCompatibilityLevel"
+        data: '5'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253463r991589_rule | Automation: automated via SCAP
+    - name: "The system must be configured to the required LDAP client signing level - (SV-253463r991589_rule)"
+      tags:
+        - stig
+        - SV-253463r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Services\LDAP'
+        name: "LDAPClientIntegrity"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253464r991589_rule | Automation: automated via SCAP
+    - name: "The system must be configured to meet the minimum session security requirement - (SV-253464r991589_rule)"
+      tags:
+        - stig
+        - SV-253464r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV'
+        name: "NTLMMinClientSec"
+        data: '537395200'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253465r991589_rule | Automation: automated via SCAP
+    - name: "The system must be configured to meet the minimum session security requirement - (SV-253465r991589_rule)"
+      tags:
+        - stig
+        - SV-253465r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV'
+        name: "NTLMMinServerSec"
+        data: '537395200'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253466r959006_rule | Automation: automated via SCAP
+    - name: "The system must be configured to use FIPS-compliant algorithms for encryption, - (SV-253466r959006_rule)"
+      tags:
+        - stig
+        - SV-253466r959006_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy'
+        name: "Enabled"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253467r991589_rule | Automation: automated via SCAP
+    - name: "The default permissions of global system objects must be increased - (SV-253467r991589_rule)"
+      tags:
+        - stig
+        - SV-253467r991589_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Session'
+        name: "ProtectionMode"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253468r1051057_rule | Automation: automated via SCAP
+    - name: "User Account Control approval mode for the built-in Administrator must be - (SV-253468r1051057_rule)"
+      tags:
+        - stig
+        - SV-253468r1051057_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "FilterAdministratorToken"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253469r958518_rule | Automation: automated via SCAP
+    - name: "User Account Control must prompt administrators for consent on the secure - (SV-253469r958518_rule)"
+      tags:
+        - stig
+        - SV-253469r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "ConsentPromptBehaviorAdmin"
+        data: '2'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253470r1106510_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 must use multifactor authentication for local and network access to - (SV-253470r1106510_rule)"
+      tags:
+        - stig
+        - SV-253470r1106510_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253470r1106510_rule: Windows 11 must use multifactor authentication for local and network access to - For nondomain joined systems, configuring Windows Hello for sign-on options would be suggested based on the organization's needs and capabilities. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253471r1051058_rule | Automation: automated via SCAP
+    - name: "User Account Control must automatically deny elevation requests for standard - (SV-253471r1051058_rule)"
+      tags:
+        - stig
+        - SV-253471r1051058_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "ConsentPromptBehaviorUser"
+        data: '0'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253472r958518_rule | Automation: automated via SCAP
+    - name: "User Account Control must be configured to detect application installations and - (SV-253472r958518_rule)"
+      tags:
+        - stig
+        - SV-253472r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableInstallerDetection"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253473r958518_rule | Automation: automated via SCAP
+    - name: "User Account Control must only elevate UIAccess applications that are installed - (SV-253473r958518_rule)"
+      tags:
+        - stig
+        - SV-253473r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableSecureUIAPaths"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253474r1051059_rule | Automation: automated via SCAP
+    - name: "User Account Control must run all administrators in Admin Approval Mode, - (SV-253474r1051059_rule)"
+      tags:
+        - stig
+        - SV-253474r1051059_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableLUA"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253475r958518_rule | Automation: automated via SCAP
+    - name: "User Account Control must virtualize file and registry write failures to - (SV-253475r958518_rule)"
+      tags:
+        - stig
+        - SV-253475r958518_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+        name: "EnableVirtualization"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253476r1051060_rule | Automation: manual-only (not covered by scap)
+    - name: "Passwords for enabled local Administrator accounts must be changed at least - (SV-253476r1051060_rule)"
+      tags:
+        - stig
+        - SV-253476r1051060_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253476r1051060_rule: Passwords for enabled local Administrator accounts must be changed at least - Change the enabled local Administrator account password at least every 60 days.   Windows LAPS must be used to change the built-in Administrator account password. Domain-joined and nondomain-joined sy... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253477r958478_rule | Automation: automated via SCAP
+    - name: "Toast notifications to the lock screen must be turned off - (SV-253477r958478_rule)"
+      tags:
+        - stig
+        - SV-253477r958478_rule
+        - windows_registry
+        - severity_low
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKCU:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications'
+        name: "NoToastApplicationNotificationOnLockScreen"
+        data: '1'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253478r991589_rule | Automation: automated via SCAP
+    - name: "Zone information must be preserved when saving attachments - (SV-253478r991589_rule)"
+      tags:
+        - stig
+        - SV-253478r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_regedit:
+        path: 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments'
+        name: "SaveZoneInformation"
+        data: '2'
+        type: dword
+        state: present
+
+
+    # STIG ID: SV-253479r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Access Credential Manager as a trusted caller\" user right must not be - (SV-253479r958726_rule)"
+      tags:
+        - stig
+        - SV-253479r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253479r958726_rule: The "Access Credential Manager as a trusted caller" user right must not be - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Access Credential Manager as a trusted caller" to be defi... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253480r958472_rule | Automation: automated via SCAP
+    - name: "The \"Access this computer from the network\" user right must only be assigned to - (SV-253480r958472_rule)"
+      tags:
+        - stig
+        - SV-253480r958472_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeNetworkLogonRight
+        users: ['Administrators', 'Users']
+        action: set
+
+
+    # STIG ID: SV-253481r958726_rule | Automation: automated via SCAP
+    - name: "The \"Act as part of the operating system\" user right must not be assigned to - (SV-253481r958726_rule)"
+      tags:
+        - stig
+        - SV-253481r958726_rule
+        - windows_user_right
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeTcbPrivilege
+        users: ['SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-253482r958472_rule | Automation: automated via SCAP
+    - name: "The \"Allow log on locally\" user right must only be assigned to the - (SV-253482r958472_rule)"
+      tags:
+        - stig
+        - SV-253482r958472_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeInteractiveLogonRight
+        users: ['Administrators', 'Users']
+        action: set
+
+
+    # STIG ID: SV-253483r958726_rule | Automation: automated via SCAP
+    - name: "The \"Back up files and directories\" user right must only be assigned to the - (SV-253483r958726_rule)"
+      tags:
+        - stig
+        - SV-253483r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeBackupPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-253484r958726_rule | Automation: automated via SCAP
+    - name: "The \"Change the system time\" user right must only be assigned to Administrators - (SV-253484r958726_rule)"
+      tags:
+        - stig
+        - SV-253484r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeSystemtimePrivilege
+        users: ['Administrators', 'SYSTEM', 'Service']
+        action: set
+
+
+    # STIG ID: SV-253485r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Create a pagefile\" user right must only be assigned to the Administrators - (SV-253485r958726_rule)"
+      tags:
+        - stig
+        - SV-253485r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253485r958726_rule: The "Create a pagefile" user right must only be assigned to the Administrators - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Create a pagefile" to only include the following groups o... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253486r958726_rule | Automation: automated via SCAP
+    - name: "The \"Create a token object\" user right must not be assigned to any groups or - (SV-253486r958726_rule)"
+      tags:
+        - stig
+        - SV-253486r958726_rule
+        - windows_user_right
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeCreateTokenPrivilege
+        users: []
+        action: set
+
+
+    # STIG ID: SV-253487r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Create global objects\" user right must only be assigned to Administrators, - (SV-253487r958726_rule)"
+      tags:
+        - stig
+        - SV-253487r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253487r958726_rule: The "Create global objects" user right must only be assigned to Administrators, - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Create global objects" to only include the following grou... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253488r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Create permanent shared objects\" user right must not be assigned to any - (SV-253488r958726_rule)"
+      tags:
+        - stig
+        - SV-253488r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253488r958726_rule: The "Create permanent shared objects" user right must not be assigned to any - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Create permanent shared objects" to be defined but contai... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253489r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Create symbolic links\" user right must only be assigned to the - (SV-253489r958726_rule)"
+      tags:
+        - stig
+        - SV-253489r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253489r958726_rule: The "Create symbolic links" user right must only be assigned to the - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Create symbolic links" to only include the following grou... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253490r958726_rule | Automation: automated via SCAP
+    - name: "The \"Debug programs\" user right must only be assigned to the Administrators - (SV-253490r958726_rule)"
+      tags:
+        - stig
+        - SV-253490r958726_rule
+        - windows_user_right
+        - severity_high
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeDebugPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-253491r958472_rule | Automation: automated via SCAP
+    - name: "The \"Deny access to this computer from the network\" user right on workstations - (SV-253491r958472_rule)"
+      tags:
+        - stig
+        - SV-253491r958472_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeDenyNetworkLogonRight
+        users: ['Guest', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-253492r958472_rule | Automation: automated via SCAP
+    - name: "The \"Deny log on as a batch job\" user right on domain-joined workstations must - (SV-253492r958472_rule)"
+      tags:
+        - stig
+        - SV-253492r958472_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeDenyBatchLogonRight
+        users: ['SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-253493r958472_rule | Automation: automated via SCAP
+    - name: "The \"Deny log on as a service\" user right on Windows 11 domain-joined - (SV-253493r958472_rule)"
+      tags:
+        - stig
+        - SV-253493r958472_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeDenyServiceLogonRight
+        users: ['SYSTEM', 'Service']
+        action: set
+
+
+    # STIG ID: SV-253494r958472_rule | Automation: automated via SCAP
+    - name: "The \"Deny log on locally\" user right on workstations must be configured to - (SV-253494r958472_rule)"
+      tags:
+        - stig
+        - SV-253494r958472_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeDenyInteractiveLogonRight
+        users: ['SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-253495r958472_rule | Automation: automated via SCAP
+    - name: "The \"Deny log on through Remote Desktop Services\" user right on Windows 11 - (SV-253495r958472_rule)"
+      tags:
+        - stig
+        - SV-253495r958472_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeDenyRemoteInteractiveLogonRight
+        users: ['Everyone', 'Service']
+        action: set
+
+
+    # STIG ID: SV-253496r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Enable computer and user accounts to be trusted for delegation\" user right - (SV-253496r958726_rule)"
+      tags:
+        - stig
+        - SV-253496r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253496r958726_rule: The "Enable computer and user accounts to be trusted for delegation" user right - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Enable computer and user accounts to be trusted for deleg... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253497r958726_rule | Automation: automated via SCAP
+    - name: "The \"Force shutdown from a remote system\" user right must only be assigned to - (SV-253497r958726_rule)"
+      tags:
+        - stig
+        - SV-253497r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeRemoteShutdownPrivilege
+        users: ['Administrators', 'SYSTEM']
+        action: set
+
+
+    # STIG ID: SV-253498r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Impersonate a client after authentication\" user right must only be - (SV-253498r958726_rule)"
+      tags:
+        - stig
+        - SV-253498r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253498r958726_rule: The "Impersonate a client after authentication" user right must only be - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Impersonate a client after authentication" to only includ... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253499r958726_rule | Automation: automated via SCAP
+    - name: "The \"Load and unload device drivers\" user right must only be assigned to the - (SV-253499r958726_rule)"
+      tags:
+        - stig
+        - SV-253499r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeLoadDriverPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-253500r958726_rule | Automation: automated via SCAP
+    - name: "The \"Lock pages in memory\" user right must not be assigned to any groups or - (SV-253500r958726_rule)"
+      tags:
+        - stig
+        - SV-253500r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeLockMemoryPrivilege
+        users: []
+        action: set
+
+
+    # STIG ID: SV-253501r958434_rule | Automation: automated via SCAP
+    - name: "The \"Manage auditing and security log\" user right must only be assigned to the - (SV-253501r958434_rule)"
+      tags:
+        - stig
+        - SV-253501r958434_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeSecurityPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-253502r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Modify firmware environment values\" user right must only be assigned to - (SV-253502r958726_rule)"
+      tags:
+        - stig
+        - SV-253502r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253502r958726_rule: The "Modify firmware environment values" user right must only be assigned to - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Modify firmware environment values" to only include the f... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253503r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Perform volume maintenance tasks\" user right must only be assigned to the - (SV-253503r958726_rule)"
+      tags:
+        - stig
+        - SV-253503r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253503r958726_rule: The "Perform volume maintenance tasks" user right must only be assigned to the - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Perform volume maintenance tasks" to only include the fol... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253504r958726_rule | Automation: manual-only (not covered by scap)
+    - name: "The \"Profile single process\" user right must only be assigned to the - (SV-253504r958726_rule)"
+      tags:
+        - stig
+        - SV-253504r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-253504r958726_rule: The "Profile single process" user right must only be assigned to the - Configure the policy value for Computer Configuration >> Windows Settings >> Security Settings >> Local Policies >> User Rights Assignment >> "Profile single process" to only include the following gro... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-253505r958726_rule | Automation: automated via SCAP
+    - name: "The \"Restore files and directories\" user right must only be assigned to the - (SV-253505r958726_rule)"
+      tags:
+        - stig
+        - SV-253505r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeRestorePrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-253506r958726_rule | Automation: automated via SCAP
+    - name: "The \"Take ownership of files or other objects\" user right must only be assigned - (SV-253506r958726_rule)"
+      tags:
+        - stig
+        - SV-253506r958726_rule
+        - windows_user_right
+        - severity_medium
+        - automation_automated
+        - windows11
+      ansible.windows.win_user_right:
+        name: SeTakeOwnershipPrivilege
+        users: ['Administrators']
+        action: set
+
+
+    # STIG ID: SV-256893r958552_rule | Automation: manual-only (not covered by scap)
+    - name: "Internet Explorer must be disabled for Windows 11 - (SV-256893r958552_rule)"
+      tags:
+        - stig
+        - SV-256893r958552_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-256893r958552_rule: Internet Explorer must be disabled for Windows 11 - For Windows 11 semi-annual channel, remove or disable the IE11 application.   To disable IE11 as a standalone browser:  Set the policy value for "Computer Configuration/Administrative Templates/Window... Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-257592r991589_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 must not have portproxy enabled or in use - (SV-257592r991589_rule)"
+      tags:
+        - stig
+        - SV-257592r991589_rule
+        - windows_registry
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-257592r991589_rule: Windows 11 must not have portproxy enabled or in use - Contact the Administrator to run "netsh interface portproxy delete" with elevation. Remove any enabled portproxies that may be configured. Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-257770r958412_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 must have command line process auditing events enabled for failures - (SV-257770r958412_rule)"
+      tags:
+        - stig
+        - SV-257770r958412_rule
+        - windows_security_policy
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-257770r958412_rule: Windows 11 must have command line process auditing events enabled for failures - Go to Computer Configuration >> Windows Settings >>Security Settings>> Advanced Audit Policy Configuration >> System Audit Policies >> Detailed Tracking >> Set "Audit Process Creation" to "Failure". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-268317r1016371_rule | Automation: manual-only (not covered by scap)
+    - name: "Copilot in Windows must be disabled for Windows 11 - (SV-268317r1016371_rule)"
+      tags:
+        - stig
+        - SV-268317r1016371_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-268317r1016371_rule: Copilot in Windows must be disabled for Windows 11 - Configure the policy value for User Configuration >> Administrative Templates >> Windows Components >> Windows Copilot >> "Turn off Windows Copilot" to "Enabled". Refer to STIG FixText for detailed steps.
+
+
+    # STIG ID: SV-268318r1081062_rule | Automation: manual-only (not covered by scap)
+    - name: "Windows 11 systems must use either Group Policy or an approved Mobile Device - (SV-268318r1081062_rule)"
+      tags:
+        - stig
+        - SV-268318r1081062_rule
+        - other
+        - severity_medium
+        - automation_manual_only
+        - windows11
+      ansible.builtin.debug:
+        msg: >-
+          Manual hardening required for SV-268318r1081062_rule: Windows 11 systems must use either Group Policy or an approved Mobile Device - Configure the Windows 11 system to use either Group Policy or an approved MDM product to enforce STIG compliance. Refer to STIG FixText for detailed steps.
+

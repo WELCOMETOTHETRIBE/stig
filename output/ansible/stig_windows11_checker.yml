@@ -1,0 +1,2125 @@
+# Generated checker playbook for windows11
+# Total Controls: 258
+#   - Automated: 246 (95%)
+#   - Manual-only: 12 (4%)
+
+# Validation usage:
+#   - Validate automated controls only:
+#       ansible-playbook checker.yml --tags validate_automated
+#   - Validate manual-only controls only:
+#       ansible-playbook checker.yml --tags validate_manual_only
+#   - Validate all controls:
+#       ansible-playbook checker.yml
+
+- name: Validate Windows 11 STIG controls
+  hosts: all
+  become: yes
+  gather_facts: yes
+  vars:
+    # Place any tunable defaults here if needed later
+  pre_tasks:
+    - name: Verify Windows 11 OS family
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['os_family'] == 'Windows'
+        fail_msg: 'This playbook is designed for Windows 11 only. Detected OS: { { ansible_facts[''os_family''] } } { { ansible_facts[''os_version''] } }'
+        success_msg: 'OS verification passed: Windows 11 detected'
+
+  tasks:
+
+    - name: 'SV-253254r991589_rule | Domain-joined systems must use Windows 11 Enterprise Edition 64-bit version.'
+      debug:
+        msg: "SV-253254r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253254r991589_rule
+
+
+    - name: 'SV-253255r971547_rule | Windows 11 domain-joined systems must have a Trusted Platform Module (TPM) enabl'
+      debug:
+        msg: "SV-253255r971547_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253255r971547_rule
+
+
+    - name: 'SV-253256r971547_rule | Windows 11 systems must have Unified Extensible Firmware Interface (UEFI) firmwa'
+      debug:
+        msg: "SV-253256r971547_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253256r971547_rule
+
+
+    - name: 'SV-253257r971547_rule | Secure Boot must be enabled on Windows 11 systems.'
+      debug:
+        msg: "SV-253257r971547_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253257r971547_rule
+
+
+    - name: 'SV-253258r1000099_rule | Windows 11 must employ automated mechanisms to determine the state of system com'
+      debug:
+        msg: "SV-253258r1000099_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253258r1000099_rule
+
+
+    - name: 'SV-253259r958870_rule | Windows 11 information systems must use BitLocker to encrypt all disks to protec'
+      debug:
+        msg: "SV-253259r958870_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253259r958870_rule
+
+
+    - name: 'SV-253260r958872_rule | Windows 11 systems must use a BitLocker PIN for pre-boot authentication.'
+      debug:
+        msg: "SV-253260r958872_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253260r958872_rule
+
+
+    - name: 'SV-253261r958504_rule | Windows 11 systems must use a BitLocker PIN with a minimum length of six digits '
+      debug:
+        msg: "SV-253261r958504_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253261r958504_rule
+
+
+    - name: 'SV-253262r958808_rule | The operating system must employ a deny-all, permit-by-exception policy to allow'
+      debug:
+        msg: "SV-253262r958808_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253262r958808_rule
+
+
+    - name: 'SV-253263r1016364_rule | Windows 11 systems must be maintained at a supported servicing level.'
+      debug:
+        msg: "SV-253263r1016364_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253263r1016364_rule
+
+
+    - name: 'SV-253264r991589_rule | The Windows 11 system must use an antivirus program.'
+      debug:
+        msg: "SV-253264r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253264r991589_rule
+
+
+    - name: 'SV-253265r958472_rule | Local volumes must be formatted using NTFS.'
+      debug:
+        msg: "SV-253265r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253265r958472_rule
+
+
+    - name: 'SV-253266r991589_rule | Alternate operating systems must not be permitted on the same system.'
+      debug:
+        msg: "SV-253266r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253266r991589_rule
+
+
+    - name: 'SV-253267r958524_rule | Non-system-created file shares on a system must limit access to groups that requ'
+      debug:
+        msg: "SV-253267r958524_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253267r958524_rule
+
+
+    - name: 'SV-253268r1051039_rule | Unused accounts must be disabled or removed from the system after 35 days of ina'
+      debug:
+        msg: "SV-253268r1051039_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253268r1051039_rule
+
+
+    - name: 'SV-253269r958702_rule | Only accounts responsible for the administration of a system must have Administr'
+      debug:
+        msg: "SV-253269r958702_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253269r958702_rule
+
+
+    - name: 'SV-253270r991589_rule | Only accounts responsible for the backup operations must be members of the Backu'
+      debug:
+        msg: "SV-253270r991589_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253270r991589_rule
+
+
+    - name: 'SV-253271r958702_rule | Only authorized user accounts must be allowed to create or run virtual machines '
+      debug:
+        msg: "SV-253271r958702_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253271r958702_rule
+
+
+    - name: 'SV-253272r991589_rule | Standard local user accounts must not exist on a system in a domain.'
+      debug:
+        msg: "SV-253272r991589_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253272r991589_rule
+
+
+    - name: 'SV-253273r1051040_rule | Accounts must be configured to require password expiration.'
+      debug:
+        msg: "SV-253273r1051040_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253273r1051040_rule
+
+
+    - name: 'SV-253274r1016661_rule | Permissions for system files and directories must conform to minimum requirement'
+      debug:
+        msg: "SV-253274r1016661_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253274r1016661_rule
+
+
+    - name: 'SV-253275r958478_rule | Internet Information System (IIS) or its subcomponents must not be installed on '
+      debug:
+        msg: "SV-253275r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253275r958478_rule
+
+
+    - name: 'SV-253276r958480_rule | Simple Network Management Protocol (SNMP) must not be installed on the system.'
+      debug:
+        msg: "SV-253276r958480_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253276r958480_rule
+
+
+    - name: 'SV-253277r958478_rule | Simple TCP/IP Services must not be installed on the system.'
+      debug:
+        msg: "SV-253277r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253277r958478_rule
+
+
+    - name: 'SV-253278r958480_rule | The Telnet Client must not be installed on the system.'
+      debug:
+        msg: "SV-253278r958480_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253278r958480_rule
+
+
+    - name: 'SV-253279r958480_rule | The TFTP Client must not be installed on the system.'
+      debug:
+        msg: "SV-253279r958480_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253279r958480_rule
+
+
+    - name: 'SV-253280r991589_rule | Software certificate installation files must be removed from Windows 11.'
+      debug:
+        msg: "SV-253280r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253280r991589_rule
+
+
+    - name: 'SV-253281r991589_rule | A host-based firewall must be installed and enabled on the system.'
+      debug:
+        msg: "SV-253281r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253281r991589_rule
+
+
+    - name: 'SV-253282r991593_rule | Inbound exceptions to the firewall on Windows 11 domain workstations must only a'
+      debug:
+        msg: "SV-253282r991593_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253282r991593_rule
+
+
+    - name: 'SV-253283r958928_rule | Data Execution Prevention (DEP) must be configured to at least OptOut.'
+      debug:
+        msg: "SV-253283r958928_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253283r958928_rule
+
+
+    - name: 'SV-253284r958928_rule | Structured Exception Handling Overwrite Protection (SEHOP) must be enabled.'
+      debug:
+        msg: "SV-253284r958928_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253284r958928_rule
+
+
+    - name: 'SV-253285r958478_rule | The Windows PowerShell 2.0 feature must be disabled on the system.'
+      debug:
+        msg: "SV-253285r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253285r958478_rule
+
+
+    - name: 'SV-253286r958478_rule | The Server Message Block (SMB) v1 protocol must be disabled on the system.'
+      debug:
+        msg: "SV-253286r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253286r958478_rule
+
+
+    - name: 'SV-253287r958478_rule | The Server Message Block (SMB) v1 protocol must be disabled on the SMB server.'
+      debug:
+        msg: "SV-253287r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253287r958478_rule
+
+
+    - name: 'SV-253288r958478_rule | The Server Message Block (SMB) v1 protocol must be disabled on the SMB client.'
+      debug:
+        msg: "SV-253288r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253288r958478_rule
+
+
+    - name: 'SV-253289r958478_rule | The Secondary Logon service must be disabled on Windows 11.'
+      debug:
+        msg: "SV-253289r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253289r958478_rule
+
+
+    - name: 'SV-253290r991589_rule | Orphaned security identifiers (SIDs) must be removed from user rights on Windows'
+      debug:
+        msg: "SV-253290r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253290r991589_rule
+
+
+    - name: 'SV-253291r958478_rule | Bluetooth must be turned off unless approved by the organization.'
+      debug:
+        msg: "SV-253291r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253291r958478_rule
+
+
+    - name: 'SV-253292r958478_rule | Bluetooth must be turned off when not in use.'
+      debug:
+        msg: "SV-253292r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253292r958478_rule
+
+
+    - name: 'SV-253293r991589_rule | The system must notify the user when a Bluetooth device attempts to connect.'
+      debug:
+        msg: "SV-253293r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253293r991589_rule
+
+
+    - name: 'SV-253294r991589_rule | Administrative accounts must not be used with applications that access the inter'
+      debug:
+        msg: "SV-253294r991589_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253294r991589_rule
+
+
+    - name: 'SV-253295r958552_rule | Windows 11 nonpersistent VM sessions must not exceed 24 hours.'
+      debug:
+        msg: "SV-253295r958552_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253295r958552_rule
+
+
+    - name: 'SV-253296r1051041_rule | The Windows 11 time service must synchronize with an appropriate DOD time source'
+      debug:
+        msg: "SV-253296r1051041_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253296r1051041_rule
+
+
+    - name: 'SV-253297r958736_rule | Windows 11 account lockout duration must be configured to 15 minutes or greater.'
+      debug:
+        msg: "SV-253297r958736_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253297r958736_rule
+
+
+    - name: 'SV-253298r958388_rule | The number of allowed bad logon attempts must be configured to three or less.'
+      debug:
+        msg: "SV-253298r958388_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253298r958388_rule
+
+
+    - name: 'SV-253299r958388_rule | The period of time before the bad logon counter is reset must be configured to 1'
+      debug:
+        msg: "SV-253299r958388_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253299r958388_rule
+
+
+    - name: 'SV-253300r1000103_rule | The password history must be configured to 24 passwords remembered.'
+      debug:
+        msg: "SV-253300r1000103_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253300r1000103_rule
+
+
+    - name: 'SV-253301r1051042_rule | The maximum password age must be configured to 60 days or less.'
+      debug:
+        msg: "SV-253301r1051042_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253301r1051042_rule
+
+
+    - name: 'SV-253302r1051043_rule | The minimum password age must be configured to at least 1 day.'
+      debug:
+        msg: "SV-253302r1051043_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253302r1051043_rule
+
+
+    - name: 'SV-253303r1051044_rule | Passwords must, at a minimum, be 14 characters.'
+      debug:
+        msg: "SV-253303r1051044_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253303r1051044_rule
+
+
+    - name: 'SV-253304r1051045_rule | The built-in Microsoft password complexity filter must be enabled.'
+      debug:
+        msg: "SV-253304r1051045_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253304r1051045_rule
+
+
+    - name: 'SV-253305r1051046_rule | Reversible password encryption must be disabled.'
+      debug:
+        msg: "SV-253305r1051046_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253305r1051046_rule
+
+
+    - name: 'SV-253306r991570_rule | The system must be configured to audit Account Logon - Credential Validation fai'
+      debug:
+        msg: "SV-253306r991570_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253306r991570_rule
+
+
+    - name: 'SV-253307r991570_rule | The system must be configured to audit Account Logon - Credential Validation suc'
+      debug:
+        msg: "SV-253307r991570_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253307r991570_rule
+
+
+    - name: 'SV-253308r971541_rule | The system must be configured to audit Account Management - Security Group Manag'
+      debug:
+        msg: "SV-253308r971541_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253308r971541_rule
+
+
+    - name: 'SV-253309r958566_rule | The system must be configured to audit Account Management - User Account Managem'
+      debug:
+        msg: "SV-253309r958566_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253309r958566_rule
+
+
+    - name: 'SV-253310r991551_rule | The system must be configured to audit Account Management - User Account Managem'
+      debug:
+        msg: "SV-253310r991551_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253310r991551_rule
+
+
+    - name: 'SV-253311r1051047_rule | The system must be configured to audit Detailed Tracking - PNP Activity successe'
+      debug:
+        msg: "SV-253311r1051047_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253311r1051047_rule
+
+
+    - name: 'SV-253312r1051048_rule | The system must be configured to audit Detailed Tracking - Process Creation succ'
+      debug:
+        msg: "SV-253312r1051048_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253312r1051048_rule
+
+
+    - name: 'SV-253313r991578_rule | The system must be configured to audit Logon/Logoff - Account Lockout failures.'
+      debug:
+        msg: "SV-253313r991578_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253313r991578_rule
+
+
+    - name: 'SV-253314r991570_rule | The system must be configured to audit Logon/Logoff - Group Membership successes'
+      debug:
+        msg: "SV-253314r991570_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253314r991570_rule
+
+
+    - name: 'SV-253315r958406_rule | The system must be configured to audit Logon/Logoff - Logoff successes.'
+      debug:
+        msg: "SV-253315r958406_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253315r958406_rule
+
+
+    - name: 'SV-253316r991581_rule | The system must be configured to audit Logon/Logoff - Logon failures.'
+      debug:
+        msg: "SV-253316r991581_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253316r991581_rule
+
+
+    - name: 'SV-253317r991581_rule | The system must be configured to audit Logon/Logoff - Logon successes.'
+      debug:
+        msg: "SV-253317r991581_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253317r991581_rule
+
+
+    - name: 'SV-253318r991578_rule | The system must be configured to audit Logon/Logoff - Special Logon successes.'
+      debug:
+        msg: "SV-253318r991578_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253318r991578_rule
+
+
+    - name: 'SV-253319r991572_rule | Windows 11 must be configured to audit Object Access - File Share failures.'
+      debug:
+        msg: "SV-253319r991572_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253319r991572_rule
+
+
+    - name: 'SV-253320r991572_rule | Windows 11 must be configured to audit Object Access - File Share successes.'
+      debug:
+        msg: "SV-253320r991572_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253320r991572_rule
+
+
+    - name: 'SV-253321r991572_rule | Windows 11 must be configured to audit Object Access - Other Object Access Event'
+      debug:
+        msg: "SV-253321r991572_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253321r991572_rule
+
+
+    - name: 'SV-253322r991572_rule | Windows 11 must be configured to audit Object Access - Other Object Access Event'
+      debug:
+        msg: "SV-253322r991572_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253322r991572_rule
+
+
+    - name: 'SV-253323r991583_rule | The system must be configured to audit Object Access - Removable Storage failure'
+      debug:
+        msg: "SV-253323r991583_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253323r991583_rule
+
+
+    - name: 'SV-253324r991583_rule | The system must be configured to audit Object Access - Removable Storage success'
+      debug:
+        msg: "SV-253324r991583_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253324r991583_rule
+
+
+    - name: 'SV-253325r991572_rule | The system must be configured to audit Policy Change - Audit Policy Change succe'
+      debug:
+        msg: "SV-253325r991572_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253325r991572_rule
+
+
+    - name: 'SV-253326r991572_rule | The system must be configured to audit Policy Change - Authentication Policy Cha'
+      debug:
+        msg: "SV-253326r991572_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253326r991572_rule
+
+
+    - name: 'SV-253327r991572_rule | The system must be configured to audit Policy Change - Authorization Policy Chan'
+      debug:
+        msg: "SV-253327r991572_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253327r991572_rule
+
+
+    - name: 'SV-253328r958732_rule | The system must be configured to audit Privilege Use - Sensitive Privilege Use f'
+      debug:
+        msg: "SV-253328r958732_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253328r958732_rule
+
+
+    - name: 'SV-253329r991575_rule | The system must be configured to audit Privilege Use - Sensitive Privilege Use s'
+      debug:
+        msg: "SV-253329r991575_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253329r991575_rule
+
+
+    - name: 'SV-253330r991586_rule | The system must be configured to audit System - IPsec Driver failures.'
+      debug:
+        msg: "SV-253330r991586_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253330r991586_rule
+
+
+    - name: 'SV-253331r991579_rule | The system must be configured to audit System - Other System Events successes.'
+      debug:
+        msg: "SV-253331r991579_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253331r991579_rule
+
+
+    - name: 'SV-253332r991579_rule | The system must be configured to audit System - Other System Events failures.'
+      debug:
+        msg: "SV-253332r991579_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253332r991579_rule
+
+
+    - name: 'SV-253333r991575_rule | The system must be configured to audit System - Security State Change successes.'
+      debug:
+        msg: "SV-253333r991575_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253333r991575_rule
+
+
+    - name: 'SV-253334r991575_rule | The system must be configured to audit System - Security System Extension succes'
+      debug:
+        msg: "SV-253334r991575_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253334r991575_rule
+
+
+    - name: 'SV-253335r991573_rule | The system must be configured to audit System - System Integrity failures.'
+      debug:
+        msg: "SV-253335r991573_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253335r991573_rule
+
+
+    - name: 'SV-253336r991573_rule | The system must be configured to audit System - System Integrity successes.'
+      debug:
+        msg: "SV-253336r991573_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253336r991573_rule
+
+
+    - name: 'SV-253337r958752_rule | The Application event log size must be configured to 32768 KB or greater.'
+      debug:
+        msg: "SV-253337r958752_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253337r958752_rule
+
+
+    - name: 'SV-253338r958752_rule | The Security event log size must be configured to 1024000 KB or greater.'
+      debug:
+        msg: "SV-253338r958752_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253338r958752_rule
+
+
+    - name: 'SV-253339r958752_rule | The System event log size must be configured to 32768 KB or greater.'
+      debug:
+        msg: "SV-253339r958752_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253339r958752_rule
+
+
+    - name: 'SV-253340r958434_rule | Windows 11 permissions for the Application event log must prevent access by non-'
+      debug:
+        msg: "SV-253340r958434_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253340r958434_rule
+
+
+    - name: 'SV-253341r958434_rule | Windows 11 permissions for the Security event log must prevent access by non-pri'
+      debug:
+        msg: "SV-253341r958434_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253341r958434_rule
+
+
+    - name: 'SV-253342r958434_rule | Windows 11 permissions for the System event log must prevent access by non-privi'
+      debug:
+        msg: "SV-253342r958434_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253342r958434_rule
+
+
+    - name: 'SV-253343r958412_rule | Windows 11 must be configured to audit Other Policy Change Events Successes.'
+      debug:
+        msg: "SV-253343r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253343r958412_rule
+
+
+    - name: 'SV-253344r958412_rule | Windows 11 must be configured to audit Other Policy Change Events Failures.'
+      debug:
+        msg: "SV-253344r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253344r958412_rule
+
+
+    - name: 'SV-253345r958412_rule | Windows 11 must be configured to audit other Logon/Logoff Events Successes.'
+      debug:
+        msg: "SV-253345r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253345r958412_rule
+
+
+    - name: 'SV-253346r958412_rule | Windows 11 must be configured to audit other Logon/Logoff Events Failures.'
+      debug:
+        msg: "SV-253346r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253346r958412_rule
+
+
+    - name: 'SV-253347r958412_rule | Windows 11 must be configured to audit Detailed File Share Failures.'
+      debug:
+        msg: "SV-253347r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253347r958412_rule
+
+
+    - name: 'SV-253348r958412_rule | Windows 11 must be configured to audit MPSSVC Rule-Level Policy Change Successes'
+      debug:
+        msg: "SV-253348r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253348r958412_rule
+
+
+    - name: 'SV-253349r958412_rule | Windows 11 must be configured to audit MPSSVC Rule-Level Policy Change Failures.'
+      debug:
+        msg: "SV-253349r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253349r958412_rule
+
+
+    - name: 'SV-253350r958478_rule | Camera access from the lock screen must be disabled.'
+      debug:
+        msg: "SV-253350r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253350r958478_rule
+
+
+    - name: 'SV-253351r1106508_rule | Windows 11 must cover or disable the built-in or attached camera when not in use'
+      debug:
+        msg: "SV-253351r1106508_rule requires manual verification. Not covered by scap automated scans. See CTP document for procedure."
+      tags:
+        - stig_check
+        - SV-253351r1106508_rule
+
+
+    - name: 'SV-253352r958478_rule | The display of slide shows on the lock screen must be disabled.'
+      debug:
+        msg: "SV-253352r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253352r958478_rule
+
+
+    - name: 'SV-253353r991589_rule | IPv6 source routing must be configured to highest protection.'
+      debug:
+        msg: "SV-253353r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253353r991589_rule
+
+
+    - name: 'SV-253354r991589_rule | The system must be configured to prevent IP source routing.'
+      debug:
+        msg: "SV-253354r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253354r991589_rule
+
+
+    - name: 'SV-253355r991589_rule | The system must be configured to prevent Internet Control Message Protocol (ICMP'
+      debug:
+        msg: "SV-253355r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253355r991589_rule
+
+
+    - name: 'SV-253356r958902_rule | The system must be configured to ignore NetBIOS name release requests except fro'
+      debug:
+        msg: "SV-253356r958902_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253356r958902_rule
+
+
+    - name: 'SV-253357r958518_rule | Local administrator accounts must have their privileged token filtered to preven'
+      debug:
+        msg: "SV-253357r958518_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253357r958518_rule
+
+
+    - name: 'SV-253358r958478_rule | WDigest Authentication must be disabled.'
+      debug:
+        msg: "SV-253358r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253358r958478_rule
+
+
+    - name: 'SV-253359r958478_rule | Run as different user must be removed from context menus.'
+      debug:
+        msg: "SV-253359r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253359r958478_rule
+
+
+    - name: 'SV-253360r991589_rule | Insecure logons to an SMB server must be disabled.'
+      debug:
+        msg: "SV-253360r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253360r991589_rule
+
+
+    - name: 'SV-253361r958478_rule | Internet connection sharing must be disabled.'
+      debug:
+        msg: "SV-253361r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253361r958478_rule
+
+
+    - name: 'SV-253362r991589_rule | Hardened UNC Paths must be defined to require mutual authentication and integrit'
+      debug:
+        msg: "SV-253362r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253362r991589_rule
+
+
+    - name: 'SV-253363r971535_rule | Windows 11 must be configured to prioritize ECC Curves with longer key lengths f'
+      debug:
+        msg: "SV-253363r971535_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253363r971535_rule
+
+
+    - name: 'SV-253364r958358_rule | Simultaneous connections to the internet or a Windows domain must be limited.'
+      debug:
+        msg: "SV-253364r958358_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253364r958358_rule
+
+
+    - name: 'SV-253365r991589_rule | Connections to non-domain networks when connected to a domain authenticated netw'
+      debug:
+        msg: "SV-253365r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253365r991589_rule
+
+
+    - name: 'SV-253366r991589_rule | Wi-Fi Sense must be disabled.'
+      debug:
+        msg: "SV-253366r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253366r991589_rule
+
+
+    - name: 'SV-253367r958422_rule | Command line data must be included in process creation events.'
+      debug:
+        msg: "SV-253367r958422_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253367r958422_rule
+
+
+    - name: 'SV-253368r991589_rule | Windows 11 must be configured to enable Remote host allows delegation of non-exp'
+      debug:
+        msg: "SV-253368r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253368r991589_rule
+
+
+    - name: 'SV-253369r991589_rule | Virtualization-based Security must be enabled on Windows 11 with the platform se'
+      debug:
+        msg: "SV-253369r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253369r991589_rule
+
+
+    - name: 'SV-253370r991589_rule | Credential Guard must be running on Windows 11 domain-joined systems.'
+      debug:
+        msg: "SV-253370r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253370r991589_rule
+
+
+    - name: 'SV-253371r991589_rule | Virtualization-based protection of code integrity must be enabled.'
+      debug:
+        msg: "SV-253371r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253371r991589_rule
+
+
+    - name: 'SV-253372r991589_rule | Early Launch Antimalware, Boot-Start Driver Initialization Policy must prevent b'
+      debug:
+        msg: "SV-253372r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253372r991589_rule
+
+
+    - name: 'SV-253373r991589_rule | Group Policy objects must be reprocessed even if they have not changed.'
+      debug:
+        msg: "SV-253373r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253373r991589_rule
+
+
+    - name: 'SV-253374r958478_rule | Downloading print driver packages over HTTP must be prevented.'
+      debug:
+        msg: "SV-253374r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253374r958478_rule
+
+
+    - name: 'SV-253375r958478_rule | Web publishing and online ordering wizards must be prevented from downloading a '
+      debug:
+        msg: "SV-253375r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253375r958478_rule
+
+
+    - name: 'SV-253376r958478_rule | Printing over HTTP must be prevented.'
+      debug:
+        msg: "SV-253376r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253376r958478_rule
+
+
+    - name: 'SV-253377r991589_rule | Systems must at least attempt device authentication using certificates.'
+      debug:
+        msg: "SV-253377r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253377r991589_rule
+
+
+    - name: 'SV-253378r958478_rule | The network selection user interface (UI) must not be displayed on the logon scr'
+      debug:
+        msg: "SV-253378r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253378r958478_rule
+
+
+    - name: 'SV-253379r958478_rule | Local users on domain-joined computers must not be enumerated.'
+      debug:
+        msg: "SV-253379r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253379r958478_rule
+
+
+    - name: 'SV-253380r1051049_rule | Users must be prompted for a password on resume from sleep (on battery).'
+      debug:
+        msg: "SV-253380r1051049_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253380r1051049_rule
+
+
+    - name: 'SV-253381r1051050_rule | The user must be prompted for a password on resume from sleep (plugged in).'
+      debug:
+        msg: "SV-253381r1051050_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253381r1051050_rule
+
+
+    - name: 'SV-253382r958524_rule | Solicited Remote Assistance must not be allowed.'
+      debug:
+        msg: "SV-253382r958524_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253382r958524_rule
+
+
+    - name: 'SV-253383r971545_rule | Unauthenticated RPC clients must be restricted from connecting to the RPC server'
+      debug:
+        msg: "SV-253383r971545_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253383r971545_rule
+
+
+    - name: 'SV-253384r991589_rule | The setting to allow Microsoft accounts to be optional for modern style apps mus'
+      debug:
+        msg: "SV-253384r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253384r991589_rule
+
+
+    - name: 'SV-253385r958478_rule | The Application Compatibility Program Inventory must be prevented from collectin'
+      debug:
+        msg: "SV-253385r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253385r958478_rule
+
+
+    - name: 'SV-253386r958804_rule | Autoplay must be turned off for non-volume devices.'
+      debug:
+        msg: "SV-253386r958804_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253386r958804_rule
+
+
+    - name: 'SV-253387r958804_rule | The default autorun behavior must be configured to prevent autorun commands.'
+      debug:
+        msg: "SV-253387r958804_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253387r958804_rule
+
+
+    - name: 'SV-253388r958804_rule | Autoplay must be disabled for all drives.'
+      debug:
+        msg: "SV-253388r958804_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253388r958804_rule
+
+
+    - name: 'SV-253389r991589_rule | Enhanced anti-spoofing for facial recognition must be enabled on Windows 11.'
+      debug:
+        msg: "SV-253389r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253389r991589_rule
+
+
+    - name: 'SV-253390r958478_rule | Microsoft consumer experiences must be turned off.'
+      debug:
+        msg: "SV-253390r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253390r958478_rule
+
+
+    - name: 'SV-253391r958518_rule | Administrator accounts must not be enumerated during elevation.'
+      debug:
+        msg: "SV-253391r958518_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253391r958518_rule
+
+
+    - name: 'SV-253392r991589_rule | Enhanced diagnostic data must be limited to the minimum required to support Wind'
+      debug:
+        msg: "SV-253392r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253392r991589_rule
+
+
+    - name: 'SV-253393r958564_rule | Windows Telemetry must not be configured to Full.'
+      debug:
+        msg: "SV-253393r958564_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253393r958564_rule
+
+
+    - name: 'SV-253394r991589_rule | Windows Update must not obtain updates from other PCs on the internet.'
+      debug:
+        msg: "SV-253394r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253394r991589_rule
+
+
+    - name: 'SV-253395r958478_rule | The Microsoft Defender SmartScreen for Explorer must be enabled.'
+      debug:
+        msg: "SV-253395r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253395r958478_rule
+
+
+    - name: 'SV-253396r958928_rule | Explorer Data Execution Prevention must be enabled.'
+      debug:
+        msg: "SV-253396r958928_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253396r958928_rule
+
+
+    - name: 'SV-253397r958902_rule | File Explorer heap termination on corruption must be disabled.'
+      debug:
+        msg: "SV-253397r958902_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253397r958902_rule
+
+
+    - name: 'SV-253398r991589_rule | File Explorer shell protocol must run in protected mode.'
+      debug:
+        msg: "SV-253398r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253398r991589_rule
+
+
+    - name: 'SV-253399r958478_rule | Windows 11 must be configured to disable Windows Game Recording and Broadcasting'
+      debug:
+        msg: "SV-253399r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253399r958478_rule
+
+
+    - name: 'SV-253400r991589_rule | The use of a hardware security device with Windows Hello for Business must be en'
+      debug:
+        msg: "SV-253400r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253400r991589_rule
+
+
+    - name: 'SV-253401r991589_rule | Windows 11 must be configured to require a minimum pin length of six characters '
+      debug:
+        msg: "SV-253401r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253401r991589_rule
+
+
+    - name: 'SV-253402r1051051_rule | Passwords must not be saved in the Remote Desktop Client.'
+      debug:
+        msg: "SV-253402r1051051_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253402r1051051_rule
+
+
+    - name: 'SV-253403r958524_rule | Local drives must be prevented from sharing with Remote Desktop Session Hosts.'
+      debug:
+        msg: "SV-253403r958524_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253403r958524_rule
+
+
+    - name: 'SV-253404r1051052_rule | Remote Desktop Services must always prompt a client for passwords upon connectio'
+      debug:
+        msg: "SV-253404r1051052_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253404r1051052_rule
+
+
+    - name: 'SV-253405r991554_rule | The Remote Desktop Session Host must require secure RPC communications.'
+      debug:
+        msg: "SV-253405r991554_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253405r991554_rule
+
+
+    - name: 'SV-253406r958408_rule | Remote Desktop Services must be configured with the client connection encryption'
+      debug:
+        msg: "SV-253406r958408_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253406r958408_rule
+
+
+    - name: 'SV-253407r991589_rule | Attachments must be prevented from being downloaded from RSS feeds.'
+      debug:
+        msg: "SV-253407r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253407r991589_rule
+
+
+    - name: 'SV-253408r958478_rule | Basic authentication for RSS feeds over HTTP must not be used.'
+      debug:
+        msg: "SV-253408r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253408r958478_rule
+
+
+    - name: 'SV-253409r958478_rule | Indexing of encrypted files must be turned off.'
+      debug:
+        msg: "SV-253409r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253409r958478_rule
+
+
+    - name: 'SV-253410r1051053_rule | Users must be prevented from changing installation options.'
+      debug:
+        msg: "SV-253410r1051053_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253410r1051053_rule
+
+
+    - name: 'SV-253411r1051054_rule | The Windows Installer feature "Always install with elevated privileges" must be '
+      debug:
+        msg: "SV-253411r1051054_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253411r1051054_rule
+
+
+    - name: 'SV-253412r991589_rule | Users must be notified if a web-based program attempts to install software.'
+      debug:
+        msg: "SV-253412r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253412r991589_rule
+
+
+    - name: 'SV-253413r991591_rule | Automatically signing in the last interactive user after a system-initiated rest'
+      debug:
+        msg: "SV-253413r991591_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253413r991591_rule
+
+
+    - name: 'SV-253414r958422_rule | PowerShell script block logging must be enabled on Windows 11.'
+      debug:
+        msg: "SV-253414r958422_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253414r958422_rule
+
+
+    - name: 'SV-253415r958420_rule | PowerShell Transcription must be enabled on Windows 11.'
+      debug:
+        msg: "SV-253415r958420_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253415r958420_rule
+
+
+    - name: 'SV-253416r958510_rule | The Windows Remote Management (WinRM) client must not use Basic authentication.'
+      debug:
+        msg: "SV-253416r958510_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253416r958510_rule
+
+
+    - name: 'SV-253417r958848_rule | The Windows Remote Management (WinRM) client must not allow unencrypted traffic.'
+      debug:
+        msg: "SV-253417r958848_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253417r958848_rule
+
+
+    - name: 'SV-253418r958510_rule | The Windows Remote Management (WinRM) service must not use Basic authentication.'
+      debug:
+        msg: "SV-253418r958510_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253418r958510_rule
+
+
+    - name: 'SV-253419r958850_rule | The Windows Remote Management (WinRM) service must not allow unencrypted traffic'
+      debug:
+        msg: "SV-253419r958850_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253419r958850_rule
+
+
+    - name: 'SV-253420r1051055_rule | The Windows Remote Management (WinRM) service must not store RunAs credentials.'
+      debug:
+        msg: "SV-253420r1051055_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253420r1051055_rule
+
+
+    - name: 'SV-253421r958510_rule | The Windows Remote Management (WinRM) client must not use Digest authentication.'
+      debug:
+        msg: "SV-253421r958510_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253421r958510_rule
+
+
+    - name: 'SV-253422r958400_rule | Windows 11 must be configured to prevent Windows apps from being activated by vo'
+      debug:
+        msg: "SV-253422r958400_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253422r958400_rule
+
+
+    - name: 'SV-253423r958478_rule | The convenience PIN for Windows 11 must be disabled.'
+      debug:
+        msg: "SV-253423r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253423r958478_rule
+
+
+    - name: 'SV-253424r958404_rule | Windows Ink Workspace must be configured to disallow access above the lock.'
+      debug:
+        msg: "SV-253424r958404_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253424r958404_rule
+
+
+    - name: 'SV-253425r958478_rule | Windows 11 must be configured to prevent users from receiving suggestions for th'
+      debug:
+        msg: "SV-253425r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253425r958478_rule
+
+
+    - name: 'SV-253426r991580_rule | Windows 11 Kernel (Direct Memory Access) DMA Protection must be enabled.'
+      debug:
+        msg: "SV-253426r991580_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253426r991580_rule
+
+
+    - name: 'SV-253427r958448_rule | The DoD Root CA certificates must be installed in the Trusted Root Store.'
+      debug:
+        msg: "SV-253427r958448_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253427r958448_rule
+
+
+    - name: 'SV-253428r958448_rule | The External Root CA certificates must be installed in the Trusted Root Store on'
+      debug:
+        msg: "SV-253428r958448_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253428r958448_rule
+
+
+    - name: 'SV-253429r958448_rule | The DoD Interoperability Root CA cross-certificates must be installed in the Unt'
+      debug:
+        msg: "SV-253429r958448_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253429r958448_rule
+
+
+    - name: 'SV-253430r1081058_rule | The US DOD CCEB Interoperability Root CA cross-certificates must be installed in'
+      debug:
+        msg: "SV-253430r1081058_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253430r1081058_rule
+
+
+    - name: 'SV-253431r958726_rule | Default permissions for the HKEY_LOCAL_MACHINE registry hive must be maintained.'
+      debug:
+        msg: "SV-253431r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253431r958726_rule
+
+
+    - name: 'SV-253432r958482_rule | The built-in administrator account must be disabled.'
+      debug:
+        msg: "SV-253432r958482_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253432r958482_rule
+
+
+    - name: 'SV-253433r958504_rule | The built-in guest account must be disabled.'
+      debug:
+        msg: "SV-253433r958504_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253433r958504_rule
+
+
+    - name: 'SV-253434r991589_rule | Local accounts with blank passwords must be restricted to prevent access from th'
+      debug:
+        msg: "SV-253434r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253434r991589_rule
+
+
+    - name: 'SV-253435r991589_rule | The built-in administrator account must be renamed.'
+      debug:
+        msg: "SV-253435r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253435r991589_rule
+
+
+    - name: 'SV-253436r991589_rule | The built-in guest account must be renamed.'
+      debug:
+        msg: "SV-253436r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253436r991589_rule
+
+
+    - name: 'SV-253437r958442_rule | Audit policy using subcategories must be enabled.'
+      debug:
+        msg: "SV-253437r958442_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253437r958442_rule
+
+
+    - name: 'SV-253438r958908_rule | Outgoing secure channel traffic must be encrypted or signed.'
+      debug:
+        msg: "SV-253438r958908_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253438r958908_rule
+
+
+    - name: 'SV-253439r958908_rule | Outgoing secure channel traffic must be encrypted.'
+      debug:
+        msg: "SV-253439r958908_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253439r958908_rule
+
+
+    - name: 'SV-253440r958908_rule | Outgoing secure channel traffic must be signed.'
+      debug:
+        msg: "SV-253440r958908_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253440r958908_rule
+
+
+    - name: 'SV-253441r991589_rule | The computer account password must not be prevented from being reset.'
+      debug:
+        msg: "SV-253441r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253441r991589_rule
+
+
+    - name: 'SV-253442r991589_rule | The maximum age for machine account passwords must be configured to 30 days or l'
+      debug:
+        msg: "SV-253442r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253442r991589_rule
+
+
+    - name: 'SV-253443r958908_rule | The system must be configured to require a strong session key.'
+      debug:
+        msg: "SV-253443r958908_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253443r958908_rule
+
+
+    - name: 'SV-253444r958636_rule | The machine inactivity limit must be set to 15 minutes, locking the system with '
+      debug:
+        msg: "SV-253444r958636_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253444r958636_rule
+
+
+    - name: 'SV-253445r958392_rule | The required legal notice must be configured to display before console logon.'
+      debug:
+        msg: "SV-253445r958392_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253445r958392_rule
+
+
+    - name: 'SV-253446r958586_rule | The Windows message title for the legal notice must be configured.'
+      debug:
+        msg: "SV-253446r958586_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253446r958586_rule
+
+
+    - name: 'SV-253447r991589_rule | Caching of logon credentials must be limited.'
+      debug:
+        msg: "SV-253447r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253447r991589_rule
+
+
+    - name: 'SV-253448r991589_rule | The Smart Card removal option must be configured to Force Logoff or Lock Worksta'
+      debug:
+        msg: "SV-253448r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253448r991589_rule
+
+
+    - name: 'SV-253449r958908_rule | The Windows SMB client must be configured to always perform SMB packet signing.'
+      debug:
+        msg: "SV-253449r958908_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253449r958908_rule
+
+
+    - name: 'SV-253450r987796_rule | Unencrypted passwords must not be sent to third-party SMB Servers.'
+      debug:
+        msg: "SV-253450r987796_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253450r987796_rule
+
+
+    - name: 'SV-253451r958908_rule | The Windows SMB server must be configured to always perform SMB packet signing.'
+      debug:
+        msg: "SV-253451r958908_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253451r958908_rule
+
+
+    - name: 'SV-253452r991589_rule | Anonymous SID/Name translation must not be allowed.'
+      debug:
+        msg: "SV-253452r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253452r991589_rule
+
+
+    - name: 'SV-253453r991589_rule | Anonymous enumeration of SAM accounts must not be allowed.'
+      debug:
+        msg: "SV-253453r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253453r991589_rule
+
+
+    - name: 'SV-253454r958524_rule | Anonymous enumeration of shares must be restricted.'
+      debug:
+        msg: "SV-253454r958524_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253454r958524_rule
+
+
+    - name: 'SV-253455r991589_rule | The system must be configured to prevent anonymous users from having the same ri'
+      debug:
+        msg: "SV-253455r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253455r991589_rule
+
+
+    - name: 'SV-253456r958524_rule | Anonymous access to Named Pipes and Shares must be restricted.'
+      debug:
+        msg: "SV-253456r958524_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253456r958524_rule
+
+
+    - name: 'SV-253457r1081060_rule | Remote calls to the Security Account Manager (SAM) must be restricted to Adminis'
+      debug:
+        msg: "SV-253457r1081060_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253457r1081060_rule
+
+
+    - name: 'SV-253458r991589_rule | NTLM must be prevented from falling back to a Null session.'
+      debug:
+        msg: "SV-253458r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253458r991589_rule
+
+
+    - name: 'SV-253459r991589_rule | PKU2U authentication using online identities must be prevented.'
+      debug:
+        msg: "SV-253459r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253459r991589_rule
+
+
+    - name: 'SV-253460r971535_rule | Kerberos encryption types must be configured to prevent the use of DES and RC4 e'
+      debug:
+        msg: "SV-253460r971535_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253460r971535_rule
+
+
+    - name: 'SV-253461r1051056_rule | The system must be configured to prevent the storage of the LAN Manager hash of '
+      debug:
+        msg: "SV-253461r1051056_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253461r1051056_rule
+
+
+    - name: 'SV-253462r991589_rule | The LanMan authentication level must be set to send NTLMv2 response only, and to'
+      debug:
+        msg: "SV-253462r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253462r991589_rule
+
+
+    - name: 'SV-253463r991589_rule | The system must be configured to the required LDAP client signing level.'
+      debug:
+        msg: "SV-253463r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253463r991589_rule
+
+
+    - name: 'SV-253464r991589_rule | The system must be configured to meet the minimum session security requirement f'
+      debug:
+        msg: "SV-253464r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253464r991589_rule
+
+
+    - name: 'SV-253465r991589_rule | The system must be configured to meet the minimum session security requirement f'
+      debug:
+        msg: "SV-253465r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253465r991589_rule
+
+
+    - name: 'SV-253466r959006_rule | The system must be configured to use FIPS-compliant algorithms for encryption, h'
+      debug:
+        msg: "SV-253466r959006_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253466r959006_rule
+
+
+    - name: 'SV-253467r991589_rule | The default permissions of global system objects must be increased.'
+      debug:
+        msg: "SV-253467r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253467r991589_rule
+
+
+    - name: 'SV-253468r1051057_rule | User Account Control approval mode for the built-in Administrator must be enable'
+      debug:
+        msg: "SV-253468r1051057_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253468r1051057_rule
+
+
+    - name: 'SV-253469r958518_rule | User Account Control must prompt administrators for consent on the secure deskto'
+      debug:
+        msg: "SV-253469r958518_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253469r958518_rule
+
+
+    - name: 'SV-253470r1106510_rule | Windows 11 must use multifactor authentication for local and network access to p'
+      debug:
+        msg: "SV-253470r1106510_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253470r1106510_rule
+
+
+    - name: 'SV-253471r1051058_rule | User Account Control must automatically deny elevation requests for standard use'
+      debug:
+        msg: "SV-253471r1051058_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253471r1051058_rule
+
+
+    - name: 'SV-253472r958518_rule | User Account Control must be configured to detect application installations and '
+      debug:
+        msg: "SV-253472r958518_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253472r958518_rule
+
+
+    - name: 'SV-253473r958518_rule | User Account Control must only elevate UIAccess applications that are installed '
+      debug:
+        msg: "SV-253473r958518_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253473r958518_rule
+
+
+    - name: 'SV-253474r1051059_rule | User Account Control must run all administrators in Admin Approval Mode, enablin'
+      debug:
+        msg: "SV-253474r1051059_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253474r1051059_rule
+
+
+    - name: 'SV-253475r958518_rule | User Account Control must virtualize file and registry write failures to per-use'
+      debug:
+        msg: "SV-253475r958518_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253475r958518_rule
+
+
+    - name: 'SV-253476r1051060_rule | Passwords for enabled local Administrator accounts must be changed at least ever'
+      debug:
+        msg: "SV-253476r1051060_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253476r1051060_rule
+
+
+    - name: 'SV-253477r958478_rule | Toast notifications to the lock screen must be turned off.'
+      debug:
+        msg: "SV-253477r958478_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253477r958478_rule
+
+
+    - name: 'SV-253478r991589_rule | Zone information must be preserved when saving attachments.'
+      debug:
+        msg: "SV-253478r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253478r991589_rule
+
+
+    - name: 'SV-253479r958726_rule | The "Access Credential Manager as a trusted caller" user right must not be assig'
+      debug:
+        msg: "SV-253479r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253479r958726_rule
+
+
+    - name: 'SV-253480r958472_rule | The "Access this computer from the network" user right must only be assigned to '
+      debug:
+        msg: "SV-253480r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253480r958472_rule
+
+
+    - name: 'SV-253481r958726_rule | The "Act as part of the operating system" user right must not be assigned to any'
+      debug:
+        msg: "SV-253481r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253481r958726_rule
+
+
+    - name: 'SV-253482r958472_rule | The "Allow log on locally" user right must only be assigned to the Administrator'
+      debug:
+        msg: "SV-253482r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253482r958472_rule
+
+
+    - name: 'SV-253483r958726_rule | The "Back up files and directories" user right must only be assigned to the Admi'
+      debug:
+        msg: "SV-253483r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253483r958726_rule
+
+
+    - name: 'SV-253484r958726_rule | The "Change the system time" user right must only be assigned to Administrators '
+      command:
+        cmd: LOCAL SERVICE
+      register: SV_253484r958726_rule_check
+      changed_when: false
+      failed_when: false
+      tags:
+        - validate_automated
+        - stig_check
+        - SV-253484r958726_rule
+
+    - name: 'SV-253484r958726_rule | Display check result'
+      debug:
+        var: SV_253484r958726_rule_check.stdout
+      tags:
+        - stig_check
+        - SV-253484r958726_rule
+
+
+    - name: 'SV-253485r958726_rule | The "Create a pagefile" user right must only be assigned to the Administrators g'
+      debug:
+        msg: "SV-253485r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253485r958726_rule
+
+
+    - name: 'SV-253486r958726_rule | The "Create a token object" user right must not be assigned to any groups or acc'
+      debug:
+        msg: "SV-253486r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253486r958726_rule
+
+
+    - name: 'SV-253487r958726_rule | The "Create global objects" user right must only be assigned to Administrators, '
+      command:
+        cmd: LOCAL SERVICE
+      register: SV_253487r958726_rule_check
+      changed_when: false
+      failed_when: false
+      tags:
+        - validate_automated
+        - stig_check
+        - SV-253487r958726_rule
+
+    - name: 'SV-253487r958726_rule | Display check result'
+      debug:
+        var: SV_253487r958726_rule_check.stdout
+      tags:
+        - stig_check
+        - SV-253487r958726_rule
+
+
+    - name: 'SV-253488r958726_rule | The "Create permanent shared objects" user right must not be assigned to any gro'
+      debug:
+        msg: "SV-253488r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253488r958726_rule
+
+
+    - name: 'SV-253489r958726_rule | The "Create symbolic links" user right must only be assigned to the Administrato'
+      debug:
+        msg: "SV-253489r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253489r958726_rule
+
+
+    - name: 'SV-253490r958726_rule | The "Debug programs" user right must only be assigned to the Administrators grou'
+      debug:
+        msg: "SV-253490r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253490r958726_rule
+
+
+    - name: 'SV-253491r958472_rule | The "Deny access to this computer from the network" user right on workstations m'
+      debug:
+        msg: "SV-253491r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253491r958472_rule
+
+
+    - name: 'SV-253492r958472_rule | The "Deny log on as a batch job" user right on domain-joined workstations must b'
+      debug:
+        msg: "SV-253492r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253492r958472_rule
+
+
+    - name: 'SV-253493r958472_rule | The "Deny log on as a service" user right on Windows 11 domain-joined workstatio'
+      debug:
+        msg: "SV-253493r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253493r958472_rule
+
+
+    - name: 'SV-253494r958472_rule | The "Deny log on locally" user right on workstations must be configured to preve'
+      debug:
+        msg: "SV-253494r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253494r958472_rule
+
+
+    - name: 'SV-253495r958472_rule | The "Deny log on through Remote Desktop Services" user right on Windows 11 works'
+      debug:
+        msg: "SV-253495r958472_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253495r958472_rule
+
+
+    - name: 'SV-253496r958726_rule | The "Enable computer and user accounts to be trusted for delegation" user right '
+      debug:
+        msg: "SV-253496r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253496r958726_rule
+
+
+    - name: 'SV-253497r958726_rule | The "Force shutdown from a remote system" user right must only be assigned to th'
+      debug:
+        msg: "SV-253497r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253497r958726_rule
+
+
+    - name: 'SV-253498r958726_rule | The "Impersonate a client after authentication" user right must only be assigned'
+      command:
+        cmd: LOCAL SERVICE
+      register: SV_253498r958726_rule_check
+      changed_when: false
+      failed_when: false
+      tags:
+        - validate_automated
+        - stig_check
+        - SV-253498r958726_rule
+
+    - name: 'SV-253498r958726_rule | Display check result'
+      debug:
+        var: SV_253498r958726_rule_check.stdout
+      tags:
+        - stig_check
+        - SV-253498r958726_rule
+
+
+    - name: 'SV-253499r958726_rule | The "Load and unload device drivers" user right must only be assigned to the Adm'
+      debug:
+        msg: "SV-253499r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253499r958726_rule
+
+
+    - name: 'SV-253500r958726_rule | The "Lock pages in memory" user right must not be assigned to any groups or acco'
+      debug:
+        msg: "SV-253500r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253500r958726_rule
+
+
+    - name: 'SV-253501r958434_rule | The "Manage auditing and security log" user right must only be assigned to the A'
+      debug:
+        msg: "SV-253501r958434_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253501r958434_rule
+
+
+    - name: 'SV-253502r958726_rule | The "Modify firmware environment values" user right must only be assigned to the'
+      debug:
+        msg: "SV-253502r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253502r958726_rule
+
+
+    - name: 'SV-253503r958726_rule | The "Perform volume maintenance tasks" user right must only be assigned to the A'
+      debug:
+        msg: "SV-253503r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253503r958726_rule
+
+
+    - name: 'SV-253504r958726_rule | The "Profile single process" user right must only be assigned to the Administrat'
+      debug:
+        msg: "SV-253504r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253504r958726_rule
+
+
+    - name: 'SV-253505r958726_rule | The "Restore files and directories" user right must only be assigned to the Admi'
+      debug:
+        msg: "SV-253505r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253505r958726_rule
+
+
+    - name: 'SV-253506r958726_rule | The "Take ownership of files or other objects" user right must only be assigned '
+      debug:
+        msg: "SV-253506r958726_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-253506r958726_rule
+
+
+    - name: 'SV-256893r958552_rule | Internet Explorer must be disabled for Windows 11.'
+      debug:
+        msg: "SV-256893r958552_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-256893r958552_rule
+
+
+    - name: 'SV-257592r991589_rule | Windows 11 must not have portproxy enabled or in use.'
+      debug:
+        msg: "SV-257592r991589_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-257592r991589_rule
+
+
+    - name: 'SV-257770r958412_rule | Windows 11 must have command line process auditing events enabled for failures.'
+      debug:
+        msg: "SV-257770r958412_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-257770r958412_rule
+
+
+    - name: 'SV-268317r1016371_rule | Copilot in Windows must be disabled for Windows 11'
+      debug:
+        msg: "SV-268317r1016371_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-268317r1016371_rule
+
+
+    - name: 'SV-268318r1081062_rule | Windows 11 systems must use either Group Policy or an approved Mobile Device Man'
+      debug:
+        msg: "SV-268318r1081062_rule requires manual verification"
+      tags:
+        - stig_check
+        - SV-268318r1081062_rule
+

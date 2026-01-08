@@ -1,0 +1,231 @@
+# Project: STIG → Ansible + Checker + CTP Generator
+
+You are working on a local-first tool that turns DISA STIG XCCDF/XML into three artifacts:
+
+1. Ansible hardening playbook: scripts/generate_hardening.py → stig_<product>_hardening.yml
+2. Ansible checker playbook: scripts/generate_checker.py → stig_<product>_checker.yml
+3. CTP: scripts/generate_ctp.py → stig_<product>_ctp.csv
+
+The current architecture is summarized in REFACTORING_SUMMARY.md. Follow that design.
+
+## External contracts (do NOT break)
+
+- The CSV **must** keep the exact headers:
+  STIG ID, NIST 800-53 Control ID, Severity, Step Number,
+  Action/Command, Expected Output/Result, Expected Screen Output (what user sees),
+  Notes, Pass/Fail.
+
+- The Ansible playbooks must:
+  - Be valid YAML.
+  - Be idempotent.
+  - Use appropriate modules instead of only `shell` where possible.
+  - Be grouped by STIG ID (sv_id) in a way that is easy for auditors/engineers to follow.
+
+- tests/test_coverage.py **must continue to pass**:
+  - Every STIG ID in the parsed JSON must appear in:
+    - the hardening playbook,
+    - the checker playbook,
+    - and the CTP CSV.
+
+## Internal model
+
+- Use a `StigControl` model (or equivalent) with fields like:
+  - sv_id, rule_id, nist_id, severity, title, description,
+    check_text, fix_text, product, category, automation_level.
+
+- Category examples (non-exhaustive):
+  - file_permissions
+  - file_owner
+  - file_group
+  - package_present
+  - package_absent
+  - service_enabled
+  - service_disabled
+  - mount_option
+  - sysctl
+  - ssh_config
+  - firewalld
+  - dconf/gsettings
+  - manual_only
+
+## Generation rules
+
+### Hardening (generate_hardening.py)
+
+For each StigControl:
+- Determine category based on check_text, fix_text, title, etc.
+- Call a category-specific generator that returns one or more Ansible tasks.
+- Prefer Ansible modules over shell, e.g.:
+  - `ansible.builtin.package`
+  - `ansible.builtin.service`
+  - `ansible.builtin.mount`
+  - `ansible.posix.sysctl`
+  - `ansible.builtin.file`
+- Always tag tasks with the STIG ID (e.g. `tags: ["SV-257879"]`).
+
+### Checker (generate_checker.py)
+
+For each StigControl:
+- Generate one or more checker tasks that:
+  - Use modules when possible (`package_facts`, `service_facts`, `stat`, `command`/`shell` + `register` + `failed_when`).
+  - Reflect the actual semantics of `check_text` (e.g. "must NOT return output" → `failed_when: result.stdout != ""`).
+- Avoid re-encoding the original English "Must: … If it does not, this is a finding." – instead, implement the logic programmatically and keep comments concise.
+
+### CTP (generate_ctp.py)
+
+**IMPORTANT: CTP is ONLY for MANUAL controls!**
+
+CTP (Certification Test Procedure) is for manual testing of controls that **cannot be automated** by SCAP/OVAL/Nessus. Automated controls are tested via automated scanning and do NOT need manual CTP steps.
+
+- **Filter controls**: Only include controls where `automation_level` is `"manual"` or `"not_scannable_with_nessus"`
+- **Exclude automated controls**: Controls with `automation_level` of `"automated"`, `"semi_automated"`, `"scannable_with_nessus"`, or `"automatable"` should NOT appear in the CTP
+- For each manual control:
+  - Generate **1–3 rows** that a human tester can follow linearly.
+  - Use real commands extracted from `check_text` and `fix_text`.
+  - Keep language:
+    - Clear.
+    - Auditor-friendly.
+    - Without awkward prefixes like "Must:" or trailing "If it is not, this is a finding." Those belong in policy docs, not step instructions.
+
+Guidelines for fields:
+- Action/Command:
+  - Concrete CLI or GUI action, e.g. `Run "mount | grep /var/log"`.
+- Expected Output/Result:
+  - Logical condition, e.g. `"/var/log" is mounted on a separate filesystem with nodev,noexec,nosuid options`.
+- Expected Screen Output (what user sees):
+  - Typical snippet of CLI output or GUI description.
+- Notes:
+  - Reference NIST control, edge cases, ISSO approvals, etc.
+- Step Number:
+  - Increment within each STIG ID (1, 2, 3, …).
+
+## Coverage & Quality
+
+- Never silently drop a STIG. If it is too manual, set automation_level to "manual" but still:
+  - Emit at least one hardening task (even if it is a TODO-like reminder or comment).
+  - Emit at least one checker task.
+  - Emit at least one CTP row.
+
+- Maintain consistent terminology and formatting across all three artifacts.
+
+- Prefer small, composable functions with docstrings and type hints.
+
+## Existing code to reuse
+
+- Use app.parsers.xccdf_parser to parse XCCDF.
+- Use app.generators.extractors for extracting command/value patterns from check_text / fix_text, where available.
+
+## STIG Files Available
+
+Real STIG files are located in `stigs/data/`:
+- **RHEL 9 V2R6**: 447 controls (largest, primary test case)
+- **RHEL 8 V2R5**: Linux variant
+- **Windows 11 V2R5**: 265 controls (Windows OS family)
+- **Windows Server 2022 V2R6**: Windows variant
+- **Cisco IOS Switch NDM V3R5**: 43 controls (network device, smallest)
+- **Cisco IOS Router** (multiple variants)
+- **Cisco NX-OS Switch** (multiple variants)
+- **Cisco ISE** (NAC and NDM variants)
+
+See `STIG_ANALYSIS.md` for detailed analysis of these files.
+
+## OS Family-Specific Patterns
+
+### Linux (RHEL)
+- File operations: `chmod`, `chown`, `chgrp`
+- Services: `systemctl enable|disable|mask|unmask`
+- Packages: `yum|dnf install|remove`, `rpm -q`
+- Sysctl: `sysctl -w net.ipv4.ip_forward=0`
+- Config files: `/etc/ssh/sshd_config`, `/etc/audit/rules.d/`
+- Mount: `mount | grep`, `/etc/fstab`
+
+### Windows
+- Registry: `Get-ItemProperty`, `Set-ItemProperty`, `HKEY_LOCAL_MACHINE\...`
+- Services: `Get-Service`, `Set-Service`
+- PowerShell: Extensive use of PowerShell cmdlets
+- GUI: References to GUI tools (gpedit.msc, secpol.msc, etc.)
+
+### Network Devices (Cisco)
+- IOS commands: `ip access-list`, `line vty`, `banner login`
+- Configuration mode: Multi-line config blocks
+- Show commands: `show running-config`, `show ip access-list`
+- Context-specific: Interface config, line config, etc.
+
+Do not:
+- Change test_coverage.py's expectations.
+- Change CSV or playbook schema without explicit instruction.
+- Hardcode product-specific paths that won't generalize.
+
+## SCAP Benchmark Integration for Automation Level
+
+We now have SCAP benchmark content checked into this repo under:
+
+- stigs/benchmark/
+
+These contain XCCDF + OVAL definitions that indicate which STIG checks are actually automatable (machine-scannable) vs manual.
+
+### Goal
+
+Leverage the SCAP benchmarks under /stig_generator/stigs/benchmark/ to:
+
+1. Classify each STIG control as:
+   - "automated"  (has an OVAL or equivalent machine-executable check)
+   - "semi_automated" (partially checkable by SCAP / OVAL but still needs human judgment)
+   - "manual"     (no SCAP/OVAL support; entirely human-driven)
+
+2. Store that classification in the `automation_level` field of our `StigControl` model.
+
+3. Use `automation_level` to drive behavior in:
+   - parse_stig.py
+   - generate_hardening.py
+   - generate_checker.py
+   - generate_ctp.py
+
+### How to link STIG controls to SCAP
+
+Use identifiers that exist in both STIG and SCAP:
+
+- `rule_id` / XCCDF Rule ID (e.g., "xccdf_mil.disa.stig_rule_SV-230221r1017040_rule")
+- STIG ID (e.g., "SV-230221r1017040_rule") extracted from rule_id
+
+### Implementation
+
+1. **SCAP Parser** (`app/parsers/scap_benchmark.py`):
+   - Parses SCAP benchmark XMLs in stigs/benchmark/
+   - Builds mapping: STIG ID → automation info (has_oval, has_ocil, automation_level)
+   - `parse_scap_benchmark()` extracts rule → automation level mapping
+   - `load_scap_mapping_for_stig()` finds and loads the correct benchmark for a STIG file
+
+2. **Parser Integration** (`scripts/parse_stig.py`):
+   - Loads SCAP mapping using `load_scap_mapping_for_stig()`
+   - For each control, looks up STIG ID in SCAP mapping
+   - Sets `automation_level` based on SCAP info:
+     - `has_oval == True` → `automation_level = "automated"`
+     - `has_ocil == True` → `automation_level = "semi_automated"`
+     - Otherwise → `automation_level = "manual"`
+   - Falls back to existing classification if control not found in SCAP
+
+3. **Generator Behavior**:
+
+   **generate_hardening.py**:
+   - For `automation_level == "automated"`: Generate full Ansible hardening tasks
+   - For `automation_level == "semi_automated"`: Generate tasks with comment: "# semi-automated: SCAP/OVAL can partially validate this; still requires human review."
+   - For `automation_level == "manual"`: Generate placeholder tasks or best-effort tasks, tagged appropriately
+
+   **generate_checker.py**:
+   - For `automation_level == "automated"`: Generate full checker tasks that mirror SCAP/OVAL validation, prefer modules
+   - For `automation_level == "semi_automated"`: Generate mix of programmatic checks and manual instructions
+   - For `automation_level == "manual"`: Generate tasks that guide human tester with `debug`/`note`-style tasks
+
+   **generate_ctp.py**:
+   - Always generate 1–3 CTP rows per control regardless of automation_level
+   - For "automated": Steps can reference SCAP scan/automated check and verify key outputs
+   - For "semi_automated": Include both automated and manual inspection steps
+   - For "manual": Focus entirely on human inspection steps (CLI commands, GUI navigation, config review)
+   - Do NOT copy boilerplate "Must:" / "If it is not, this is a finding." language
+
+### Tests & Contracts
+
+- Every StigControl must have a non-null `automation_level`
+- For controls found in SCAP, `automation_level` should match SCAP classification
+- Keep tests/test_coverage.py intact and passing

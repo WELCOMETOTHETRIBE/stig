@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STIG Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="file"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .stats {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .stats h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .downloads {
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .downloads h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .download-link {
+            display: block;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+        }
+        
+        .download-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner.active {
+            display: block;
+        }
+        
+        .spinner::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .product-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .search-section {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 2px solid #eee;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .search-box button {
+            width: auto;
+            padding: 12px 24px;
+        }
+        
+        .search-results {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .result-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .result-item h4 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .result-item .result-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        small {
+            display: block;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ STIG Generator</h1>
+        <p class="subtitle">Generate Ansible playbooks and CTP documents from DISA STIG XCCDF files</p>
+        
+        <form id="generateForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="stig_file">STIG XCCDF XML File</label>
+                <input type="file" id="stig_file" name="stig_file" accept=".xml" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="secondary_artifact">Optional: SCAP Benchmark or Nessus Scan</label>
+                <input type="file" id="secondary_artifact" name="secondary_artifact" accept=".xml">
+                <small>If not provided, will auto-detect benchmark2/ files when available</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="secondary_type">Secondary Artifact Type</label>
+                <select id="secondary_type" name="secondary_type">
+                    <option value="">Auto-detect</option>
+                    <option value="scap">SCAP Benchmark</option>
+                    <option value="nessus">Nessus Scan</option>
+                </select>
+            </div>
+            
+            <button type="submit" id="generateBtn">Generate Artifacts</button>
+        </form>
+        
+        <div class="spinner" id="spinner"></div>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="stats" id="stats">
+            <h3>Generation Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="totalControls">0</div>
+                    <div class="stat-label">Total Controls</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="automated">0</div>
+                    <div class="stat-label">Automated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="manual_only">0</div>
+                    <div class="stat-label">Manual-Only</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="downloads" id="downloads">
+            <h3>Download Generated Files</h3>
+            <div id="productBadge" class="product-badge" style="display: none;"></div>
+            <a href="#" class="download-link" id="hardeningLink" target="_blank">📄 Hardening Playbook</a>
+            <a href="#" class="download-link" id="checkerLink" target="_blank">✅ Checker Playbook</a>
+            <a href="#" class="download-link" id="ctpLink" target="_blank">📋 CTP Document</a>
+        </div>
+        
+        <div class="search-section">
+            <h2>🔍 Search STIG Controls</h2>
+            <p class="subtitle">Search through parsed STIG controls by ID, title, or description</p>
+            <div class="search-box">
+                <input type="text" id="searchQuery" placeholder="Search by STIG ID, title, or description (min 2 characters)">
+                <button type="button" id="searchBtn">Search</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+    
+    <script>
+        const form = document.getElementById('generateForm');
+        const status = document.getElementById('status');
+        const stats = document.getElementById('stats');
+        const downloads = document.getElementById('downloads');
+        const spinner = document.getElementById('spinner');
+        const generateBtn = document.getElementById('generateBtn');
+        
+        function showStatus(message, type) {
+            status.textContent = message;
+            status.className = `status ${type}`;
+            status.style.display = 'block';
+        }
+        
+        function hideStatus() {
+            status.style.display = 'none';
+        }
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            
+            // Reset UI
+            hideStatus();
+            stats.style.display = 'none';
+            downloads.style.display = 'none';
+            spinner.classList.add('active');
+            generateBtn.disabled = true;
+            
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    showStatus('✓ ' + data.message, 'success');
+                    
+                    // Show product badge
+                    if (data.product) {
+                        const productBadge = document.getElementById('productBadge');
+                        productBadge.textContent = `Product: ${data.product.toUpperCase()}`;
+                        productBadge.style.display = 'inline-block';
+                    }
+                    
+                    // Show stats
+                    document.getElementById('totalControls').textContent = data.stats.total_controls;
+                    document.getElementById('automated').textContent = data.stats.automated || 0;
+                    document.getElementById('manual_only').textContent = data.stats.manual_only || 0;
+                    stats.style.display = 'block';
+                    
+                    // Show download links
+                    document.getElementById('hardeningLink').href = `/api/download/${data.files.hardening}`;
+                    document.getElementById('checkerLink').href = `/api/download/${data.files.checker}`;
+                    document.getElementById('ctpLink').href = `/api/download/${data.files.ctp}`;
+                    downloads.style.display = 'block';
+                } else {
+                    showStatus('✗ Error: ' + (data.error || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                showStatus('✗ Error: ' + error.message, 'error');
+            } finally {
+                spinner.classList.remove('active');
+                generateBtn.disabled = false;
+            }
+        });
+        
+        // Search functionality
+        const searchBtn = document.getElementById('searchBtn');
+        const searchQuery = document.getElementById('searchQuery');
+        const searchResults = document.getElementById('searchResults');
+        
+        async function performSearch() {
+            const query = searchQuery.value.trim();
+            
+            if (query.length < 2) {
+                showStatus('Search query must be at least 2 characters', 'error');
+                return;
+            }
+            
+            searchResults.innerHTML = '<div class="spinner active"></div>';
+            searchResults.classList.add('active');
+            
+            try {
+                const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    if (data.results && data.results.length > 0) {
+                        let html = `<h3>Found ${data.count} result${data.count !== 1 ? 's' : ''}${data.total_matches > data.count ? ` (showing first ${data.count} of ${data.total_matches})` : ''}</h3>`;
+                        
+                        data.results.forEach(result => {
+                            html += `
+                                <div class="result-item">
+                                    <h4>${result.sv_id || result.id || 'Unknown ID'}</h4>
+                                    <p><strong>${result.title || 'No title'}</strong></p>
+                                    <div class="result-meta">
+                                        <span>Severity: ${result.severity || 'N/A'}</span> | 
+                                        <span>Automation: ${result.automation_level || 'N/A'}</span> | 
+                                        <span>Source: ${result.source_file || 'N/A'}</span>
+                                    </div>
+                                    ${result.description ? `<p style="margin-top: 10px; font-size: 0.9em; color: #666;">${result.description.substring(0, 200)}${result.description.length > 200 ? '...' : ''}</p>` : ''}
+                                </div>
+                            `;
+                        });
+                        
+                        searchResults.innerHTML = html;
+                    } else {
+                        searchResults.innerHTML = '<p>No results found. Try a different search term.</p>';
+                    }
+                } else {
+                    searchResults.innerHTML = `<p class="status error">Error: ${data.error || 'Unknown error'}</p>`;
+                }
+            } catch (error) {
+                searchResults.innerHTML = `<p class="status error">Error: ${error.message}</p>`;
+            }
+        }
+        
+        searchBtn.addEventListener('click', performSearch);
+        searchQuery.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>
+
+
