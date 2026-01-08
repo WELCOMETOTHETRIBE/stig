@@ -554,6 +554,10 @@ def download(filename):
         return jsonify({'error': str(e)}), 500
 
 
+# Log successful module load at the end
+logger.info("Web server module loaded successfully - all routes registered")
+print("✓ Web server module fully loaded", file=sys.stderr)
+
 if __name__ == '__main__':
     print("=" * 60)
     print("STIG Generator Web Server")
