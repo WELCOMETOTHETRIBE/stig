@@ -18,7 +18,14 @@ try:
     print("Attempting to import web_server...", file=sys.stderr)
     from web_server import app
     print("✓ Successfully imported Flask app from web_server", file=sys.stderr)
+    print(f"App type: {type(app)}", file=sys.stderr)
+    print(f"App callable: {callable(app)}", file=sys.stderr)
     print(f"App name: {app.name}", file=sys.stderr)
+    
+    # Verify app is WSGI callable
+    if not callable(app):
+        raise ValueError("App is not callable - cannot be used with WSGI")
+    print("✓ App is WSGI callable", file=sys.stderr)
 except Exception as e:
     print(f"✗ ERROR: Failed to import Flask app: {e}", file=sys.stderr)
     traceback.print_exc(file=sys.stderr)
