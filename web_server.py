@@ -21,28 +21,44 @@ from scripts.generate_hardening import generate_hardening_playbook
 from scripts.parse_stig import parse_xccdf_file, save_controls_to_json
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(levelname)s: %(message)s",
-    handlers=[
-        logging.FileHandler("server.log"),
-        logging.StreamHandler()
-    ]
-)
+# Try to create file handler, but fall back to stream-only if it fails
+# (e.g., in Railway or other restricted environments)
+try:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(levelname)s: %(message)s",
+        handlers=[
+            logging.FileHandler("server.log"),
+            logging.StreamHandler()
+        ]
+    )
+except (PermissionError, OSError):
+    # Fall back to stream-only logging if file logging fails
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(levelname)s: %(message)s",
+        handlers=[logging.StreamHandler()]
+    )
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
 # Use absolute paths based on script location
 BASE_DIR = Path(__file__).parent.resolve()
+
+# Initialize Flask app with explicit template folder
+app = Flask(__name__, template_folder=str(BASE_DIR / 'templates'))
 app.config['UPLOAD_FOLDER'] = BASE_DIR / 'stigs' / 'input'
 app.config['OUTPUT_FOLDER'] = BASE_DIR / 'output'
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
 
-# Ensure directories exist
-app.config['UPLOAD_FOLDER'].mkdir(parents=True, exist_ok=True)
-app.config['OUTPUT_FOLDER'].mkdir(parents=True, exist_ok=True)
-(app.config['OUTPUT_FOLDER'] / 'ansible').mkdir(parents=True, exist_ok=True)
-(app.config['OUTPUT_FOLDER'] / 'ctp').mkdir(parents=True, exist_ok=True)
+# Ensure directories exist (with error handling for Railway)
+try:
+    app.config['UPLOAD_FOLDER'].mkdir(parents=True, exist_ok=True)
+    app.config['OUTPUT_FOLDER'].mkdir(parents=True, exist_ok=True)
+    (app.config['OUTPUT_FOLDER'] / 'ansible').mkdir(parents=True, exist_ok=True)
+    (app.config['OUTPUT_FOLDER'] / 'ctp').mkdir(parents=True, exist_ok=True)
+except Exception as e:
+    logger.warning(f"Could not create directories: {e}")
+    # Continue anyway - directories might already exist or be created on first use
 
 
 def _auto_detect_benchmark2(stig_path: Path, original_filename: str = None) -> tuple[Path | None, str]:
