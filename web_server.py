@@ -73,10 +73,19 @@ logger.info("Web server module loading...")
 BASE_DIR = Path(__file__).parent.resolve()
 
 # Initialize Flask app with explicit template folder
-app = Flask(__name__, template_folder=str(BASE_DIR / 'templates'))
-app.config['UPLOAD_FOLDER'] = BASE_DIR / 'stigs' / 'input'
-app.config['OUTPUT_FOLDER'] = BASE_DIR / 'output'
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
+# Wrap in try/except to handle any initialization errors
+try:
+    template_dir = BASE_DIR / 'templates'
+    logger.info(f"Initializing Flask app with template folder: {template_dir}")
+    app = Flask(__name__, template_folder=str(template_dir))
+    app.config['UPLOAD_FOLDER'] = BASE_DIR / 'stigs' / 'input'
+    app.config['OUTPUT_FOLDER'] = BASE_DIR / 'output'
+    app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
+    logger.info("Flask app initialized successfully")
+except Exception as e:
+    logger.error(f"Failed to initialize Flask app: {e}", exc_info=True)
+    # Re-raise so main.py can catch it
+    raise
 
 # Add global error handler to catch all exceptions
 @app.errorhandler(Exception)
@@ -92,10 +101,12 @@ def handle_exception(e):
 
 # Ensure directories exist (with error handling for Railway)
 try:
+    logger.info("Creating directories...")
     app.config['UPLOAD_FOLDER'].mkdir(parents=True, exist_ok=True)
     app.config['OUTPUT_FOLDER'].mkdir(parents=True, exist_ok=True)
     (app.config['OUTPUT_FOLDER'] / 'ansible').mkdir(parents=True, exist_ok=True)
     (app.config['OUTPUT_FOLDER'] / 'ctp').mkdir(parents=True, exist_ok=True)
+    logger.info("Directories created successfully")
 except Exception as e:
     logger.warning(f"Could not create directories: {e}")
     # Continue anyway - directories might already exist or be created on first use
