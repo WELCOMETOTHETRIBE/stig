@@ -15,26 +15,43 @@ from flask import Flask, jsonify, render_template, request, send_file
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-# Import script functions with error handling
-try:
-    from scripts.generate_checker import generate_checker_playbook
-    from scripts.generate_ctp import generate_ctp_csv
-    from scripts.generate_hardening import generate_hardening_playbook
-    from scripts.parse_stig import parse_xccdf_file, save_controls_to_json
-    _scripts_loaded = True
-except ImportError as e:
-    # Log the error but don't crash - we'll handle it in the route handlers
-    import sys
-    print(f"ERROR: Failed to import scripts: {e}", file=sys.stderr)
-    import traceback
-    traceback.print_exc()
-    # Set to None so we can check later
-    generate_checker_playbook = None
-    generate_ctp_csv = None
-    generate_hardening_playbook = None
-    parse_xccdf_file = None
-    save_controls_to_json = None
-    _scripts_loaded = False
+# Lazy import script functions - only import when needed
+# This allows the app to start even if scripts have issues
+_scripts_loaded = None
+_generate_checker_playbook = None
+_generate_ctp_csv = None
+_generate_hardening_playbook = None
+_parse_xccdf_file = None
+_save_controls_to_json = None
+
+def _load_scripts():
+    """Lazy load script functions."""
+    global _scripts_loaded, _generate_checker_playbook, _generate_ctp_csv
+    global _generate_hardening_playbook, _parse_xccdf_file, _save_controls_to_json
+    
+    if _scripts_loaded is not None:
+        return _scripts_loaded
+    
+    try:
+        from scripts.generate_checker import generate_checker_playbook
+        from scripts.generate_ctp import generate_ctp_csv
+        from scripts.generate_hardening import generate_hardening_playbook
+        from scripts.parse_stig import parse_xccdf_file, save_controls_to_json
+        
+        _generate_checker_playbook = generate_checker_playbook
+        _generate_ctp_csv = generate_ctp_csv
+        _generate_hardening_playbook = generate_hardening_playbook
+        _parse_xccdf_file = parse_xccdf_file
+        _save_controls_to_json = save_controls_to_json
+        _scripts_loaded = True
+        return True
+    except Exception as e:
+        # Log the error but don't crash
+        print(f"ERROR: Failed to import scripts: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        _scripts_loaded = False
+        return False
 
 # Configure logging
 # Try to create file handler, but fall back to stream-only if it fails
@@ -174,8 +191,8 @@ def health():
 @app.route('/api/generate', methods=['POST'])
 def generate():
     """Generate STIG artifacts from uploaded file."""
-    # Check if imports succeeded
-    if not _scripts_loaded:
+    # Lazy load scripts
+    if not _load_scripts():
         return jsonify({'error': 'Script modules failed to load. Check server logs for import errors.'}), 500
     
     try:
@@ -224,17 +241,17 @@ def generate():
         # Pass original filename for better product detection
         if secondary_artifact:
             logger.info(f"Using secondary artifact: {secondary_artifact} (type: {secondary_type})")
-            controls = parse_xccdf_file(
+            controls = _parse_xccdf_file(
                 stig_path,
                 secondary_artifact=secondary_artifact,
                 secondary_type=secondary_type,
                 original_filename=stig_file.filename
             )
         else:
-            controls = parse_xccdf_file(stig_path, original_filename=stig_file.filename)
+            controls = _parse_xccdf_file(stig_path, original_filename=stig_file.filename)
         
         # Save to JSON
-        save_controls_to_json(controls, json_path)
+        _save_controls_to_json(controls, json_path)
         
         # Convert to dict format for generators
         controls_dict = [c.to_dict() if hasattr(c, 'to_dict') else c for c in controls]
@@ -328,13 +345,13 @@ def generate():
         
         # Generate using new scripts
         logger.info("Generating hardening playbook...")
-        generate_hardening_playbook(controls_dict, hardening_path, product)
+        _generate_hardening_playbook(controls_dict, hardening_path, product)
         
         logger.info("Generating checker playbook...")
-        generate_checker_playbook(controls_dict, checker_path, product)
+        _generate_checker_playbook(controls_dict, checker_path, product)
         
         logger.info("Generating CTP document...")
-        generate_ctp_csv(controls_dict, ctp_path, manual_only=True)
+        _generate_ctp_csv(controls_dict, ctp_path, manual_only=True)
         
         # Return relative paths from output folder (relative to BASE_DIR)
         # These paths will be used in the download route, so they should be relative to OUTPUT_FOLDER
