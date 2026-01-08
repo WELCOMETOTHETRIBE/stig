@@ -153,6 +153,16 @@ def _auto_detect_benchmark2(stig_path: Path, original_filename: str = None) -> t
     return None, ''
 
 
+@app.route('/test')
+def test():
+    """Simple test endpoint that doesn't require templates."""
+    return jsonify({
+        'status': 'ok',
+        'message': 'Flask app is running',
+        'base_dir': str(BASE_DIR),
+        'template_dir': str(BASE_DIR / 'templates')
+    }), 200
+
 @app.route('/')
 def index():
     """Serve the main page."""
