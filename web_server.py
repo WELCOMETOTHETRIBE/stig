@@ -87,6 +87,24 @@ except Exception as e:
     # Re-raise so main.py can catch it
     raise
 
+# Add request logging middleware
+@app.before_request
+def log_request_info():
+    """Log incoming requests for debugging."""
+    try:
+        logger.info(f"Incoming request: {request.method} {request.path}")
+    except:
+        pass  # Don't fail if logging fails
+
+@app.after_request
+def log_response_info(response):
+    """Log responses for debugging."""
+    try:
+        logger.info(f"Response: {response.status_code} for {request.method} {request.path}")
+    except:
+        pass
+    return response
+
 # Add global error handler to catch all exceptions
 @app.errorhandler(Exception)
 def handle_exception(e):
@@ -163,12 +181,20 @@ def _auto_detect_benchmark2(stig_path: Path, original_filename: str = None) -> t
 @app.route('/test')
 def test():
     """Simple test endpoint that doesn't require templates."""
-    return jsonify({
-        'status': 'ok',
-        'message': 'Flask app is running',
-        'base_dir': str(BASE_DIR),
-        'template_dir': str(BASE_DIR / 'templates')
-    }), 200
+    try:
+        logger.info("Test endpoint called")
+        response = jsonify({
+            'status': 'ok',
+            'message': 'Flask app is running',
+            'base_dir': str(BASE_DIR),
+            'template_dir': str(BASE_DIR / 'templates'),
+            'template_exists': (BASE_DIR / 'templates' / 'index.html').exists()
+        })
+        logger.info("Test endpoint returning success")
+        return response, 200
+    except Exception as e:
+        logger.error(f"Error in test endpoint: {e}", exc_info=True)
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/')
 def index():
