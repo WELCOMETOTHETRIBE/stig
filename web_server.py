@@ -88,31 +88,32 @@ except Exception as e:
     raise
 
 # Add request logging middleware - but make it very defensive
-@app.before_request
-def log_request_info():
-    """Log incoming requests for debugging."""
-    try:
-        import sys
-        print(f"BEFORE_REQUEST: {request.method} {request.path}", file=sys.stderr)
-        logger.info(f"Incoming request: {request.method} {request.path}")
-    except Exception as e:
-        # Don't fail if logging fails - just print to stderr
-        import sys
-        print(f"Error in before_request: {e}", file=sys.stderr)
-        pass
+# Commented out temporarily to see if this is causing the crash
+# @app.before_request
+# def log_request_info():
+#     """Log incoming requests for debugging."""
+#     try:
+#         import sys
+#         print(f"BEFORE_REQUEST: {request.method} {request.path}", file=sys.stderr)
+#         logger.info(f"Incoming request: {request.method} {request.path}")
+#     except Exception as e:
+#         # Don't fail if logging fails - just print to stderr
+#         import sys
+#         print(f"Error in before_request: {e}", file=sys.stderr)
+#         pass
 
-@app.after_request
-def log_response_info(response):
-    """Log responses for debugging."""
-    try:
-        import sys
-        print(f"AFTER_REQUEST: {response.status_code} for {request.method} {request.path}", file=sys.stderr)
-        logger.info(f"Response: {response.status_code} for {request.method} {request.path}")
-    except Exception as e:
-        import sys
-        print(f"Error in after_request: {e}", file=sys.stderr)
-        pass
-    return response
+# @app.after_request
+# def log_response_info(response):
+#     """Log responses for debugging."""
+#     try:
+#         import sys
+#         print(f"AFTER_REQUEST: {response.status_code} for {request.method} {request.path}", file=sys.stderr)
+#         logger.info(f"Response: {response.status_code} for {request.method} {request.path}")
+#     except Exception as e:
+#         import sys
+#         print(f"Error in after_request: {e}", file=sys.stderr)
+#         pass
+#     return response
 
 # Add global error handler to catch all exceptions
 @app.errorhandler(Exception)
