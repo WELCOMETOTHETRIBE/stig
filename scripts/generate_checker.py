@@ -491,9 +491,17 @@ def generate_checker_playbook(controls: list[dict], output_path: Path, product: 
         f.write(f"# Total Controls: {len(controls)}\n")
         
         # Count by automation level
+        # Handle None/missing/empty values by defaulting to "unknown"
         automated = sum(1 for c in controls if c.get("automation_level") in ["automated", "automatable", "scannable_with_nessus"])
         manual_only = sum(1 for c in controls if c.get("automation_level") in ["manual_only", "manual", "not_scannable_with_nessus"])
-        unknown = sum(1 for c in controls if c.get("automation_level") == "unknown")
+        # Count "unknown" and also None/missing/empty values as unknown
+        unknown = sum(1 for c in controls if c.get("automation_level") == "unknown" or c.get("automation_level") is None or c.get("automation_level") == "")
+        
+        # Count any unexpected values and add to unknown for display
+        total_categorized = automated + manual_only + unknown
+        uncategorized = len(controls) - total_categorized
+        if uncategorized > 0:
+            unknown += uncategorized
         
         f.write(f"#   - Automated: {automated} ({automated*100//len(controls) if controls else 0}%)\n")
         f.write(f"#   - Manual-only: {manual_only} ({manual_only*100//len(controls) if controls else 0}%)\n")

@@ -3064,9 +3064,24 @@ def generate_hardening_playbook(controls: list[dict], output_path: Path, product
         f.write(f"# Total Controls: {len(controls)}\n")
         
         # Count by automation level
+        # Handle None/missing/empty values by defaulting to "unknown"
         automated = sum(1 for c in controls if c.get("automation_level") in ["automated", "automatable", "scannable_with_nessus"])
         manual_only = sum(1 for c in controls if c.get("automation_level") in ["manual_only", "manual", "not_scannable_with_nessus"])
-        unknown = sum(1 for c in controls if c.get("automation_level") == "unknown")
+        # Count "unknown" and also None/missing/empty values as unknown
+        unknown = sum(1 for c in controls if c.get("automation_level") == "unknown" or c.get("automation_level") is None or c.get("automation_level") == "")
+        
+        # Count any unexpected values (should be 0 if JSON is properly generated)
+        total_categorized = automated + manual_only + unknown
+        uncategorized = len(controls) - total_categorized
+        if uncategorized > 0:
+            logger.warning(f"Automation level counts don't match total: {total_categorized} categorized vs {len(controls)} total controls")
+            logger.warning(f"  {uncategorized} controls have unexpected automation_level values")
+            # Show examples of unexpected values
+            unexpected = [c for c in controls if c.get("automation_level") not in ["automated", "automatable", "scannable_with_nessus", "manual_only", "manual", "not_scannable_with_nessus", "unknown"] and c.get("automation_level") is not None and c.get("automation_level") != ""]
+            for c in unexpected[:5]:  # Show first 5 examples
+                logger.warning(f"    {c.get('sv_id', 'UNKNOWN')}: automation_level=\"{c.get('automation_level')}\"")
+            # Add uncategorized to unknown count for display
+            unknown += uncategorized
         
         f.write(f"#   - Automated: {automated} ({automated*100//len(controls) if controls else 0}%)\n")
         f.write(f"#   - Manual-only: {manual_only} ({manual_only*100//len(controls) if controls else 0}%)\n")
