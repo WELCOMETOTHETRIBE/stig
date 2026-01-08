@@ -200,14 +200,21 @@ def test():
 def index():
     """Serve the main page."""
     try:
+        logger.info("Index route called")
         template_path = BASE_DIR / 'templates' / 'index.html'
+        logger.info(f"Template path: {template_path}, exists: {template_path.exists()}")
         if not template_path.exists():
+            logger.error(f"Template not found at: {template_path}")
             return f"Template not found at: {template_path}", 500
-        return render_template('index.html')
+        logger.info("Rendering template...")
+        result = render_template('index.html')
+        logger.info("Template rendered successfully")
+        return result
     except Exception as e:
         import traceback
         error_msg = str(e)
         traceback_str = traceback.format_exc()
+        logger.error(f"ERROR rendering index: {error_msg}", exc_info=True)
         print(f"ERROR rendering index: {error_msg}", file=sys.stderr)
         print(traceback_str, file=sys.stderr)
         return f"Error loading page: {error_msg}<br><pre>{traceback_str}</pre>", 500
