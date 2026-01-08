@@ -96,8 +96,15 @@ def handle_exception(e):
     traceback_str = traceback.format_exc()
     print(f"ERROR in Flask app: {error_msg}", file=sys.stderr)
     print(traceback_str, file=sys.stderr)
-    logger.error(f"Unhandled exception: {error_msg}", exc_info=True)
-    return jsonify({'error': error_msg, 'traceback': traceback_str}), 500
+    try:
+        logger.error(f"Unhandled exception: {error_msg}", exc_info=True)
+    except:
+        pass  # If logging fails, continue anyway
+    try:
+        return jsonify({'error': error_msg, 'traceback': traceback_str}), 500
+    except:
+        # If jsonify fails, return plain text
+        return f"Error: {error_msg}\n\n{traceback_str}", 500
 
 # Ensure directories exist (with error handling for Railway)
 try:
