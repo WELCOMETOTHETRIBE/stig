@@ -15,10 +15,24 @@ from flask import Flask, jsonify, render_template, request, send_file
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from scripts.generate_checker import generate_checker_playbook
-from scripts.generate_ctp import generate_ctp_csv
-from scripts.generate_hardening import generate_hardening_playbook
-from scripts.parse_stig import parse_xccdf_file, save_controls_to_json
+# Import script functions with error handling
+try:
+    from scripts.generate_checker import generate_checker_playbook
+    from scripts.generate_ctp import generate_ctp_csv
+    from scripts.generate_hardening import generate_hardening_playbook
+    from scripts.parse_stig import parse_xccdf_file, save_controls_to_json
+except ImportError as e:
+    # Log the error but don't crash - we'll handle it in the route handlers
+    import logging
+    logging.basicConfig(level=logging.ERROR, handlers=[logging.StreamHandler()])
+    logger = logging.getLogger(__name__)
+    logger.error(f"Failed to import scripts: {e}")
+    # Set to None so we can check later
+    generate_checker_playbook = None
+    generate_ctp_csv = None
+    generate_hardening_playbook = None
+    parse_xccdf_file = None
+    save_controls_to_json = None
 
 # Configure logging
 # Try to create file handler, but fall back to stream-only if it fails
@@ -117,6 +131,10 @@ def health():
 @app.route('/api/generate', methods=['POST'])
 def generate():
     """Generate STIG artifacts from uploaded file."""
+    # Check if imports succeeded
+    if not _scripts_loaded:
+        return jsonify({'error': 'Script modules failed to load. Check server logs for import errors.'}), 500
+    
     try:
         if 'stig_file' not in request.files:
             return jsonify({'error': 'No STIG file provided'}), 400
