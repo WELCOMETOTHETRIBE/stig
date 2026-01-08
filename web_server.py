@@ -121,13 +121,42 @@ def _auto_detect_benchmark2(stig_path: Path, original_filename: str = None) -> t
 @app.route('/')
 def index():
     """Serve the main page."""
-    return render_template('index.html')
+    try:
+        template_path = BASE_DIR / 'templates' / 'index.html'
+        if not template_path.exists():
+            return f"Template not found at: {template_path}", 500
+        return render_template('index.html')
+    except Exception as e:
+        import traceback
+        error_msg = str(e)
+        traceback_str = traceback.format_exc()
+        print(f"ERROR rendering index: {error_msg}", file=sys.stderr)
+        print(traceback_str, file=sys.stderr)
+        return f"Error loading page: {error_msg}<br><pre>{traceback_str}</pre>", 500
 
 
 @app.route('/health')
 def health():
     """Health check endpoint for Railway."""
-    return jsonify({'status': 'ok', 'service': 'stig-generator'}), 200
+    try:
+        # Check if template exists
+        template_path = BASE_DIR / 'templates' / 'index.html'
+        template_exists = template_path.exists()
+        
+        return jsonify({
+            'status': 'ok', 
+            'service': 'stig-generator',
+            'scripts_loaded': _scripts_loaded,
+            'template_exists': template_exists,
+            'base_dir': str(BASE_DIR)
+        }), 200
+    except Exception as e:
+        import traceback
+        error_msg = str(e)
+        traceback_str = traceback.format_exc()
+        print(f"ERROR in health check: {error_msg}", file=sys.stderr)
+        print(traceback_str, file=sys.stderr)
+        return jsonify({'status': 'error', 'error': error_msg}), 500
 
 
 @app.route('/api/generate', methods=['POST'])
