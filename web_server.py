@@ -53,26 +53,21 @@ def _load_scripts():
         _scripts_loaded = False
         return False
 
-# Configure logging
-# Try to create file handler, but fall back to stream-only if it fails
-# (e.g., in Railway or other restricted environments)
+# Configure logging - do this early and defensively
 try:
     logging.basicConfig(
         level=logging.INFO,
         format="%(levelname)s: %(message)s",
-        handlers=[
-            logging.FileHandler("server.log"),
-            logging.StreamHandler()
-        ]
+        handlers=[logging.StreamHandler()]  # Only use StreamHandler for Railway
     )
-except (PermissionError, OSError):
-    # Fall back to stream-only logging if file logging fails
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(levelname)s: %(message)s",
-        handlers=[logging.StreamHandler()]
-    )
+except Exception as e:
+    # If even basic logging fails, just use print
+    import sys
+    print(f"Warning: Could not configure logging: {e}", file=sys.stderr)
+    logging.basicConfig(level=logging.INFO, handlers=[logging.StreamHandler()])
+
 logger = logging.getLogger(__name__)
+logger.info("Web server module loading...")
 
 # Use absolute paths based on script location
 BASE_DIR = Path(__file__).parent.resolve()
