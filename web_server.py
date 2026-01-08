@@ -108,6 +108,12 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/health')
+def health():
+    """Health check endpoint for Railway."""
+    return jsonify({'status': 'ok', 'service': 'stig-generator'}), 200
+
+
 @app.route('/api/generate', methods=['POST'])
 def generate():
     """Generate STIG artifacts from uploaded file."""
