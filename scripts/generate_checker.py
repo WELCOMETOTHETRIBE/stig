@@ -129,7 +129,7 @@ def _extract_sysctl_param(text: str) -> Optional[str]:
     if match:
         return match.group(1)
     match = re.search(r'([a-z0-9_]+(?:\.[a-z0-9_]+)+)', text)
-    if match and 'kernel' in match.group(1) or 'fs' in match.group(1) or 'net' in match.group(1):
+    if match and ('kernel' in match.group(1) or 'fs' in match.group(1) or 'net' in match.group(1)):
         return match.group(1)
     return None
 
