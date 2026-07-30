@@ -1,0 +1,183 @@
+name: Railway auto-approve
+
+# Railway gates a GitHub auto-deploy behind "Deploy this commit from an external
+# contributor?" whenever the merge commit's GitHub author is not a member of the
+# Railway workspace. Bot-authored commits (claude[bot]) can never satisfy that,
+# and neither can collaborators without a Railway account. There is no Railway
+# setting to turn the gate off, so we clear it from CI instead: once a commit has
+# landed on main it has already been reviewed in GitHub, and that is the gate.
+#
+# Requires one org-level secret: RAILWAY_TOKEN (an account or workspace token —
+# project-scoped tokens cannot enumerate projects or approve deployments).
+# Optionally set a RAILWAY_PROJECT_ID repo variable to skip project discovery.
+#
+# This file is deliberately self-contained so it can be copied verbatim into any
+# repo that deploys to Railway. See scripts/install-railway-auto-approve.sh.
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: railway-auto-approve-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    name: Clear the external-contributor gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Approve the pending Railway deployment
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_PROJECT_ID: ${{ vars.RAILWAY_PROJECT_ID }}
+          COMMIT_SHA: ${{ github.sha }}
+          REPO_FULL_NAME: ${{ github.repository }}
+        run: |
+          node <<'NODE'
+          const API = "https://backboard.railway.com/graphql/v2";
+          const TOKEN = process.env.RAILWAY_TOKEN;
+          const SHA = process.env.COMMIT_SHA;
+          const REPO = (process.env.REPO_FULL_NAME || "").toLowerCase();
+          const PINNED = (process.env.RAILWAY_PROJECT_ID || "").trim();
+
+          // Railway usually creates the deployment within seconds of the push
+          // webhook, but a busy builder can lag. Poll, then give up quietly —
+          // a missing deployment must never fail the caller's CI.
+          const ATTEMPTS = 20;
+          const INTERVAL_MS = 15_000;
+
+          if (!TOKEN) {
+            console.log("::warning::RAILWAY_TOKEN is not set — skipping approval.");
+            process.exit(0);
+          }
+
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+          async function gql(query, variables) {
+            const res = await fetch(API, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${TOKEN}`,
+              },
+              body: JSON.stringify({ query, variables }),
+            });
+            const body = await res.json().catch(() => null);
+            if (!res.ok || !body) {
+              throw new Error(`Railway API returned HTTP ${res.status}`);
+            }
+            if (body.errors?.length) {
+              throw new Error(body.errors.map((e) => e.message).join("; "));
+            }
+            return body.data;
+          }
+
+          const PROJECTS_QUERY = `{
+            me {
+              projects(first: 100) { edges { node { id name } } }
+              workspaces {
+                name
+                team { projects(first: 100) { edges { node { id name } } } }
+              }
+            }
+          }`;
+
+          const DEPLOYMENTS_QUERY = `query($id: String!) {
+            deployments(first: 20, input: { projectId: $id }) {
+              edges { node { id status meta } }
+            }
+          }`;
+
+          const APPROVE_MUTATION = `mutation($id: String!) {
+            deploymentApprove(id: $id)
+          }`;
+
+          async function listProjects() {
+            if (PINNED) return [{ id: PINNED, name: "(pinned)" }];
+            const data = await gql(PROJECTS_QUERY);
+            const seen = new Map();
+            const collect = (conn) => {
+              for (const edge of conn?.edges ?? []) {
+                if (edge?.node?.id) seen.set(edge.node.id, edge.node);
+              }
+            };
+            collect(data.me.projects);
+            for (const workspace of data.me.workspaces ?? []) {
+              collect(workspace.team?.projects);
+            }
+            return [...seen.values()];
+          }
+
+          // Returns the deployment for our commit, or null if Railway has not
+          // registered it yet. Matching on both commit hash and repo keeps us
+          // honest in projects that build several services from one commit.
+          async function findDeployment(projects) {
+            for (const project of projects) {
+              let data;
+              try {
+                data = await gql(DEPLOYMENTS_QUERY, { id: project.id });
+              } catch (err) {
+                // A project we cannot read is not a reason to stop looking.
+                console.log(`  · ${project.name}: ${err.message}`);
+                continue;
+              }
+              for (const edge of data.deployments?.edges ?? []) {
+                const node = edge.node;
+                const meta = node.meta ?? {};
+                if (meta.commitHash !== SHA) continue;
+                if (meta.repo && meta.repo.toLowerCase() !== REPO) continue;
+                return { ...node, projectName: project.name };
+              }
+            }
+            return null;
+          }
+
+          async function main() {
+            const projects = await listProjects();
+            console.log(`Searching ${projects.length} Railway project(s) for ${SHA.slice(0, 8)} (${REPO}).`);
+
+            for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+              const deployment = await findDeployment(projects);
+
+              if (!deployment) {
+                if (attempt === ATTEMPTS) break;
+                await sleep(INTERVAL_MS);
+                continue;
+              }
+
+              if (deployment.status !== "NEEDS_APPROVAL") {
+                console.log(
+                  `Deployment ${deployment.id} in ${deployment.projectName} is ${deployment.status} — no gate to clear.`,
+                );
+                return;
+              }
+
+              await gql(APPROVE_MUTATION, { id: deployment.id });
+              console.log(
+                `Approved deployment ${deployment.id} in ${deployment.projectName} ` +
+                  `(authored by ${deployment.meta?.commitAuthor ?? "unknown"}).`,
+              );
+              return;
+            }
+
+            // Not an error: the repo may not deploy to Railway at all, or the
+            // push may have touched only paths Railway is configured to ignore.
+            console.log(
+              `::warning::No Railway deployment found for ${SHA.slice(0, 8)} after ` +
+                `${(ATTEMPTS * INTERVAL_MS) / 1000}s. If this repo does not deploy to ` +
+                `Railway, delete this workflow.`,
+            );
+          }
+
+          main().catch((err) => {
+            // A real API or auth failure should be loud — the push has already
+            // landed, so a red job blocks nothing but does get noticed.
+            console.log(`::error::Railway auto-approve failed: ${err.message}`);
+            process.exit(1);
+          });
+          NODE
